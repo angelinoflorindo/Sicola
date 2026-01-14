@@ -20,7 +20,7 @@ export default function Sidebar() {
                 pathname === "/" ? "bg-blue-700" : "hover:bg-blue-800"
               }`}
             >
-              🏠 Dashboard
+              🏠 Painel Principal
             </Link>
           </li>
 

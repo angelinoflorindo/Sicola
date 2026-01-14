@@ -1,27 +1,32 @@
+'use client'
 import Link from "next/link";
 import Card from "@/components/ui/Card";
+import { useParams } from "next/navigation";
 
-const DISCIPLINAS: Record<string, string[]> = {
-  "1": ["Matemática I", "Métodos de Investigação"],
-  "2": [
+const DISCIPLINAS: Record<number, string[]> = {
+  1: ["Matemática I", "Métodos de Investigação"],
+  2: [
     "Contabilidade Geral II",
     "Cálculo e Operações Financeiras",
     "Estatística",
   ],
-  "3": [
+  3: [
     "Finanças Empresariais",
     "Contabilidade e Controlo Orçamental",
     "Macroeconomia I",
   ],
-  "4": [
+  4: [
     "Fiscalidade",
     "Contabilidade Analítica Avançada",
     "Operações e Prática Seguradora",
   ],
 };
 
-export default function AnoPage({ params }: { params: { ano: string } }) {
-  const disciplinas = DISCIPLINAS[params.ano];
+export default function AnoPage() {
+  const params = useParams()
+  const anoNumero = Number(params.ano);
+
+  const disciplinas = DISCIPLINAS[anoNumero] ?? [];
 
   return (
     <section>
