@@ -1,7 +1,6 @@
 import "./globals.css";
 import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
-import { MathJaxContext } from "better-react-mathjax";
 
 export default function RootLayout({
   children,
@@ -11,23 +10,13 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body className="bg-gray-100">
-        <MathJaxContext
-                  config={{
-            loader: { load: ['input/tex', 'output/chtml'] },
-            tex: {
-              inlineMath: [['\\(', '\\)']],
-              displayMath: [['$$', '$$']],
-            },
-          }}
-        >
-          <div className="flex min-h-screen">
-            <Sidebar />
-            <div className="flex-1 flex flex-col">
-              <Topbar />
-              <main className="p-4 md:p-8">{children}</main>
-            </div>
+        <div className="flex min-h-screen">
+          <Sidebar />
+          <div className="flex-1 flex flex-col">
+            <Topbar />
+            <main className="p-4 md:p-8">{children}</main>
           </div>
-        </MathJaxContext>
+        </div>
       </body>
     </html>
   );

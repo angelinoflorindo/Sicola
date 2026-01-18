@@ -14,14 +14,14 @@ export default function Matematica() {
           />
         </Link>
 
-        <Link href={`/anos/primeiro/matematica/p2`}>
+        <Link href={`/anos/primeiro/matematica1/p2`}>
           <Card
             title="Simular - P2"
             description="Iniciar Simulação(2h)"
           />
         </Link>
 
-        <Link href={`/anos/primeiro/matematica/exame`}>
+        <Link href={`/anos/primeiro/matematica1/exame`}>
           <Card title="Simular - Exame" description="Iniciar Simulação(2h)" />
         </Link>
 

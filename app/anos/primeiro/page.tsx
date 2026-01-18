@@ -9,7 +9,7 @@ export default function PrimeiroAno() {
     <section>
       <h2 className="text-xl font-bold mb-4">1 º Ano</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Link href={`/anos/primeiro/matematica`}>
+        <Link href={`/anos/primeiro/matematica1`}>
           <Card title="Matemática I" description="Consultar simulados" />
         </Link>
 

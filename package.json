@@ -9,19 +9,29 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "better-react-mathjax": "^2.4.0-beta-1",
+    "@prisma/client": "^7.2.0",
+    "bcrypt": "^6.0.0",
+    "katex": "^0.16.27",
+    "mysql2": "^3.16.0",
     "next": "16.1.1",
+    "prisma": "^7.2.0",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-katex": "^3.1.0",
+    "reflect-metadata": "^0.2.2",
+    "sequelize": "^6.37.7",
+    "sequelize-typescript": "^2.1.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-katex": "^3.0.4",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
+    "sequelize-cli": "^6.6.5",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5.9.3"
   }
 }

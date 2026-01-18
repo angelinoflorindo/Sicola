@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DropDown  from "@/components/dropDown/index"
 
 export default function Topbar() {
   return (
@@ -6,7 +7,8 @@ export default function Topbar() {
       <Link href="/">
         <span className="font-semibold"> SICOLA - Simulação de Provas</span>
       </Link>
-      <span className="text-sm text-gray-600">👤 Estudante</span>
+
+      <DropDown userRole="ESTUDANTE" ></DropDown>
     </header>
   );
 }
