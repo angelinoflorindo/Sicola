@@ -1,7 +1,5 @@
-// lib/matematicaI.avaliacao.ts
 
 import { corrigir } from "./correcao";
-
 
 export function avaliar(respostas: string[], questoes: any[]) {
   let total = 0;

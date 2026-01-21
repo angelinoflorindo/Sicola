@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const ANOS = [1, 2, 3, 4];
+const Links = ["primeiro", "segundo", "terceiro", "quarto"];
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -15,12 +16,12 @@ export default function Sidebar() {
         <ul className="space-y-2">
           <li>
             <Link
-              href="/"
+              href="/dashboard"
               className={`block px-3 py-2 rounded ${
-                pathname === "/" ? "bg-blue-700" : "hover:bg-blue-800"
+                pathname === "/dashboard" ? "bg-blue-700" : "hover:bg-blue-800"
               }`}
             >
-              🏠 Painel Principal
+              Painel Principal
             </Link>
           </li>
 
@@ -28,20 +29,60 @@ export default function Sidebar() {
             Anos Académicos
           </li>
 
-          {ANOS.map((ano) => (
-            <li key={ano}>
-              <Link
-                href={`/anos/${ano}`}
-                className={`block px-3 py-2 rounded ${
-                  pathname === `/anos/${ano}`
-                    ? "bg-blue-700"
-                    : "hover:bg-blue-800"
-                }`}
-              >
-                🎓 {ano}º Ano
-              </Link>
-            </li>
-          ))}
+          <li>
+            <Link
+              href={`/anos/primeiro`}
+              className={`block px-3 py-2 rounded ${
+                pathname === `/anos/primeiro`
+                  ? "bg-blue-700"
+                  : "hover:bg-blue-800"
+              }`}
+            >
+              🎓 1º Ano
+            </Link>
+          </li>
+
+          
+          <li>
+            <Link
+              href={`/anos/segundo`}
+              className={`block px-3 py-2 rounded ${
+                pathname === `/anos/segundo`
+                  ? "bg-blue-700"
+                  : "hover:bg-blue-800"
+              }`}
+            >
+              🎓 2º Ano
+            </Link>
+          </li>
+
+          
+          <li>
+            <Link
+              href={`/anos/terceiro`}
+              className={`block px-3 py-2 rounded ${
+                pathname === `/anos/terceiro`
+                  ? "bg-blue-700"
+                  : "hover:bg-blue-800"
+              }`}
+            >
+              🎓 3º Ano
+            </Link>
+          </li>
+
+          
+          <li>
+            <Link
+              href={`/anos/quarto`}
+              className={`block px-3 py-2 rounded ${
+                pathname === `/anos/quarto`
+                  ? "bg-blue-700"
+                  : "hover:bg-blue-800"
+              }`}
+            >
+              🎓 4º Ano
+            </Link>
+          </li>
 
           <li className="mt-4">
             <Link
@@ -50,7 +91,7 @@ export default function Sidebar() {
                 pathname === "/resultados" ? "bg-blue-700" : "hover:bg-blue-800"
               }`}
             >
-              📊 Resultados
+              Resultados
             </Link>
           </li>
         </ul>

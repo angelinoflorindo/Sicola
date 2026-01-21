@@ -1,18 +1,20 @@
-"use client";
+'use client'
 
-import Card from "@/components/ui/Card";
-import Link from "next/link";
+import Sidebar from "@/components/layout/Sidebar";
+import Topbar from "@/components/layout/Topbar";
+import Conteudo from "./not-content";
 
 export default function Notfound() {
   return (
-    <div>
-      <h1>
-        <b>Página 404: Inexistente</b>
-      </h1>
 
-      <Link href={`/`}>
-        <Card title="Voltar" description="Voltar ao painel princiopal" />
-      </Link>
-    </div>
+    <div className="flex min-h-screen">
+          <Sidebar />
+          <div className="flex-1 flex flex-col">
+            <Topbar />
+            <main className="p-4 md:p-8">
+              <Conteudo />
+            </main>
+          </div>
+        </div>
   );
 }

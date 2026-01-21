@@ -4,7 +4,7 @@ import DropDown  from "@/components/dropDown/index"
 export default function Topbar() {
   return (
     <header className="bg-white shadow px-4 py-3 flex justify-between items-center">
-      <Link href="/">
+      <Link href="/dashboard">
         <span className="font-semibold"> SICOLA - Simulação de Provas</span>
       </Link>
 

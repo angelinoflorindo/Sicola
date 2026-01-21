@@ -25,7 +25,6 @@ export class Chave extends Model {
   @Column(DataType.INTEGER.UNSIGNED)
   id!: number;
 
-  @Unique
   @Column(DataType.STRING)
   codigo!: string;
   

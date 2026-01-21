@@ -1,5 +1,4 @@
-// lib/sequelize.ts
-//import { Sequelize } from "sequelize";
+import  "server-only";
 import { Sequelize } from "sequelize-typescript";
 import {User} from "@/models/User";
 import {Chave} from "@/models/Chave"
@@ -11,11 +10,11 @@ import {Resposta} from "@/models/Resposta"
 import {Suporte} from "@/models/Suporte"
 
 
-
 import { config } from "dotenv";
 import { setProvaAssociation } from "./prova.association";
 import {setUserAssociation} from "./user.association"
 import {setQuestaoAssociation} from "./questao.association"
+import { Papel } from "@/models/Papel";
   
 
 
@@ -31,6 +30,7 @@ export const sequelize = new Sequelize({
   dialectModule: require("mysql2"),
   models: [
     User,
+    Papel,
     Chave,
     Disciplina,
     Pagamento,

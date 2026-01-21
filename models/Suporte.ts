@@ -9,6 +9,7 @@ import {
   CreatedAt,
   UpdatedAt,
   ForeignKey,
+  Default,
 } from "sequelize-typescript";
 import { User } from "./User";
 
@@ -35,6 +36,10 @@ export class Suporte extends Model {
     allowNull: false,
   })
   user_id!: number;
+
+  @Default(true)
+  @Column({ type: DataType.BOOLEAN, defaultValue: true })
+  estado!: boolean;
 
   @CreatedAt
   @Column({ field: "created_at", type: DataType.DATE })
