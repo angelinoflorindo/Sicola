@@ -10,7 +10,7 @@ export default function Conteudo() {
           <Card title="Simular - P1" description="Iniciar Simulação(2h)" />
         </Link>
 
-        <Link href={`/anos/primeiro/matematica1/p2`}>
+        <Link href={`/anos/primeiro/matematica1/p2`}> 
           <Card title="Simular - P2" description="Iniciar Simulação(2h)" />
         </Link>
 

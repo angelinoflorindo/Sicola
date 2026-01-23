@@ -26,6 +26,11 @@ module.exports = {
         type: Sequelize.ENUM('GBS', 'IGF', 'CF'),
         allowNull: false,
       },
+      perfil: {
+        type: Sequelize.ENUM('ADMIN', 'ESTUDANTE', 'EXPLICADOR'),
+        allowNull: false,
+        defaultValue:'ESTUDANTE'
+      },
       telemovel: {
         type: Sequelize.STRING,
         allowNull: false,

@@ -1,86 +1,59 @@
-export const dynamic = "force-dynamic";
-import { NextRequest, NextResponse } from "next/server";
-import { sequelize } from "@/lib/sequelize";
-import { User } from "@/models/User";
-import { Pagamento } from "@/models/Pagamento";
-import { Suporte } from "@/models/Suporte";
-import { Prova } from "@/models/Prova";
-import { Disciplina } from "@/models/Disciplina";
+// eliminei o sequelize.authenticate e sync
+ 
 
+import { NextRequest, NextResponse } from 'next/server'
+import { buscarUsuarioPorEmail, criarUsuario } from '../actions/server'
+
+export const dynamic = 'force-dynamic'
+
+// 🔎 BUSCAR USUÁRIO
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const email = searchParams.get("email");
+  const { searchParams } = new URL(req.url)
+  const email = searchParams.get('email')
 
-  try {
-    await sequelize.authenticate();
-    await sequelize.sync();
-    const userInfo = await User.findOne({
-      where: { email: email },
-      attributes: { exclude: ["password"] },
-      include: [
-        {
-          model: Pagamento,
-          as: "Pagamento",
-        },
-        {
-          model: Suporte,
-          as: "Suporte",
-        },
-        {
-          model: Prova,
-          as: "Prova",
-          include: [{ model: Disciplina, as: "Disciplina" }],
-        },
-      ],
-    });
-    return NextResponse.json(userInfo, { status: 200 });
-  } catch (error) {
+  if (!email) {
     return NextResponse.json(
-      { message: "Erro ao buscar usuário", error },
-      { status: 500 }
-    );
+      { message: 'Email é obrigatório' },
+      { status: 400 }
+    )
   }
+
+  const user = await buscarUsuarioPorEmail(email)
+
+  if (!user) {
+    return NextResponse.json(
+      { message: 'Usuário não encontrado' },
+      { status: 404 }
+    )
+  }
+
+  return NextResponse.json(user)
 }
 
-// registar usuários
-
+//  REGISTAR USUÁRIO
 export async function POST(req: NextRequest) {
-  const data = await req.json();
-  const isEmail = data.email.includes("@isaf");
+  const data = await req.json()
 
-  try {
-    await sequelize.authenticate();
-    await sequelize.sync();
-    if (isEmail) {
-      const user = await createUser({
-        primeiro_nome: data.primeiro_nome,
-        password: data.password,
-        curso: data.curso,
-        email: data.email,
-        segundo_nome: data.segundo_nome,
-        telemovel: data.telemovel,
-      });
-
-
-      return NextResponse.json({ email: user.email, id: user.id });
-    }
-    return null
-  } catch (error) {
+  if (!data.email?.includes('@isaf')) {
     return NextResponse.json(
-      { isSqlError: true, message: "Erro ao criar usuário", error },
-      { status: 500 }
-    );
+      { message: 'Email institucional inválido' },
+      { status: 400 }
+    )
   }
+
+  const user = await criarUsuario({
+    primeiro_nome: data.primeiro_nome,
+    segundo_nome: data.segundo_nome,
+    email: data.email,
+    password: data.password,
+    curso: data.curso,
+    telemovel: data.telemovel,
+  })
+
+  return NextResponse.json(
+    { id: user.id, email: user.email },
+    { status: 201 }
+  )
 }
 
-async function createUser(data: any) {
-  const user = await User.create({
-      primeiro_nome: data.primeiro_nome,
-      password: data.password,
-      curso: data.curso,
-      email: data.email,
-      segundo_nome: data.segundo_nome,
-      telemovel: data.telemovel,
-    });
-  return user;
-}
+

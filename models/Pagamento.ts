@@ -25,14 +25,8 @@ export class Pagamento extends Model {
   @Column(DataType.INTEGER.UNSIGNED)
   id!: number;
 
-  @Column(DataType.FLOAT)
+  @Column(DataType.INTEGER)
   valor!: number;
-
-  @Column(DataType.DATE)
-  prazo!: Date;
-
-  @Column(DataType.STRING)
-  descricao!: string; // Para a explicação da modalidade de pagamento
 
   @ForeignKey(() => User)
   @Column({
@@ -40,6 +34,21 @@ export class Pagamento extends Model {
     allowNull: false,
   })
   user_id!: number;
+  
+  @Column({
+    type: DataType.ENUM("BASICO", "PREMIUM"),
+    allowNull: false,
+  })
+  plano!:'BASICO'|'PREMIUM' 
+
+
+  @Default("PENDENTE")
+  @Column({
+    type: DataType.ENUM("PENDENTE", "PAGO", "EXPIRADO"),
+    allowNull: false,
+  })
+  status!: "PENDENTE" | "PAGO" | "EXPIRADO"
+
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })

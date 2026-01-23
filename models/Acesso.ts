@@ -10,46 +10,39 @@ import {
   CreatedAt,
   UpdatedAt,
   Default,
+  ForeignKey,
 } from "sequelize-typescript";
+import { User } from "./User";
 
 @Table({
-  tableName: "users",
+  tableName: "acessos",
   createdAt: "created_at",
   updatedAt: "updated_at",
 })
-export class User extends Model {
+export class Acesso extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
   id!: number;
 
-  @Column(DataType.STRING)
-  primeiro_nome!: string;
+  @Column(DataType.DATE)
+  inicio!: Date;
 
-  @Column(DataType.STRING)
-  segundo_nome!: string;
+  @Column(DataType.DATE)
+  fim!: Date;
 
-  @Unique
-  @Column(DataType.STRING)
-  password!: string;
-
-  @Unique
-  @Column(DataType.STRING)
-  telemovel!: string;
-
-  @Unique
-  @Column(DataType.STRING)
-  email!: string;
-
-  @Column(DataType.ENUM("GBS", "IGF", "CF"))
-  curso!: "GBS" | "IGF" | "CF";
-
-  @Default("ESTUDANTE")
   @Column({
-    type: DataType.ENUM("ADMIN", "ESTUDANTE", "EXPLICADOR"),
+    type: DataType.ENUM("BASICO", "PREMIUM"),
     allowNull: false,
   })
-  perfil!: "ADMIN" | "ESTUDANTE" | "EXPLICADOR";
+  plano!: "BASICO" | "PREMIUM";
+
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  user_id!: number;
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })

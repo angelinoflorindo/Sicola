@@ -2,15 +2,21 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("pagamentos", {
+    await queryInterface.createTable("acessos", {
       id: {
         type: Sequelize.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
-      valor: {
-        type: Sequelize.INTEGER,
+      
+      inicio: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+
+      fim: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
 
@@ -19,11 +25,7 @@ module.exports = {
         allowNull: false,
       },
       
-      status: {
-        type: Sequelize.ENUM("PENDENTE", "PAGO", "EXPIRADO"),
-        allowNull: false,
-        defaultValue: "PENDENTE",
-      },
+
       user_id: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
@@ -37,7 +39,7 @@ module.exports = {
       estado: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: true,
+        defaultValue: false,
       },
       created_at: {
         allowNull: false,
@@ -53,6 +55,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("pagamentos");
+    await queryInterface.dropTable("acessos");
   },
 };

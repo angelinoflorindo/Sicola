@@ -1,4 +1,4 @@
-import  "server-only";
+'server-only'
 import { Sequelize } from "sequelize-typescript";
 import {User} from "@/models/User";
 import {Chave} from "@/models/Chave"
@@ -14,7 +14,7 @@ import { config } from "dotenv";
 import { setProvaAssociation } from "./prova.association";
 import {setUserAssociation} from "./user.association"
 import {setQuestaoAssociation} from "./questao.association"
-import { Papel } from "@/models/Papel";
+import { Acesso } from "@/models/Acesso";
   
 
 
@@ -27,13 +27,14 @@ export const sequelize = new Sequelize({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  logging:false,
   dialectModule: require("mysql2"),
   models: [
     User,
-    Papel,
     Chave,
     Disciplina,
     Pagamento,
+    Acesso,
     Prova,
     Suporte,
     Resposta,

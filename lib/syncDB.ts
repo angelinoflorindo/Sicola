@@ -1,4 +1,5 @@
-// lib/syncDb.ts
+
+
 import {sequelize} from './sequelize';
 
 const syncDb = async () => {
