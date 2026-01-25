@@ -15,3 +15,5 @@ export function Formula({ latex, inline = false }: Props) {
 
   return <BlockMath math={latex} />;
 }
+
+

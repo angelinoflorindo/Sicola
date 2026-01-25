@@ -24,6 +24,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
+      acertou: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
 
       resposta_id: {
         type: Sequelize.INTEGER.UNSIGNED,

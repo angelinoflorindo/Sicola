@@ -64,4 +64,5 @@ export class Prova extends Model {
   @UpdatedAt
   @Column({ field: "updated_at", type: DataType.DATE })
   declare updatedAt: Date;
+  Respostas: any;
 }

@@ -9,6 +9,8 @@ import { initDB } from "@/lib/db";
 import { Op, where } from "sequelize";
 import { Acesso } from "@/models/Acesso";
 import { getToken } from "next-auth/jwt";
+import { Resposta } from "@/models/Resposta";
+import { Detalhes } from "@/models/Detalhes";
 
 export async function converterString(value: any) {
   if (!isNaN(value)) {
@@ -28,7 +30,7 @@ export async function hashPassword(password: string) {
 // logica de concessao de acesso
 export async function calcularDataFim(
   plano: "BASICO" | "PREMIUM",
-  inicio: Date
+  inicio: Date,
 ): Promise<Date> {
   const fim = new Date(inicio);
 
@@ -43,7 +45,6 @@ export async function calcularDataFim(
   return fim;
 }
 
-
 export async function buscarAcesso(uuid: number) {
   return await Acesso.findOne({
     where: { user_id: uuid, estado: true },
@@ -56,13 +57,19 @@ export async function buscarPagamento(uuid: number) {
   });
 }
 
-export async function buscarPagamentoId(id:number){
-   return await Pagamento.findOne({
-    raw:false,
-    where: { id:id, estado: true },
+export async function buscarPagamentoId(id: number) {
+  return await Pagamento.findOne({
+    raw: false,
+    where: { id: id, estado: true },
   });
 }
 
+export async function buscarDisciplina(codigo: string) {
+  return await Disciplina.findOne({
+    raw: false,
+    where: { nome: codigo, estado: true },
+  });
+}
 // serviços para  criar usuario e buscar usuarios
 
 export async function buscarPersonalUsuario(email: any) {
@@ -72,6 +79,30 @@ export async function buscarPersonalUsuario(email: any) {
     where: { email: email },
     attributes: { exclude: ["password"] },
   });
+}
+
+export async function buscarProva(id: number) {
+  const prova = await Prova.findOne({
+    where: { id: id },
+    include: [
+      {
+        model: Resposta,
+        as: "Respostas",
+        include: [{ model: Detalhes, as: "Detalhes" }],
+      },
+    ],
+  });
+   
+  if (!prova) return null;
+
+  const provaJSON = prova.toJSON() as any;
+
+  provaJSON.Respostas = provaJSON.Respostas.map((r: any) => ({
+    ...r,
+    resposta: JSON.parse(r.resposta), //  NORMALIZA AQUI
+  }));
+
+  return provaJSON;
 }
 
 export async function buscarUsuarioPorEmail(email: string) {
@@ -90,7 +121,6 @@ export async function buscarUsuarioPorEmail(email: string) {
     ],
   });
 }
- 
 
 // Lógica de acesso a prova
 export async function validarAcesso(userId: number) {
@@ -133,6 +163,10 @@ export async function validarEstado(value: any) {
 }
 
 // Operações relacionadas entre os models
+
+export async function buscarUser(userId: number) {
+  return await User.findByPk(userId);
+}
 
 export async function buscarUserPorPagamento(pagamentoId: number) {
   const result = await Pagamento.findOne({

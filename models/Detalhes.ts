@@ -36,6 +36,10 @@ export class Detalhes extends Model {
   // gabarito
   @Column(DataType.BOOLEAN)
   declare correta: boolean;
+  
+  // acertou 
+  @Column(DataType.BOOLEAN)
+  declare acertou: boolean;
 
   @ForeignKey(() => Resposta)
   @Column(DataType.INTEGER)

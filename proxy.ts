@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { buscarPersonalUsuario, buscarUser } from "./app/api/actions/server";
 
 
 const rotasProtegidas = [
@@ -79,15 +80,20 @@ export default async function proxy(req: NextRequest) {
   // Recuperar o token do usuário (Verifica se está logado)
   const token = await getToken({ req, secret:process.env.NEXTAUTH_SECRET});
   
+  const user = await buscarPersonalUsuario(String(token?.email))
   // Se a rota for protegida e o usuário não estiver logado, redireciona para a página inicial
 
-  if (isProtegida && !token) {
+  if(user == null){
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
+  if (isProtegida && !token ) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
   // Se a rota for pública, mas o usuário já estiver logado, redireciona para o dashboard
   //
-  if (isPublica && token) {
+  if (isPublica && token && user) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 

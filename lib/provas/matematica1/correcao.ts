@@ -20,6 +20,7 @@ export function corrigir(resposta: any, questao: any) {
       respostaAluno: resposta ?? null,
       correta: correta?.texto ?? null,
       acertou,
+      indice:questao.id
     });
   }
 
@@ -48,6 +49,7 @@ export function corrigir(resposta: any, questao: any) {
         respostaAluno: respondeu ?? null,
         correta: item.correta,
         acertou,
+        indice:i
       });
     });
   }

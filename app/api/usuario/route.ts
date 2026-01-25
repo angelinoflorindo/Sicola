@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
           user_id: user.id,
           plano: "TRIAL",
           inicio: agora,
-          fim: addHours(agora, 4),
+          fim: addHours(agora, 12),
         },
         { transaction: t },
       );

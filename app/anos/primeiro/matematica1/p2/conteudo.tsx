@@ -7,16 +7,15 @@ import { useRouter } from "next/navigation";
 import Sucesso from "@/components/ui/Sucesso";
 import LoadingPage from "@/components/LoadingPage";
 
-
 export default function Conteudo() {
   const [respostas, setRespostas] = useState<any[]>(
-    Array(questoesMatematicaI.length).fill("")
+    Array(questoesMatematicaI.length).fill(""),
   );
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [inicioProva] = useState<number>(() => Date.now());
   const [operacaoSucesso, setOperacaoSucesso] = useState(false);
-  
-  
+
   // Atualiza resposta de uma questão
   function handleSelect(qIndex: number, subIndex: number, valor: boolean) {
     setRespostas((prev) => {
@@ -38,23 +37,29 @@ export default function Conteudo() {
   async function submeterProva() {
     setLoading(true);
     try {
+      const tempoGasto = Math.floor((Date.now() - inicioProva) / 1000);
+      const codigo = "MATEMATICAI";
+
       const resp = await fetch("/api/provas/matematica1/p2", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           respostas,
+          tempoGasto,
+          codigo,
         }),
       });
 
       if (!resp.ok) throw new Error("Erro na submissão");
-
+      const data = await resp.json().then((data)=> {return data} )
+      const prova = data.prova
       // sucesso
       setLoading(false);
       setOperacaoSucesso(true);
 
       // redireciona após 3s
       setTimeout(() => {
-        router.push("/resultados/anos/primeiro/matematica1/p2");
+        router.push(`/resultados/anos/primeiro/matematica1/${prova.id}`);
       }, 3000);
     } catch (error) {
       router.push("/anos/primeiro/matematica1/p2");
@@ -86,7 +91,9 @@ export default function Conteudo() {
           key={questao.id}
           questao={questao}
           changeInput={(valor: string) => handleInput(index, valor)}
-          changeSelect={(i:number, valor:boolean) => handleSelect(index, i, valor)}
+          changeSelect={(i: number, valor: boolean) =>
+            handleSelect(index, i, valor)
+          }
         />
       ))}
 
