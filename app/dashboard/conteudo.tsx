@@ -1,5 +1,4 @@
-import Sidebar from "@/components/layout/Sidebar";
-import Topbar from "@/components/layout/Topbar";
+
 import Card from "@/components/ui/Card";
 import Link from "next/link";
 

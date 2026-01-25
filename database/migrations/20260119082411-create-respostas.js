@@ -9,21 +9,27 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
-      
-      codigo: {
-        type: Sequelize.STRING,
+
+      nota: {
+        type: Sequelize.FLOAT,
         allowNull: false,
       },
-      descricao: {
-        type: Sequelize.STRING,
+
+      resposta: {
+        type: Sequelize.JSON,
         allowNull: false,
       },
 
       questao_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+
+      prova_id: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
         references: {
-          model: "questoes",
+          model: "provas",
           key: "id",
         },
         onUpdate: "CASCADE",

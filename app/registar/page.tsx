@@ -1,29 +1,27 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "@/modules/login.module.css";
-import { hashPassword } from "@/app/api/actions/server";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import LoadingPage from "@/components/LoadingPage";
 
-const RegisterForm = () => {
+const Registar = () => {
   const [curso, setCurso] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+
   const [formData, setFormData] = useState({
     primeiro_nome: "",
     segundo_nome: "",
     telemovel: "",
     email: "",
     password: "",
-    curso: "",
   });
 
-  const mudarCurso = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedcurso = event.target.value;
-    setCurso(selectedcurso);
+  const mudarCurso = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCurso(e.target.value);
   };
 
-  // Manipula mudanças nos inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -31,140 +29,131 @@ const RegisterForm = () => {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const hashPass = await hashPassword(formData.password);
-    const password = formData.password.trim()
-    const usuario = {
-      primeiro_nome: formData.primeiro_nome,
-      password: hashPass,
-      email: formData.email,
-      curso: curso,
-      segundo_nome: formData.segundo_nome,
-      telemovel: formData.telemovel,
-    };
+    setLoading(true);
 
-    if(!usuario.primeiro_nome || !usuario.segundo_nome || !usuario.curso || !usuario.password || !usuario.telemovel || !usuario.email){
-      console.log(usuario)
-      
-      alert('Verifique os campos vazios')
-      return
-    }
+    try {
+      const usuario = {
+        primeiro_nome: formData.primeiro_nome,
+        segundo_nome: formData.segundo_nome,
+        telemovel: formData.telemovel,
+        email: formData.email,
+        password: formData.password,
+        curso,
+      };
 
-    const resp = await fetch(
-      `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/usuario`,
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-
-        body: JSON.stringify(usuario),
+      if (
+        !usuario.primeiro_nome ||
+        !usuario.segundo_nome ||
+        !usuario.curso ||
+        !usuario.password ||
+        !usuario.telemovel ||
+        !usuario.email
+      ) {
+        alert("Verifique os campos vazios");
+        setLoading(false);
+        return;
       }
-    );
-  
-    if (!resp.ok) {
-      router.push("/registar");
-      return;
-    }
 
-    const res = await signIn("credentials", {
-      redirect: false,
-      email: usuario.email,
-      password:password,
-    });
+      const resp = await fetch("/api/usuario", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(usuario),
+      });
 
-    if (res?.error) {
-      console.log("Erro na autenticação:", res.error);
-      router.push("/registar");
-      return;
-    } else {
+      if (!resp.ok) {
+        setLoading(false);
+        return router.push("/registar");
+      }
+
+      const res = await signIn("credentials", {
+        redirect: false,
+        email: usuario.email,
+        password: usuario.password,
+      });
+
+      if (res?.error) {
+        setLoading(false);
+        return router.push("/registar");
+      }
+
       router.push("/dashboard");
-      return;
+    } catch (err) {
+      router.push("/registar");
+    } finally {
+      setLoading(false);
     }
+  }
+
+  if (loading) {
+    return <LoadingPage />;
   }
 
   return (
     <div className={styles.container}>
       <div className="flex flex-col h-screen w-[400px] bg-white mx-auto shadow-lg">
-        <div className=" p-[20px]">
-          <b>
-            <h1>CRIAR UMA CONTA</h1>{" "}
-          </b>
-          <form onSubmit={onSubmit}>
-            <div className="space-y-4">
-              <input
-                type="text"
-                name="primeiro_nome"
-                placeholder="Primeiro Nome"
-                required
-                className={styles.input}
-                onChange={handleChange}
-              />
+        <div className="p-[20px]">
+          <h1 className="font-bold">CRIAR UMA CONTA</h1>
 
-              <input
-                type="text"
-                name="segundo_nome"
-                placeholder="Segundo Nome"
-                required
-                className={styles.input}
-                onChange={handleChange}
-              />
+          <form onSubmit={onSubmit} className="space-y-4">
+            <input
+              name="primeiro_nome"
+              placeholder="Primeiro Nome"
+              className={styles.input}
+              onChange={handleChange}
+            />
+            <input
+              name="segundo_nome"
+              placeholder="Segundo Nome"
+              className={styles.input}
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Palavra passe"
+              className={styles.input}
+              onChange={handleChange}
+            />
+            <input
+              name="telemovel"
+              placeholder="Telemovel"
+              className={styles.input}
+              onChange={handleChange}
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email institucional"
+              className={styles.input}
+              onChange={handleChange}
+            />
 
-              <input
-                type="password"
-                name="password"
-                placeholder="Palavra passe"
-                required
-                className={styles.input}
-                onChange={handleChange}
-              />
-
-              <input
-                type="tel"
-                name="telemovel"
-                placeholder="Telemovel"
-                required
-                className={styles.input}
-                onChange={handleChange}
-              />
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Insira email institucional"
-                required
-                className={styles.input}
-                onChange={handleChange}
-              />
-
-              <select
-                name="curso"
-                value={curso}
-                onChange={mudarCurso}
-                className={styles.input}
-                required
+            <select
+              value={curso}
+              onChange={mudarCurso}
+              className={styles.input}
+            >
+              <option value="">Escolher o curso</option>
+              <option value="IGF">IGF</option>
+              <option value="CF">CF</option>
+              <option value="GBS">GBS</option>
+            </select>
+            <div className={styles.space}>
+              <button
+                type="button"
+                onClick={() => {
+                  router.push("/");
+                }}
+                className="px-4 py-2 bg-blue-900 text-white rounded  cursor-pointer w-[100px]"
               >
-                <option value="Nenhum">Escolher o curso</option>
-                <option value="IGF">IGF</option>
-                <option value="CF">CF</option>
-                <option value="GBS">GBS</option>
-              </select>
-              <div className={styles.space}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    router.push("/");
-                  }}
-                  className="px-4 py-2 bg-blue-900 text-white rounded  cursor-pointer w-[100px]"
-                >
-                  Login
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-blue-900 text-white rounded  cursor-pointer w-[100px]"
-                >
-                  Registar
-                </button>
-              </div>
+                Login
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-900 text-white rounded  cursor-pointer w-[100px]"
+              >
+                Registar
+              </button>
             </div>
           </form>
         </div>
@@ -173,4 +162,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default Registar;

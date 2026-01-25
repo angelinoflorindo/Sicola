@@ -42,7 +42,6 @@ export default function Sidebar() {
             </Link>
           </li>
 
-          
           <li>
             <Link
               href={`/anos/segundo`}
@@ -56,7 +55,6 @@ export default function Sidebar() {
             </Link>
           </li>
 
-          
           <li>
             <Link
               href={`/anos/terceiro`}
@@ -70,7 +68,6 @@ export default function Sidebar() {
             </Link>
           </li>
 
-          
           <li>
             <Link
               href={`/anos/quarto`}
@@ -81,17 +78,6 @@ export default function Sidebar() {
               }`}
             >
               🎓 4º Ano
-            </Link>
-          </li>
-
-          <li className="mt-4">
-            <Link
-              href="/resultados"
-              className={`block px-3 py-2 rounded ${
-                pathname === "/resultados" ? "bg-blue-700" : "hover:bg-blue-800"
-              }`}
-            >
-              Resultados
             </Link>
           </li>
         </ul>

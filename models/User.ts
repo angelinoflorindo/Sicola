@@ -21,45 +21,45 @@ export class User extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
-  id!: number;
+  declare id: number;
 
   @Column(DataType.STRING)
-  primeiro_nome!: string;
+  declare primeiro_nome: string;
 
   @Column(DataType.STRING)
-  segundo_nome!: string;
-
-  @Unique
-  @Column(DataType.STRING)
-  password!: string;
+  declare segundo_nome: string;
 
   @Unique
   @Column(DataType.STRING)
-  telemovel!: string;
+  declare password: string;
 
   @Unique
   @Column(DataType.STRING)
-  email!: string;
+  declare telemovel: string;
+
+  @Unique
+  @Column(DataType.STRING)
+  declare email: string;
 
   @Column(DataType.ENUM("GBS", "IGF", "CF"))
-  curso!: "GBS" | "IGF" | "CF";
+  declare curso: "GBS" | "IGF" | "CF";
 
   @Default("ESTUDANTE")
   @Column({
     type: DataType.ENUM("ADMIN", "ESTUDANTE", "EXPLICADOR"),
     allowNull: false,
   })
-  perfil!: "ADMIN" | "ESTUDANTE" | "EXPLICADOR";
+  declare perfil: "ADMIN" | "ESTUDANTE" | "EXPLICADOR";
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  estado!: boolean;
+  declare estado: boolean;
 
   @CreatedAt
   @Column({ field: "created_at", type: DataType.DATE })
-  createdAt!: Date;
+  declare createdAt: Date;
 
   @UpdatedAt
   @Column({ field: "updated_at", type: DataType.DATE })
-  updatedAt!: Date;
+  declare updatedAt: Date;
 }

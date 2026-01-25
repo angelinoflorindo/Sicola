@@ -2,15 +2,21 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("provas", {
+    await queryInterface.createTable("provas",  {
       id: {
         type: Sequelize.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
+
       nome: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM("P2", "EXAME", "RECURSO"),
+        allowNull: false,
+      },
+
+      tempo: {
+        type: Sequelize.TIME,
         allowNull: false,
       },
 
@@ -24,7 +30,6 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
-
       disciplina_id: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,

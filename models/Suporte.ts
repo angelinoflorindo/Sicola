@@ -22,30 +22,30 @@ export class Suporte extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
-  id!: number;
+  declare id: number;
 
   @Column(DataType.STRING)
-  descricao!: string;
+  declare descricao: string;
 
   @Column(DataType.ENUM("RECLAMACAO", "SUGESTAO"))
-  categoria!: "RECLAMACAO" | "SUGESTAO";
+  declare categoria: "RECLAMACAO" | "SUGESTAO";
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  user_id!: number;
+  declare user_id: number;
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  estado!: boolean;
+  declare estado: boolean;
 
   @CreatedAt
   @Column({ field: "created_at", type: DataType.DATE })
-  createdAt!: Date;
+  declare createdAt: Date;
 
   @UpdatedAt
   @Column({ field: "updated_at", type: DataType.DATE })
-  updatedAt!: Date;
+  declare updatedAt: Date;
 }

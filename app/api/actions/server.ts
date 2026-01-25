@@ -6,7 +6,7 @@ import { Prova } from "@/models/Prova";
 import { Disciplina } from "@/models/Disciplina";
 import { Suporte } from "@/models/Suporte";
 import { initDB } from "@/lib/db";
-import { Op } from "sequelize";
+import { Op, where } from "sequelize";
 import { Acesso } from "@/models/Acesso";
 import { getToken } from "next-auth/jwt";
 
@@ -26,23 +26,40 @@ export async function hashPassword(password: string) {
 }
 
 // logica de concessao de acesso
-export async function calcularDataFim(plano: string) {
-  const agora = new Date();
+export async function calcularDataFim(
+  plano: "BASICO" | "PREMIUM",
+  inicio: Date
+): Promise<Date> {
+  const fim = new Date(inicio);
 
   if (plano === "BASICO") {
-    agora.setHours(agora.getHours() + 24);
+    fim.setTime(fim.getTime() + 24 * 60 * 60 * 1000); // +1 dia
   }
 
   if (plano === "PREMIUM") {
-    agora.setDate(agora.getDate() + 7);
+    fim.setTime(fim.getTime() + 7 * 24 * 60 * 60 * 1000); // +7 dias
   }
 
-  return agora;
+  return fim;
 }
+
 
 export async function buscarAcesso(uuid: number) {
   return await Acesso.findOne({
     where: { user_id: uuid, estado: true },
+  });
+}
+
+export async function buscarPagamento(uuid: number) {
+  return await Pagamento.findOne({
+    where: { user_id: uuid, estado: true },
+  });
+}
+
+export async function buscarPagamentoId(id:number){
+   return await Pagamento.findOne({
+    raw:false,
+    where: { id:id, estado: true },
   });
 }
 
@@ -73,17 +90,13 @@ export async function buscarUsuarioPorEmail(email: string) {
     ],
   });
 }
-
-export async function criarUsuario(data: any) {
-  await initDB();
-  return await User.create(data);
-}
+ 
 
 // Lógica de acesso a prova
 export async function validarAcesso(userId: number) {
   return await Acesso.findOne({
     where: {
-      user_id:userId, 
+      user_id: userId,
       estado: true,
       fim: {
         [Op.gte]: new Date(),
@@ -92,7 +105,56 @@ export async function validarAcesso(userId: number) {
   });
 }
 
+export async function registarPagamento(userId: number, planoIn: string) {
+  if (planoIn == "BASICO") {
+    return await Pagamento.create({
+      user_id: userId,
+      plano: planoIn,
+      valor: 1000,
+    });
+  }
+
+  return await Pagamento.create({
+    user_id: userId,
+    plano: planoIn,
+    valor: 5000,
+  });
+}
 export async function getUserIdFromToken(req: any) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   return token?.id;
+}
+
+export async function validarEstado(value: any) {
+  if (value === "true" || value === true) {
+    return true;
+  }
+  return false; // já é número ou não é conversível
+}
+
+// Operações relacionadas entre os models
+
+export async function buscarUserPorPagamento(pagamentoId: number) {
+  const result = await Pagamento.findOne({
+    raw: false,
+    where: {
+      id: pagamentoId,
+      estado: true,
+    },
+    include: [
+      {
+        model: User,
+        attributes: [
+          "id",
+          "primeiro_nome",
+          "segundo_nome",
+          "email",
+          "telemovel",
+        ],
+        as: "Usuario",
+      },
+    ],
+  });
+
+  return result;
 }

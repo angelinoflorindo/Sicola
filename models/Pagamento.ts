@@ -23,23 +23,23 @@ export class Pagamento extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
-  id!: number;
+  declare id: number;
 
   @Column(DataType.INTEGER)
-  valor!: number;
+  declare valor: number;
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  user_id!: number;
+  declare user_id: number;
   
   @Column({
     type: DataType.ENUM("BASICO", "PREMIUM"),
     allowNull: false,
   })
-  plano!:'BASICO'|'PREMIUM' 
+  declare plano:'BASICO'|'PREMIUM' 
 
 
   @Default("PENDENTE")
@@ -47,18 +47,18 @@ export class Pagamento extends Model {
     type: DataType.ENUM("PENDENTE", "PAGO", "EXPIRADO"),
     allowNull: false,
   })
-  status!: "PENDENTE" | "PAGO" | "EXPIRADO"
+  declare status: "PENDENTE" | "PAGO" | "EXPIRADO"
 
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  estado!: boolean;
+  declare estado: boolean;
 
   @CreatedAt
   @Column({ field: "created_at", type: DataType.DATE })
-  createdAt!: Date;
+  declare createdAt: Date;
 
   @UpdatedAt
   @Column({ field: "updated_at", type: DataType.DATE })
-  updatedAt!: Date;
+  declare updatedAt: Date;
 }

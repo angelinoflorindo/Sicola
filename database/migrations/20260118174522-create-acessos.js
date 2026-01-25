@@ -21,7 +21,7 @@ module.exports = {
       },
 
       plano: {
-        type: Sequelize.ENUM("BASICO", "PREMIUM"),
+        type: Sequelize.ENUM("TRIAL","BASICO", "PREMIUM"),
         allowNull: false,
       },
       

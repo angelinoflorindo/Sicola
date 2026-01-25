@@ -23,20 +23,20 @@ export class Disciplina extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
-  id!: number;
+  declare id: number;
 
   @Column(DataType.STRING)
-  nome!: string
+  declare nome: string
   
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  estado!: boolean;
+  declare estado: boolean;
 
   @CreatedAt
   @Column({ field: "created_at", type: DataType.DATE })
-  createdAt!: Date;
+  declare createdAt: Date;
 
   @UpdatedAt
   @Column({ field: "updated_at", type: DataType.DATE })
-  updatedAt!: Date;
+  declare updatedAt: Date;
 }

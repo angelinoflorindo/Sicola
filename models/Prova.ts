@@ -24,35 +24,44 @@ export class Prova extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
-  id!: number;
+  declare id: number;
 
-  @Column(DataType.STRING)
-  nome!: string;
+  @Column({
+    type: DataType.ENUM("P2", "EXAME", "RECURSO"),
+    allowNull: false,
+  })
+  declare nome: "P2" | "EXAME" | "RECURSO"; // p2, exame, recurso
+
+  @Column({
+    type: DataType.TIME,
+    allowNull: false,
+  })
+  declare tempo: string;
+
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  user_id!: number;
+  declare user_id: number;
 
   @ForeignKey(() => Disciplina)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  disciplina_id!: number;
-
+  declare disciplina_id: number;
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  estado!: boolean;
+  declare estado: boolean;
 
   @CreatedAt
   @Column({ field: "created_at", type: DataType.DATE })
-  createdAt!: Date;
+  declare createdAt: Date;
 
   @UpdatedAt
   @Column({ field: "updated_at", type: DataType.DATE })
-  updatedAt!: Date;
+  declare updatedAt: Date;
 }

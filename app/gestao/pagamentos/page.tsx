@@ -5,6 +5,8 @@ import Topbar from "@/components/layout/Topbar";
 import Conteudo from "./conteudo";
 
 export default function Pagamentos() {
+
+  
   return (
     <div className="flex min-h-screen">
       <Sidebar />

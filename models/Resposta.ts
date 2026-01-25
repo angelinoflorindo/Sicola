@@ -12,7 +12,7 @@ import {
   Default,
   ForeignKey,
 } from "sequelize-typescript";
-import { Questao } from "./Questao";
+import { Prova } from "./Prova";
 
 @Table({
   tableName: "respostas",
@@ -23,30 +23,33 @@ export class Resposta extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
-  id!: number;
+  declare id: number;
 
-  @Column(DataType.STRING)
-  codigo!: string;
-  
-  @Column(DataType.STRING)
-  descricao!: string;
+  @Column(DataType.FLOAT)
+  declare nota: number;
 
-  @ForeignKey(() => Questao)
+  @Column(DataType.JSON)
+  declare resposta: string | boolean[];
+
+  @Column(DataType.INTEGER)
+  declare questao_id: number;
+
+  @ForeignKey(() => Prova)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  questao_id!: number;
+  declare prova_id: number;
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  estado!: boolean;
+  declare estado: boolean;
 
   @CreatedAt
   @Column({ field: "created_at", type: DataType.DATE })
-  createdAt!: Date;
+  declare createdAt: Date;
 
   @UpdatedAt
   @Column({ field: "updated_at", type: DataType.DATE })
-  updatedAt!: Date;
+  declare updatedAt: Date;
 }

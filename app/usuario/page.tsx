@@ -18,7 +18,9 @@ const Usuario = () => {
     segundo_nome: "",
     telemovel: "",
     perfil:"",
-    estado:""
+    estado:"",
+    createdAt:"",
+    updatedAt:""
   });
   const { data: session, status } = useSession();
   const router = useRouter();

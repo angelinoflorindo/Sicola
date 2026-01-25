@@ -1,19 +1,29 @@
 import ContadorAcesso from "@/components/ui/contador";
-import { AcessoProps } from "@/services/userService";
+import { AcessoProps, PagamentoProps } from "@/services/userService";
 
 export default function Pagamentos({
   getAcesso,
+  getPagamento,
 }: {
   getAcesso: AcessoProps | null;
+  getPagamento: PagamentoProps | null;
 }) {
   const temAcesso = !!getAcesso;
+  const temPagamento = !!getPagamento;
+
+  const statusLabel =
+    getPagamento?.status === "PENDENTE"
+      ? "O seu pagamento está sendo validado. Aguarde até receber o acesso!"
+      : getPagamento?.status === "PAGO"
+      ? "O seu pagamento já foi validado!"
+      : "Faça o pagamento para garantir acesso contínuo às simulações."
 
   const planoLabel =
     getAcesso?.plano === "BASICO"
       ? "Plano Básico (Diário)"
       : getAcesso?.plano === "PREMIUM"
       ? "Plano Premium (Semanal)"
-      : "Sem plano";
+      : "Plano gratuito";
 
   const statusAtivo = getAcesso?.estado === true;
 
@@ -60,7 +70,7 @@ export default function Pagamentos({
           <div className="text-center bg-white rounded-2xl shadow-sm p-6">
             <p className="text-sm text-gray-500">Validade</p>
             <p className="text-xl font-semibold text-gray-800 mt-1">
-              {temAcesso ? getAcesso.fim : "--"}
+              {temAcesso ? getAcesso.fim.split("T")[0] : "--"}
             </p>
           </div>
         </div>
@@ -74,8 +84,8 @@ export default function Pagamentos({
 
         {/* Ação */}
         <div className="bg-white rounded-2xl shadow-sm p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <p className="text-gray-600">
-            Faça o pagamento para garantir acesso contínuo às simulações.
+          <p className="text-blue-800">
+            {temPagamento ? statusLabel : "Faça o pagamento para renovar!"}
           </p>
 
           <a

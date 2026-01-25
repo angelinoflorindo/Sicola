@@ -1,14 +1,18 @@
-
 import { corrigir } from "./correcao";
 
-export function avaliar(respostas: string[], questoes: any[]) {
+export function avaliar(respostas: any[], questoes: any[]) {
   let total = 0;
-  const detalhes:any = [];
+  const detalhes: any[] = [];
 
   questoes.forEach((q, i) => {
-    const nota = corrigir(respostas[i], q.respostaEsperada, q.cotacao);
-    total += nota;
-    detalhes.push({ questaoId: q.id, nota });
+    const resultado = corrigir(respostas[i], q);
+    total += resultado.nota;
+
+    detalhes.push({
+      questaoId: q.id,
+      nota: resultado.nota,
+      detalhes: resultado.detalhes,
+    });
   });
 
   return { total, detalhes };

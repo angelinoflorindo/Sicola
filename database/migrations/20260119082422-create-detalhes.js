@@ -2,28 +2,34 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("chaves", {
+    await queryInterface.createTable("detalhes", {
       id: {
         type: Sequelize.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
       },
-      
-      codigo: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      descricao: {
-        type: Sequelize.STRING,
+
+      indice: {
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
 
-      questao_id: {
+      marcada: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+
+      correta: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+
+      resposta_id: {
         type: Sequelize.INTEGER.UNSIGNED,
         allowNull: false,
         references: {
-          model: "questoes",
+          model: "respostas",
           key: "id",
         },
         onUpdate: "CASCADE",
@@ -49,6 +55,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("chaves");
+    await queryInterface.dropTable("detalhes");
   },
 };

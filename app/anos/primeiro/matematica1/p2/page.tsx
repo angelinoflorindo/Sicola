@@ -14,9 +14,9 @@ export default function Simular() {
   const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
-    const validarPagamento = async () => {
+    const validarAcesso = async () => {
       try {
-        const resp = await fetch("/api/usuario/pagamento", {
+        const resp = await fetch("/api/usuario/pagamento/acesso/validar", {
           method: "POST",
         });
 
@@ -34,7 +34,7 @@ export default function Simular() {
       }
     };
 
-    validarPagamento();
+    validarAcesso();
   }, [router]);
 
   if (loading) {

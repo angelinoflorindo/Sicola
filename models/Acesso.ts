@@ -23,36 +23,36 @@ export class Acesso extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
-  id!: number;
+  declare id: number;
 
   @Column(DataType.DATE)
-  inicio!: Date;
+  declare inicio: Date;
 
   @Column(DataType.DATE)
-  fim!: Date;
+  declare fim: Date;
 
   @Column({
-    type: DataType.ENUM("BASICO", "PREMIUM"),
+    type: DataType.ENUM("TRIAL","BASICO", "PREMIUM"),
     allowNull: false,
   })
-  plano!: "BASICO" | "PREMIUM";
+  declare plano: "TRIAL" | "BASICO" | "PREMIUM";
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  user_id!: number;
+  declare user_id: number;
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  estado!: boolean;
+  declare estado: boolean;
 
   @CreatedAt
   @Column({ field: "created_at", type: DataType.DATE })
-  createdAt!: Date;
+  declare createdAt: Date;
 
   @UpdatedAt
   @Column({ field: "updated_at", type: DataType.DATE })
-  updatedAt!: Date;
+  declare updatedAt: Date;
 }
