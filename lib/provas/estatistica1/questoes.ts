@@ -66,7 +66,7 @@ export const questoesEstatisticaI = [
     ],
     opcoes: [
       { texto: "0,65", correta: true },
-      { texto: "0,35", correta: false },
+      { texto: "0,45", correta: false },
       { texto: "0,75", correta: false },
 
       { texto: "0,35", correta: true },
@@ -121,13 +121,13 @@ export const questoesEstatisticaI = [
       { texto: "0,2575", correta: false },
       { texto: "0,015", correta: false },
 
-      { texto: "0,02575", correta: true },
-      { texto: "0,388", correta: true },
+      { texto: "0,0265", correta: true },
+      { texto: "0,378", correta: true },
 
-      { texto: "0,233", correta: true },
+      { texto: "0,226", correta: true },
       { texto: "0,612", correta: false },
 
-      { texto: "0,379", correta: true },
+      { texto: "0,396", correta: true },
       { texto: "0,035", correta: false },
     ],
   },
