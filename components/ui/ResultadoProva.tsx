@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Formula } from "@/components/math/Formula";
+import TabelaCard, { Tabela } from "../provas/estatistica/TabelaCard";
 
 interface Opcao {
   texto: any;
@@ -27,6 +28,7 @@ interface Questao {
   formula?: string;
   subitens?: string[];
   opcoes: Opcao[];
+  tabela?: Tabela
 }
 
 interface ResultadoProvaProps {
@@ -61,8 +63,6 @@ const ResultadoProva: React.FC<ResultadoProvaProps> = ({
 
       {/* Questões */}
       {detalhes.map((item) => {
-
-
         const questao = questoes.find((q) => q.id === item.questaoId);
         if (!questao) return null;
 
@@ -94,6 +94,8 @@ const ResultadoProva: React.FC<ResultadoProvaProps> = ({
 
             {/* Enunciado */}
             <p className="text-gray-800">{questao.enunciado}</p>
+
+            {questao.tabela && <TabelaCard tabela={questao.tabela} />}
 
             {questao.formula && <Formula latex={questao.formula} />}
 

@@ -1,10 +1,9 @@
 "use client";
-
 import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import Conteudo from "./conteudo";
 
-export default function PrimeiroAno() {
+export default function Matematica() {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
