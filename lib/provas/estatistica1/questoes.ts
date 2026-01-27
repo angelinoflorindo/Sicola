@@ -3,8 +3,13 @@ export const questoesEstatisticaI = [
     id: 1,
     tipo: "MULTIPLA",
     cotacao: 4,
-    enunciado:
-      "Os mais importantes fornecedores de ovos de um supermercado F₁ e F₂ fornecem, respectivamente, 50% e 40% do total dos ovos adquiridos pelo supermercado. Alguns dos ovos vêm estragados, tendo-se apurado que, dos ovos estragados, 6% são fornecidos por F₁  e 3% por F₂. Sabe-se também que a percentagem de ovos estragados de outros fornecedores é de 5%.",
+    enunciado: `
+      Os mais importantes fornecedores de ovos de um supermercado F₁ e F₂ fornecem, 
+      respectivamente, 50% e 40% do total dos ovos adquiridos pelo supermercado. 
+      Alguns dos ovos vêm estragados, tendo-se apurado que, dos ovos estragados, 
+      6% são fornecidos por F₁  e 3% por F₂. Sabe-se também que a percentagem 
+      de ovos estragados de outros fornecedores é de 5%.
+      `,
     subitens: [
       "Qual a percentagem total de ovos estragados recebidos pelo supermercado?",
       "Escolhidos ao acaso alguns ovos verificou-se que estavam estragados, qual a probabilidade de estes terem sido fornecidos por outros fornecedores?",
@@ -26,8 +31,11 @@ export const questoesEstatisticaI = [
     id: 2,
     tipo: "MULTIPLA",
     cotacao: 1.5,
-    enunciado:
-      "A tabela a seguir apresenta a distribuição de alunos diplomados em 2002, segundo o nível de ensino e o tipo de instituição, no município X. Um aluno é selecionado ao acaso:",
+    enunciado: `
+      A tabela a seguir apresenta a distribuição de alunos diplomados em 2002, 
+      segundo o nível de ensino e o tipo de instituição, no município X. 
+      Um aluno é selecionado ao acaso:
+      `,
     tabela: {
       cabecalho: ["Nível", "Pública", "Privada", "Total"],
       dados: [
@@ -56,8 +64,11 @@ export const questoesEstatisticaI = [
     id: 3,
     tipo: "MULTIPLA",
     cotacao: 4,
-    enunciado:
-      "Na análise de uma amostra de 100 empresas portuguesas de importação-exportação, verificou-se que 40 exportam para Angola, 50 exportam para Moçambique e 25 exportam para ambos os países. Seleciona-se ao acaso uma destas empresas:",
+    enunciado: `
+    Na análise de uma amostra de 100 empresas portuguesas de importação-exportação,
+     verificou-se que 40 exportam para Angola, 50 exportam para Moçambique e 
+     25 exportam para ambos os países. Seleciona-se ao acaso uma destas empresas:
+      `,
     subitens: [
       "Probabilidade de a empresa exportar pelo menos para um dos países",
       "Probabilidade de a empresa não exportar para nenhum dos países",
@@ -83,8 +94,12 @@ export const questoesEstatisticaI = [
     id: 4,
     tipo: "MULTIPLA",
     cotacao: 3,
-    enunciado:
-      "Numa linha de produção, uma peça é produzida por três máquinas M₁, M₂ e M₃, responsáveis por 30%, 35% e 35% da produção, respetivamente. As proporções de peças defeituosas são 5%, 2,5% e 2%. Seleciona-se ao acaso uma peça produzida na fábrica:",
+    enunciado: `
+      Numa linha de produção, uma peça é produzida por três máquinas M₁, M₂ e M₃, 
+      responsáveis por 30%, 35% e 35% da produção, respetivamente. As proporções 
+      de peças defeituosas são 5%, 2,5% e 2%. Seleciona-se ao acaso uma peça 
+      produzida na fábrica:
+      `,
     subitens: [
       "Proporção total de peças defeituosas produzidas na fábrica",
       "Probabilidade de a peça defeituosa ter sido produzida na máquina M₁",
@@ -109,8 +124,12 @@ export const questoesEstatisticaI = [
     id: 5,
     tipo: "MULTIPLA",
     cotacao: 3,
-    enunciado:
-      "Uma fábrica de lâmpadas possui três linhas de montagem L₁, L₂ e L₃, responsáveis por 25%, 40% e 35% da produção total, respetivamente. As percentagens de lâmpadas defeituosas em cada linha são 4%, 1,5% e 3%. Seleciona-se ao acaso uma lâmpada produzida nesta fábrica:",
+    enunciado: `
+      Uma fábrica de lâmpadas possui três linhas de montagem L₁, L₂ e L₃, 
+      responsáveis por 25%, 40% e 35% da produção total, respetivamente. 
+      As percentagens de lâmpadas defeituosas em cada linha são 4%, 1,5% e 3%. 
+      Seleciona-se ao acaso uma lâmpada produzida nesta fábrica:
+      `,
     subitens: [
       "Proporção total de lâmpadas defeituosas produzidas na fábrica",
       "Probabilidade de a lâmpada defeituosa ter sido produzida na linha L₁",
@@ -135,8 +154,12 @@ export const questoesEstatisticaI = [
     id: 6,
     tipo: "MULTIPLA",
     cotacao: 4.5,
-    enunciado:
-      "Uma linha de montagem produz smartphones em duas unidades: Unidade A (65% da produção) e Unidade B (35% da produção). Sabe-se que 2% dos aparelhos da Unidade A apresentam defeitos na tela, enquanto na Unidade B essa taxa é de 4%. Seleciona-se ao acaso um smartphone produzido nesta linha:",
+    enunciado: `
+      Uma linha de montagem produz smartphones em duas unidades: Unidade A (65% da produção)
+       e Unidade B (35% da produção). Sabe-se que 2% dos aparelhos da Unidade A apresentam 
+       defeitos na tela, enquanto na Unidade B essa taxa é de 4%. Seleciona-se ao acaso 
+       um smartphone produzido nesta linha:
+      `,
     subitens: [
       "Probabilidade de o smartphone ser defeituoso",
       "Probabilidade de o aparelho ter sido produzido na Unidade A, sabendo que é defeituoso",
