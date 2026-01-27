@@ -7,14 +7,15 @@ export default function Conteudo() {
      <section>
       <h2 className="text-xl font-bold mb-4">2 º Ano</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Link href={`/anos/segundo/contabilidade2`}>
+        {/* anos/segundo/contabilidade2 */}
+        <Link href={`/develop`}>
           <Card
             title="Contabilidade Geral II"
             description="Consultar simulados"
           />
         </Link>
-
-        <Link href={`/anos/segundo/calculo`}>
+          {/*anos/segundo/calculo */}
+        <Link href={`/develop`}>
           <Card
             title="Cálculo e Operações Financeiras"
             description="Consultar Simulados"

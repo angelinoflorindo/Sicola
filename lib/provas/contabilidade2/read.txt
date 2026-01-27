@@ -297,58 +297,6 @@ export default function QuestaoRenderer({
     if (onResponder) onResponder(novasRespostas);
   };
 
-  // Renderizar fórmulas LaTeX no texto
-  const renderComLatex = (texto: string) => {
-    return <Latex>{texto}</Latex>;
-  };
-
-  // Renderizar tabela
-  const renderTabela = (tabela: TabelaQuestao) => {
-    const { cabecalho, subcabecalho, dados } = tabela;
-    
-    return (
-      <div className="overflow-x-auto my-4">
-        <table className="min-w-full border border-gray-300 text-sm">
-          <thead className="bg-gray-100">
-            <tr>
-              {cabecalho.map((col, idx) => (
-                <th 
-                  key={idx} 
-                  className="border border-gray-300 px-3 py-2 text-left font-semibold"
-                  colSpan={subcabecalho && idx === 0 ? 1 : cabecalho.length > 4 ? 1 : undefined}
-                >
-                  {renderComLatex(col)}
-                </th>
-              ))}
-            </tr>
-            {subcabecalho && (
-              <tr>
-                {subcabecalho.map((col, idx) => (
-                  <th key={idx} className="border border-gray-300 px-3 py-2 text-left font-medium">
-                    {renderComLatex(col)}
-                  </th>
-                ))}
-              </tr>
-            )}
-          </thead>
-          <tbody>
-            {dados.map((linha, rowIndex) => (
-              <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                {linha.map((celula, cellIndex) => (
-                  <td key={cellIndex} className="border border-gray-300 px-3 py-2">
-                    {typeof celula === 'string' && celula.includes('\\') 
-                      ? renderComLatex(celula)
-                      : celula.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-                    }
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
 
   return (
     <div className="questao-container p-4 border border-gray-200 rounded-lg mb-6 bg-white">
