@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@prisma/client": "^7.2.0",
     "@types/katex": "^0.16.8",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
@@ -21,7 +20,6 @@
     "next-auth": "^4.24.13",
     "pg": "^8.17.1",
     "pg-hstore": "^2.3.4",
-    "prisma": "^7.2.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-katex": "^3.1.0",
