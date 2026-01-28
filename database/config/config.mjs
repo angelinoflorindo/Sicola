@@ -1,12 +1,13 @@
+
 export const options = {
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT) || 3306,
+    username: process.env.production.production.DB_USERNAME,
+    password: process.env.production.DB_PASSWORD,
+    database: process.env.production.DB_NAME,
+    host: process.env.production.DB_HOST,
+    port: Number(process.env.production.DB_PORT) || 3306,
     dialect: 'mysql',
     // Corrigido: logging (com 'g' no final)
-    logging: process.env.NODE_ENV === "development" ? console.log : false,
+    logging: process.env.production.NODE_ENV === "development" ? console.log : false,
     migrationStorageTableName: 'migrations',
     
     // Recomendado para Produção: Gerenciamento de conexões
@@ -19,8 +20,8 @@ export const options = {
     timezone: '+00:00',   // Garante consistência de datas (UTC)
 }
 
-if (process.env.NODE_ENV === 'production') {
-    if (process.env.DB_SSL === 'true') {
+if (process.env.production.NODE_ENV === 'production') {
+    if (process.env.production.DB_SSL === 'true') {
         options.dialectOptions = {
             ssl: {
                 rejectUnauthorized: true
