@@ -1,7 +1,7 @@
 export const options = {
-    username: process.env.DB_USERNAME || 'seu_usuario',
-    password: process.env.DB_PASSWORD || 'sua_senha',
-    database: process.env.DB_NAME || 'nome_banco',
+    username: process.env.DB_USERNAME || 'usicola',
+    password: process.env.DB_PASSWORD || 'sic0La',
+    database: process.env.DB_NAME || 'sicoladb',
     host: process.env.DB_HOST || 'localhost',
     port: Number(process.env.DB_PORT) || 3306,
     dialect: 'mysql',
