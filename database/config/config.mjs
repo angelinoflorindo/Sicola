@@ -2,7 +2,7 @@ export const options = {
     username: process.env.DB_USERNAME || 'usicola',
     password: process.env.DB_PASSWORD || 'sic0La',
     database: process.env.DB_NAME || 'sicoladb',
-    host: process.env.DB_HOST || 'localhost',
+    host: process.env.DB_HOST || '127.0.0.1',
     port: Number(process.env.DB_PORT) || 3306,
     dialect: 'mysql',
     logging: process.env.NODE_ENV === "development" ? console.log : false,
