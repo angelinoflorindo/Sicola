@@ -1,11 +1,11 @@
 export const options = {
-    username: process.env.production.DB_USERNAME || 'usicola',
-    password: process.env.production.DB_PASSWORD || 'sic0La',
-    database: process.env.production.DB_NAME || 'sicoladb',
-    host: process.env.production.DB_HOST || 'localhost',
-    port: Number(process.env.production.DB_PORT) || 3306,
+    username: process.env.DB_USERNAME || 'usicola',
+    password: process.env.DB_PASSWORD || 'sic0La',
+    database: process.env.DB_NAME || 'sicoladb',
+    host: process.env.DB_HOST || 'localhost',
+    port: Number(process.env.DB_PORT) || 3306,
     dialect: 'mysql',
-    logging: process.env.production.NODE_ENV === "development" ? console.log : false,
+    logging: process.env.NODE_ENV === "development" ? console.log : false,
     migrationStorageTableName: 'migrations',
     
     pool: {
@@ -17,7 +17,7 @@ export const options = {
     timezone: '+00:00',
 }
 
-if (process.env.production.NODE_ENV === 'production' && process.env.production.DB_SSL === 'true') {
+if (process.env.NODE_ENV === 'production' && process.env.DB_SSL === 'true') {
     options.dialectOptions = {
         ssl: {
             rejectUnauthorized: true
