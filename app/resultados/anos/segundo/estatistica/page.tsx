@@ -3,7 +3,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import Conteudo from "./conteudo";
 
-export default function Matematica() {
+export default function Estatistica() {
   return (
     <div className="flex min-h-screen">
       <Sidebar />

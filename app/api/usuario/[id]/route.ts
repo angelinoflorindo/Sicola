@@ -7,7 +7,7 @@ import { Prova } from "@/models/Prova";
 
 export async function GET(
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }, // Agora é uma Promise
 ) {
   const { id } = await context.params;
   const query = id;
@@ -59,14 +59,14 @@ export async function GET(
     if (!user) {
       return NextResponse.json(
         { error: "Usuário não encontrado" },
-        { status: 404 }
+        { status: 404 },
       );
     }
     return NextResponse.json(user);
   } catch (error) {
     return NextResponse.json(
       { error: "Erro ao buscar dados" },
-      { status: 404 }
+      { status: 404 },
     );
   }
 }
@@ -74,7 +74,7 @@ export async function GET(
 // PUT - Atualizar usuário por ID
 export async function PUT(
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }, // Agora é uma Promise
 ) {
   //const { searchParams } = new URL(req.url);
   const { id } = await context.params;
@@ -111,7 +111,7 @@ export async function PUT(
       if (!userResponse) {
         return NextResponse.json(
           { message: "Operação mal sucedida" },
-          { status: 404 }
+          { status: 404 },
         );
       }
       return NextResponse.json(userResponse, { status: 200 });
@@ -122,7 +122,7 @@ export async function PUT(
     if (!userResponse) {
       return NextResponse.json(
         { message: "Operação mal sucedida" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -135,7 +135,7 @@ export async function PUT(
 // DELETE - Remover usuário por ID
 export async function DELETE(
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }, // Agora é uma Promise
 ) {
   const { id } = await context.params;
   try {

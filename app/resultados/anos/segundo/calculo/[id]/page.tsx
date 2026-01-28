@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import LoadingPage from "@/components/LoadingPage";
 
-export default function Estatistica() {
+export default function Calculo() {
   const router = useRouter();
    const [active, setActive] = useState(false);
 

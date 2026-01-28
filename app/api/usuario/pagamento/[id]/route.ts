@@ -6,9 +6,10 @@ import { buscarPagamentoId, calcularDataFim } from "@/app/api/actions/server";
 import { sequelize } from "@/lib/sequelize";
 
 // Aprovar pagamentos
+
 export async function GET(
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> } // Agora é uma Promise
 ) {
   const { id } = await context.params;
   const uuid = Number(id);
@@ -65,8 +66,8 @@ export async function GET(
 
 // Reverter pagamentos aprovados, mas indevidamente validados
 export async function PUT(
-  req: NextRequest,
-  context: { params: { id: string } }
+    req: NextRequest,
+  context: { params: Promise<{ id: string }> } // Agora é uma Promise
 ) {
   const { id } = await context.params;
   const uuid = Number(id);
@@ -106,8 +107,8 @@ export async function PUT(
 
 // DELETE - Remover historico de pagamento por ID
 export async function DELETE(
-  req: NextRequest,
-  context: { params: { id: string } }
+   req: NextRequest,
+  context: { params: Promise<{ id: string }> } // Agora é uma Promise
 ) {
   const { id } = await context.params;
   const uuid = Number(id);

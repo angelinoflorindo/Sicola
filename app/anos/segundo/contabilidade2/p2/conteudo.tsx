@@ -4,8 +4,6 @@ import {
   primeiroGrupoContabilidadeII,
   segundoGrupoContabilidadeII,
 } from "@/lib/provas/contabilidade2/questoes";
-import { QuestaoCard } from "@/components/provas/contabilidade2/QuestaoCard";
-import { QuestaoCardAdd } from "@/components/provas/contabilidade2/QuestaoCardAdd";
 import { Temporizador } from "@/components/provas/contabilidade2/Temporizador";
 import { useRouter } from "next/navigation";
 import Sucesso from "@/components/ui/Sucesso";
@@ -91,28 +89,7 @@ export default function Conteudo() {
       {/* Temporizador // erro esta vindo daqui*/}
       <Temporizador onFinish={submeterProva} /> 
 
-      {/* Questões */}
-      {primeiroGrupoContabilidadeII.map((questao, index) => (
-        <QuestaoCard
-          key={questao.id}
-          questao={questao}
-          changeInput={(valor: string) => handleInput(index, valor)}
-          changeSelect={(i: number, valor: boolean) =>
-            handleSelect(index, i, valor)
-          }
-        />
-      ))}
-
-    {segundoGrupoContabilidadeII.map((questao, index) => (
-  <QuestaoCardAdd
-    key={questao.id}
-    questao={questao}
-    changeInput={(valor: string) => handleInput(index, valor)}
-    changeSelect={(i: number, valor: boolean) =>
-      handleSelect(index, i, valor)
-    }
-  />
-))}
+    
 
 
       {/* Botão submeter */}

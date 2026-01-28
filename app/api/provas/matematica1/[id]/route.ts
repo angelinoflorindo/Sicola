@@ -8,7 +8,7 @@ import { Detalhes } from "@/models/Detalhes";
 
 export async function GET(
   req: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> } // Agora é uma Promise
 ) {
   const { id } = await context.params;
   const uuid = Number(id);
