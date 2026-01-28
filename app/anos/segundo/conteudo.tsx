@@ -14,8 +14,8 @@ export default function Conteudo() {
             description="Consultar simulados"
           />
         </Link>
-          {/*anos/segundo/calculo */}
-        <Link href={`/develop`}>
+          {/**/}
+        <Link href={`/anos/segundo/calculo`}>
           <Card
             title="Cálculo e Operações Financeiras"
             description="Consultar Simulados"

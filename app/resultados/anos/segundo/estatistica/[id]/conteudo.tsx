@@ -24,7 +24,6 @@ export default function Conteudo() {
   const router = useRouter();
   const [data, setData] = useState<any>();
   const [loading, setLoading] = useState(true);
-
   const params = useParams();
   const id = params.id;
 
@@ -33,7 +32,6 @@ export default function Conteudo() {
       const resp = await fetch(`/api/provas/estatistica/${id}`);
       if (!resp.ok) throw new Error("Erro ao buscar prova");
       const json = await resp.json();
-      console.log("validando prova", json);
       setData(json);
     } catch (error) {
       console.log("erros", error);

@@ -1,15 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
-import { questoesEstatisticaI } from "@/lib/provas/estatistica1/questoes";
-import { QuestaoCard } from "@/components/provas/estatistica/QuestaoCard";
-import { Temporizador } from "@/components/provas/estatistica/Temporizador";
+import { questoesCalculoFinanceiro } from "@/lib/provas/calculo/questoes";
+import { QuestaoCard } from "@/components/provas/calculo/QuestaoCard";
+import { Temporizador } from "@/components/provas/calculo/Temporizador";
 import { useRouter } from "next/navigation";
 import Sucesso from "@/components/ui/Sucesso";
 import LoadingPage from "@/components/LoadingPage"; 
 
 export default function Conteudo() {
   const [respostas, setRespostas] = useState<any[]>(
-    Array(questoesEstatisticaI.length).fill(""),
+    Array(questoesCalculoFinanceiro.length).fill(""),
   );
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -86,7 +86,7 @@ export default function Conteudo() {
       <Temporizador onFinish={submeterProva} />
 
       {/* Questões */}
-      {questoesEstatisticaI.map((questao, index) => (
+      {questoesCalculoFinanceiro.map((questao, index) => (
         <QuestaoCard
           key={questao.id}
           questao={questao}

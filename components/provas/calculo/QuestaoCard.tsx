@@ -34,7 +34,6 @@ export function QuestaoCard({ questao, changeInput, changeSelect }: any) {
         </ul>
       )}
 
-      {questao.formula && <Formula latex={questao.formula} />}
 
       {/* QUESTÃO ÚNICA */}
       {(questao.tipo === "UNICA") && (
@@ -46,7 +45,7 @@ export function QuestaoCard({ questao, changeInput, changeSelect }: any) {
                 name={`q-${questao.id}`}
                 onChange={() => changeInput(o.texto)}
               />
-              {o.texto && <Formula latex={o.texto}/> }
+              <span>{o.texto}</span>
             </label>
           ))}
         </div>
@@ -57,7 +56,7 @@ export function QuestaoCard({ questao, changeInput, changeSelect }: any) {
         <div className="space-y-3">
           {questao.opcoes.map((s: any, i: number) => (
             <div key={i} className="flex justify-between">
-              {s.texto && <Formula latex={s.texto}/> }
+              <span>{s.texto}</span>
               <select onChange={(e) => changeSelect(i, e.target.value === "true")}>
                 <option value="">---</option>
                 <option value="true">Certa</option>

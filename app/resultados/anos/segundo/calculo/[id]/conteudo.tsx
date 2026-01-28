@@ -4,19 +4,18 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import LoadingPage from "@/components/LoadingPage";
-import ResultadoProva from "@/components/ui/ResultadoProva";
-import { questoesEstatisticaI } from "@/lib/provas/estatistica1/questoes";
+
+import { questoesCalculoFinanceiro } from "@/lib/provas/calculo/questoes";
+import ResultadoCalculo from "../ResultadoCalculo";
 
 // Adaptador para o componente
 const mapearQuestoes = () => {
-  return questoesEstatisticaI.map((q) => ({
+  return questoesCalculoFinanceiro.map((q) => ({
     id: q.id,
     tipo:q.tipo,
     subitens:q.subitens,
-    enunciado: q.enunciado,
-    tabela: q.tabela,
+    enunciado: q.enunciado, 
     opcoes: q.opcoes,
-    formula: q.formula,
   }));
 };
 
@@ -30,14 +29,14 @@ export default function Conteudo() {
 
   const fetchProva = async () => {
     try {
-      const resp = await fetch(`/api/provas/estatistica/${id}`);
+      const resp = await fetch(`/api/provas/calculo/${id}`);
       if (!resp.ok) throw new Error("Erro ao buscar prova");
       const json = await resp.json();
       console.log("validando prova", json);
       setData(json);
     } catch (error) {
       console.log("erros", error);
-      router.push("/anos/segundo/estatistica/p2");
+      router.push("/anos/segundo/calculo/p2");
     } finally {
       setLoading(false);
     }
@@ -53,7 +52,7 @@ export default function Conteudo() {
 
   return (
     <section className="space-y-6">
-      <ResultadoProva
+      <ResultadoCalculo
         notaFinal={data.notaFinal}
         detalhes={data.detalhes}
         questoes={questoesAdaptadas}
@@ -63,7 +62,7 @@ export default function Conteudo() {
         <Link href={"/dashboard"}>
           <button className="px-4 py-2 bg-gray-200 rounded">Voltar à página principal</button>
         </Link>
-        <Link href={"/anos/segundo/estatistica/p2"}>
+        <Link href={"/anos/segundo/calculo/p2"}>
           <button className="px-4 py-2 bg-blue-500 text-white rounded">Voltar a realizar a prova</button>
         </Link>
       </div>
