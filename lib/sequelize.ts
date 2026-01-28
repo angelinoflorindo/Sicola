@@ -9,14 +9,12 @@ import {Resposta} from "@/models/Resposta"
 import {Suporte} from "@/models/Suporte"
 
 
-import { config } from "dotenv";
 import { setProvaAssociation } from "./prova.association";
 import {setUserAssociation} from "./user.association"
 import { Acesso } from "@/models/Acesso";
   
 
 
-config();
 
 
 export const sequelize = new Sequelize({
