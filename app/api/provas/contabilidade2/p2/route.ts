@@ -9,8 +9,8 @@ import {
   converterString,
   getUserIdFromToken,
 } from "@/app/api/actions/server";
-import { avaliar } from "@/lib/provas/estatistica1/avaliacao";
-import { questoesEstatisticaI } from "@/lib/provas/estatistica1/questoes";
+import { avaliar } from "@/lib/provas/contabilidade2/avaliacao";
+import { primeiroGrupoContabilidadeII, segundoGrupoContabilidadeII } from "@/lib/provas/contabilidade2/questoes";
 import { initDB } from "@/lib/db";
 
 function segundosParaTime(segundos: number) {
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     const { respostas, tempoGasto, codigo } = await req.json();
 
     // 3️⃣ Avaliação
-    const { total, detalhes } = avaliar(respostas, questoesEstatisticaI);
+    const { total, detalhes } = avaliar(respostas, primeiroGrupoContabilidadeII, segundoGrupoContabilidadeII);
 
     initDB();
     const disciplina = await buscarDisciplina(codigo);
@@ -71,7 +71,7 @@ export async function POST(req: Request) {
 
         // 4.3 Detalhes da correção (cada alternativa da questão)
         for (const det of item.detalhes) {
-          await Detalhes.create(
+           await Detalhes.create(
             {
               resposta_id: resposta.id,
               acertou: det.acertou,

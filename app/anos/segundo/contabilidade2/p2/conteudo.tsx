@@ -8,6 +8,8 @@ import { Temporizador } from "@/components/provas/contabilidade2/Temporizador";
 import { useRouter } from "next/navigation";
 import Sucesso from "@/components/ui/Sucesso";
 import LoadingPage from "@/components/LoadingPage";
+import { PrimeiraQuestao } from "@/components/provas/contabilidade2/PrimeiraQuestao";
+import { SegundaQuestao } from "@/components/provas/contabilidade2/SegundaQuestao";
 
 export default function Conteudo() {
   const [respostas, setRespostas] = useState<any[]>([]);
@@ -84,13 +86,31 @@ export default function Conteudo() {
         </p>
       </header>
 
-
-
       {/* Temporizador // erro esta vindo daqui*/}
-      <Temporizador onFinish={submeterProva} /> 
+      <Temporizador onFinish={submeterProva} />
 
-    
+      {/* Questões */}
+      {primeiroGrupoContabilidadeII.map((questao, index) => (
+        <PrimeiraQuestao
+          key={questao.id}
+          questao={questao}
+          changeInput={(valor: string) => handleInput(index, valor)}
+          changeSelect={(i: number, valor: boolean) =>
+            handleSelect(index, i, valor)
+          }
+        />
+      ))}
 
+      {segundoGrupoContabilidadeII.map((questao, index) => (
+        <SegundaQuestao
+          key={questao.id}
+          questao={questao}
+          changeInput={(valor: string) => handleInput(index, valor)}
+          changeSelect={(i: number, valor: boolean) =>
+            handleSelect(index, i, valor)
+          }
+        />
+      ))}
 
       {/* Botão submeter */}
       <div className="flex justify-end">

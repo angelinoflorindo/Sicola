@@ -2,10 +2,9 @@ export const primeiroGrupoContabilidadeII = [
   {
     id: 1,
     enunciado:
-      "Com base no balancete da empresa (31 de dezembro de 2024), a empresa realizou as seguintes operações, das quais pretende-se",
+      "I GRUPO: Com base no balancete da empresa (31 de dezembro de 2024), a empresa realizou as seguintes operações, das quais pretende-se",
     tabela: {
-      cabecalho: ["Contas", "Movimentos", "Saldos"],
-      subcabecalho: ["", "Débito", "Crédito", "Devedor", "Credor"],
+      cabecalho: ["Contas", "Débito", "Crédito", "Devedor", "Credor"],
       dados: [
         ["Edifícios e outras Construções", "500 000,00", "", "500 000,00", ""],
         [
@@ -35,11 +34,11 @@ export const primeiroGrupoContabilidadeII = [
       ],
     },
     subitens: [
-      "1.	Lançamento no diário e pagamento do IVA de Novembro (C.C Ex:. 75.2). 10 V ",
-      "2.	Apuramento do IVA de Dezembro; 1,5 V. ",
-      "3.	 Registar o rédito do Subsídio. 1,5V",
-      "4.	Balancete Final ( Não precisa descrever as contas, basta apenas o código). 1V",
-      "5.	Balanço Final e DRE.  2V",
+      "1.	Lançamento no diário e pagamento do IVA de Novembro (C.C Ex:. 75.2). ",
+      "2.	Apuramento do IVA de Dezembro; ",
+      "3.	 Registar o rédito do Subsídio.",
+      "4.	Balancete Final ( Não precisa descrever as contas, basta apenas o código).",
+      "5.	Balanço Final e DRE. ",
     ],
   },
 
@@ -496,13 +495,11 @@ export const primeiroGrupoContabilidadeII = [
     tipo: "UNICA",
     cotacao: 1,
     enunciado: `
-  Registo da amortização dos activos fixos, considerando
-  as taxas e vidas úteis indicadas.
-  `,
+  9-	Pagamento dos Juros e prestação referente ao mês de Dezembro, sendo taxa de juros 10% e a prestação é constante.(Empréstimo obtido em Novembro. `,
 
     opcoes: [
       {
-        texto: "Amortização correta",
+        texto: "pagamento correto",
         correta: true,
         tabela: {
           cabecalho: ["Conta", "Débito", "Crédito"],
@@ -514,7 +511,7 @@ export const primeiroGrupoContabilidadeII = [
         },
       },
       {
-        texto: "Erro: amortização registada como pagamento",
+        texto: "Erro: pagamento",
         correta: false,
         tabela: {
           cabecalho: ["Conta", "Débito", "Crédito"],
@@ -526,7 +523,7 @@ export const primeiroGrupoContabilidadeII = [
         },
       },
       {
-        texto: "Erro: amortização registada no capital próprio",
+        texto: "Erro:  capital próprio",
         correta: false,
         tabela: {
           cabecalho: ["Conta", "Débito", "Crédito"],
@@ -544,11 +541,11 @@ export const primeiroGrupoContabilidadeII = [
     id: 11,
     tipo: "UNICA",
     cotacao: 1,
-    enunciado: `
-  Registo da amortização dos activos fixos, considerando
-  as taxas e vidas úteis indicadas.
-  `,
-
+    enunciado: `Registo de amortização referente aos Activos fixos (do Balancete) e aquirido em Dezembro, tendo em conta que: 
+Edifícios e outras construções: Taxa anual de 10% 
+Equipamento de carga e transporte= Vida útil de 8 anos 
+Equipamento administrativo= Taxa anual 10% (Adquirida em Março de 2024) 
+`,
     opcoes: [
       {
         texto: "Erro: amortização registada como pagamento",
@@ -701,6 +698,7 @@ export const primeiroGrupoContabilidadeII = [
   {
     id: 14,
     cotacao: 1,
+    tipo:'UNICA',
     enunciado:
       "Balancete Final da Empresa após o registo de todas as operações do período:",
     opcoes: [
@@ -708,8 +706,7 @@ export const primeiroGrupoContabilidadeII = [
         texto: "Registo errado do Balancete Final",
         correta: false,
         tabela: {
-          cabecalho: ["Contas", "Movimentos", "Saldos"],
-          subcabecalho: ["", "Débito", "Crédito", "Devedor", "Credor"],
+          cabecalho: ["Contas", "Débito", "Crédito", "Devedor", "Credor"],
           dados: [
             [
               "Edifícios e outras construções",
@@ -878,8 +875,7 @@ export const primeiroGrupoContabilidadeII = [
         texto: "Registo correto do Balancete Final",
         correta: true,
         tabela: {
-          cabecalho: ["Contas", "Movimentos", "Saldos"],
-          subcabecalho: ["", "Débito", "Crédito", "Devedor", "Credor"],
+          cabecalho: ["Contas", "Débito", "Crédito", "Devedor", "Credor"],
           dados: [
             [
               "Edifícios e outras construções",
@@ -1036,6 +1032,7 @@ export const primeiroGrupoContabilidadeII = [
 
   {
     id: 15,
+    tipo:'UNICA',
     cotacao: 1,
     enunciado: "Balanço  Final  do período:",
     opcoes: [
@@ -1256,6 +1253,7 @@ export const primeiroGrupoContabilidadeII = [
 
   {
     id: 16,
+    tipo:'UNICA',
     cotacao: 1,
     enunciado: "Demonstração de Resultados do período:",
     opcoes: [
@@ -1343,19 +1341,17 @@ export const segundoGrupoContabilidadeII = [
   {
     id: 1,
     enunciado: `
-    A empresa XPTO, LDA adquiriu uma máquina fotográfica em dezembro de 2014 com as seguintes despesas:
-    • 03/12/2014: Compra dos materiais necessários à montagem da máquina – despesa de 513.000 Kz (IVA incluído)
-    • 20/12/2014: Montagem da primeira estrutura da máquina – despesa de 400.000 Kz + IVA
-    • 30/12/2014: Finalização da montagem da máquina – despesa de 570.000 Kz (IVA incluído)
-    • 31/12/2014: Finalização dos testes e disponibilização da máquina à empresa – despesa de 300.000 Kz + IVA
-    • 02/01/2015: Formação do pessoal que usará a máquina – despesa de 114.000 Kz (IVA incluído)
-    • 03/01/2015: Início da utilização da máquina pela XPTO, Lda.
-    
-    A máquina tem uma vida útil estimada de 5 anos, valor residual 150.000 Kz e capacidade para tirar 40.000 fotografias. 
-    A actividade real de cada ano é apresentada no quadro abaixo:`,
+    II GRUPO: A empresa XPTO, LDA adquiriu uma máquina fotográfica em dezembro de 2014..
+    A máquina tem uma vida útil estimada de 5 anos, valor residual 150.000 Kz e capacidade para tirar 40.000 fotografias. Conforme a ilustração`,
     subitens: [
-      "a) Elabore o quadro de amortizações, para toda a vida útil do bem, utilizando o método das Quotas degressivas",
-      "b)	Sabendo que em janeiro de 2019, a máquina foi alienada por $400.000\text{kz}$ + IVA efectue o registo contabilístico da alienação. ",
+    "03/12/2014: Compra dos materiais necessários à montagem da máquina – despesa de 513.000 Kz (IVA incluído)",
+    "20/12/2014: Montagem da primeira estrutura da máquina – despesa de 400.000 Kz + IVA",
+    "30/12/2014: Finalização da montagem da máquina – despesa de 570.000 Kz (IVA incluído)",
+    "31/12/2014: Finalização dos testes e disponibilização da máquina à empresa – despesa de 300.000 Kz + IVA",
+    "02/01/2015: Formação do pessoal que usará a máquina – despesa de 114.000 Kz (IVA incluído)",
+    "03/01/2015: Início da utilização da máquina pela XPTO, Lda",
+    
+    
     ],
     tabela: {
       cabecalho: ["Ano", "Fotografias (unidades)"],

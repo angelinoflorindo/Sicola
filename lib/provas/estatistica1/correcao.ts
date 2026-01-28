@@ -17,8 +17,8 @@ export function corrigir(resposta: any, questao: any) {
     }
 
     detalhes.push({
-      respostaAluno: resposta ?? null,
-      correta: correta?.texto ?? null,
+      respostaAluno: resposta ?? false,
+      correta: correta?.texto ?? false,
       acertou,
       indice:questao.id
     });
@@ -46,7 +46,7 @@ export function corrigir(resposta: any, questao: any) {
       }
 
       detalhes.push({
-        respostaAluno: respondeu ?? null,
+        respostaAluno: respondeu ?? false,
         correta: item.correta,
         acertou,
         indice:i

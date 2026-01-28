@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Formula } from "@/components/math/Formula";
-import TabelaCard, { Tabela } from "../provas/estatistica/TabelaCard";
+import TabelaCard from "../provas/contabilidade2/TabelaCard";
 
 interface Opcao {
   texto: any;
@@ -21,6 +21,11 @@ interface ItemDetalhes {
   detalhes: Detalhe[];
 }
 
+interface TabelaQuestao {
+  cabecalho: string[];
+  subcabecalho?: string[];
+  dados: (string | number)[][];
+}
 interface Questao {
   id: number;
   tipo: string;
@@ -28,7 +33,7 @@ interface Questao {
   formula?: string;
   subitens?: string[];
   opcoes: Opcao[];
-  tabela?: Tabela
+  tabela?: TabelaQuestao
 }
 
 interface ResultadoProvaProps {
