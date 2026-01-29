@@ -10,7 +10,7 @@ interface CustomSession extends Session {
     name: any;
     email: any;
     image: any;
-    role: any;
+    perfil: any;
   };
   expires: any;
 }
@@ -37,11 +37,9 @@ const handler = NextAuth({
           where: { email: credentials.email },
         });
 
-        const user = response?.dataValues
-        
-        
+        const user = response?.dataValues;
+
         if (!user.email || !user.password) {
-          ;
           console.log("usuario inexistente");
           return null;
         }
@@ -49,7 +47,7 @@ const handler = NextAuth({
         // Verificar senha
         const senhaValida = await bcrypt.compare(
           credentials.password,
-          user.password
+          user.password,
         );
         if (!senhaValida) {
           console.log("senha incorreta");
@@ -60,7 +58,7 @@ const handler = NextAuth({
           id: user.id,
           name: `${user.primeiro_nome} ${user.segundo_nome}`,
           email: credentials.email,
-          //      role:papel?.perfil
+          perfil: user.perfil,
         };
 
         // console.log('users', users)
@@ -81,7 +79,7 @@ const handler = NextAuth({
         token.id = user.id;
         token.name = user.name;
         token.email = user.email;
-        //  token.role = user.role
+        token.perfil = user.perfil;
       }
       return token;
     },
@@ -91,7 +89,7 @@ const handler = NextAuth({
         cus.user.id = token.id;
         cus.user.name = token.name;
         cus.user.email = token.email;
-        //cus.user.role = token.role as string
+        cus.user.perfil = token.perfil as string;
       }
       return cus;
     },
