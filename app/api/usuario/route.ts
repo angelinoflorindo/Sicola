@@ -5,7 +5,7 @@ import { buscarUsuarioPorEmail, hashPassword } from "../actions/server";
 import { initDB } from "@/lib/db";
 import { sequelize } from "@/lib/sequelize";
 import { Acesso } from "@/models/Acesso";
-import { addHours } from "date-fns";
+import { addHours, addDays } from "date-fns";
 import { User } from "@/models/User";
 
 export const dynamic = "force-dynamic";
@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
           user_id: user.id,
           plano: "TRIAL",
           inicio: agora,
-          fim: addHours(agora, 6),
+          fim: addDays(agora, 7),
         },
         { transaction: t },
       );
