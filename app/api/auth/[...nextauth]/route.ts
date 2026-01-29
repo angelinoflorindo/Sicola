@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { User } from "@/models/User";
 import { sequelize } from "@/lib/sequelize";
+import { initDB } from "@/lib/db";
 
 interface CustomSession extends Session {
   user: {
@@ -29,9 +30,7 @@ const handler = NextAuth({
           return null;
         }
 
-        // verificação de authentication com db
-        await sequelize.authenticate();
-        await sequelize.sync();
+        initDB()
 
         const response = await User.findOne({
           where: { email: credentials.email },
