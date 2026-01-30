@@ -53,7 +53,7 @@ const ResultadoProva: React.FC<ResultadoProvaProps> = ({
       : { texto: "Exame", cor: "text-red-600" };
 
   return (
-    <div className="max-w-5xl mx-auto p-6 bg-gray-50 min-h-screen space-y-6">
+    <div id="container" className="max-w-5xl mx-auto p-6 bg-gray-50 min-h-screen space-y-6">
       {/* Cabeçalho */}
       <header className="bg-white shadow rounded p-6 flex justify-between items-center">
         <h1 className="text-2xl font-bold">Resultado da Prova</h1>

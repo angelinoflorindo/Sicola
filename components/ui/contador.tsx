@@ -60,7 +60,7 @@ export default function ContadorAcesso({ getFim }: Props) {
   const mostrarDias = dias >= 2
 
   return (
-    <div className="flex items-center gap-3 rounded-xl bg-gradient-to-r from-yellow-100 to-amber-100 px-5 py-3 shadow-md">
+    <div  className="flex items-center gap-3 rounded-xl bg-gradient-to-r from-yellow-100 to-amber-100 px-5 py-3 shadow-md">
       <div className="flex h-9 w-9 items-center justify-center rounded-full bg-yellow-400 text-white font-bold">
         ⏳
       </div>

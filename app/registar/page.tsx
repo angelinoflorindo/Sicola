@@ -90,11 +90,12 @@ const Registar = () => {
 
   return (
     <div className={styles.container}>
-      <div className="flex flex-col h-screen w-[400px] bg-white mx-auto shadow-lg">
-        <div className="p-[20px]">
-          <h1 className="font-bold">CRIAR UMA CONTA</h1>
-
-          <form onSubmit={onSubmit} className="space-y-4">
+      <form onSubmit={onSubmit}  id={styles.form}>
+            <div className={styles.header}>
+              <h1 className={styles.h1}>
+                <b>Registar </b>
+              </h1>
+            </div>
             <input
               name="primeiro_nome"
               placeholder="Primeiro Nome"
@@ -156,8 +157,6 @@ const Registar = () => {
               </button>
             </div>
           </form>
-        </div>
-      </div>
     </div>
   );
 };

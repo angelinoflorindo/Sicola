@@ -52,7 +52,7 @@ const Usuario = () => {
 
 
   return (
-    <div className="flex min-h-screen">
+    <div  id="container" className="flex min-h-screen">
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Topbar />

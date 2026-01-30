@@ -5,7 +5,7 @@ import Conteudo from "./conteudo";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AcessoProps, PagamentoProps } from "@/services/userService";
-
+import styles from "@/modules/login.module.css"
 export default function ContaPage() {
   const [acesso, setAcesso] = useState<any>();
   const [pagamento, setPagamento] = useState<any>();
@@ -56,7 +56,7 @@ export default function ContaPage() {
   }, []);
 
   return (
-    <div className="flex min-h-screen">
+    <div className={styles.section}>
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Topbar />

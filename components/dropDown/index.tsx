@@ -11,16 +11,22 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   { label: "Meu Perfil", path: "/usuario", roles: ['ADMIN','ESTUDANTE',"EXPLICADOR"] },
-  {
+ 
+  /*
+   {
     label: "Portal de  Pagamentos",
     path: "/usuario/pagamentos",
     roles: ["ESTUDANTE"],
   },
-  {
+  */
+/*
+
+{
     label: "Portal de Reclamações",
     path: "/usuario/reclamacoes",
     roles: ["ESTUDANTE","EXPLICADOR"],
   },
+*/
   {
     label: "Portal de  Sugestões",
     path: "/usuario/sugestoes",
@@ -37,7 +43,7 @@ const menuItems: MenuItem[] = [
   { label: "Gerir Sugestões", path: "/gestao/sugestoes", roles: ["ADMIN"] },
   { label: "Terminar a Sessão", path: "/usuario/logout", roles: ['ESTUDANTE',"ADMIN","EXPLICADOR"] },
 
-];
+]; 
 
 
 export default function DropDown({ userPerfil, userNome }: { userPerfil: Role, userNome:String }) {

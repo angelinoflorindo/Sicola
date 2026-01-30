@@ -1,15 +1,13 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const ANOS = [1, 2, 3, 4];
-const Links = ["primeiro", "segundo", "terceiro", "quarto"];
+import styles from "@/modules/login.module.css"
 
 export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:flex w-64 bg-blue-900 text-white flex-col p-4">
+    <aside className={styles.side}>
       <h1 className="text-2xl font-bold mb-6">SICOLA</h1>
 
       <nav className="flex-1">

@@ -4,10 +4,7 @@ import { useState } from "react";
 import styles from "@/modules/login.module.css";
 import { signIn } from "next-auth/react";
 import Footer from "@/components/layout/Footer";
-import {useRouter } from "next/navigation";
-
-
-
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -15,7 +12,7 @@ export default function LoginPage() {
     password: "",
   });
 
-  const router = useRouter()
+  const router = useRouter();
   // Manipula mudanças nos inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -43,17 +40,12 @@ export default function LoginPage() {
   }
   return (
     <div className={styles.container}>
-      <form
-        onSubmit={onSubmit}
-        className="flex flex-col h-screen   justify-center items-center  p-[20px] w-[400px] bg-white mx-auto shadow-lg "
-      >
+      <form onSubmit={onSubmit}  id={styles.form}>
         <div className={styles.header}>
           <h1 className={styles.h1}>
             <b>Sicola</b>
           </h1>
-          <h4>
-            Simulação de provas
-          </h4>
+          <h4>Simulação de provas</h4>
         </div>
         <input
           type="email"

@@ -11,7 +11,7 @@ export function PrimeiraQuestao({ questao, changeInput, changeSelect }: any) {
 
   if (!ready) return <LoadingPage />;
   return (
-    <div className="bg-white rounded-xl shadow p-6 space-y-4">
+    <div id="container" className="bg-white rounded-xl shadow p-6 space-y-4">
       <div className="flex justify-between">
         <h2 className="font-bold">Questão {questao.id}</h2>
         <span className="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded-full">

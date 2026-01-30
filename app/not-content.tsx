@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Conteudo() {
   return (
-    <div>
+    <div id="container" >
       <h1>
         <b>Página 404: Inexistente</b>
       </h1>

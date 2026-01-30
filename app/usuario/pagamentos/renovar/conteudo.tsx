@@ -66,7 +66,7 @@ export default function Renovacao() {
     <>
       {operacaoSucesso && <OperacaoSucesso />}
 
-      <div className="bg-gray-50 py-10 px-4">
+      <div id="container" className="bg-gray-50 py-10 px-4">
         <div className="max-w-4xl mx-auto space-y-6">
           <h1 className="text-2xl font-bold text-gray-800">
             Saiba como ter acesso

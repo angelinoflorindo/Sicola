@@ -63,6 +63,7 @@ export async function POST(req: NextRequest) {
         { transaction: t },
       );
 
+     /*
       const respAcesso = await Acesso.create(
         {
           user_id: user.id,
@@ -73,7 +74,9 @@ export async function POST(req: NextRequest) {
         { transaction: t },
       );
 
-      return [user, respAcesso];
+     
+     */
+      return [user]; // respAcesso
     });
 
     return NextResponse.json({ result }, { status: 201 });

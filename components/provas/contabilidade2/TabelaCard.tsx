@@ -18,7 +18,7 @@ interface TabelaProps{
   }) => {
 
     return (
-      <div className="overflow-x-auto my-4">
+      <div  id="container" className="overflow-x-auto my-4">
         <table className="min-w-full border border-gray-300 text-sm">
           <thead className="bg-gray-100">
             <tr>

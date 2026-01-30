@@ -6,7 +6,7 @@ export default function Conteudo({ users }: { users: UserPerfonal }) {
     return <LoadingPage />;
   }
   return (
-    <div className="bg-gray-50 py-5 px-4">
+    <div id="container" className="bg-gray-50 py-5 px-4">
       <div className="max-w-4xl mx-auto space-y-6">
         <h1 className="text-2xl font-bold text-gray-800">Meu Perfil</h1>
         <div className="flex flex-col">
