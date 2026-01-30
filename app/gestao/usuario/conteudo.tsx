@@ -2,6 +2,8 @@
 export default function Conteudo() {
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
+      { /* 
+      
       <div className="max-w-5xl mx-auto space-y-6">
         
         <h1 className="text-3xl font-bold text-gray-800">
@@ -32,6 +34,10 @@ export default function Conteudo() {
         </div>
 
       </div>
+      
+      */}
+      
+      
     </div>
   );
 }
