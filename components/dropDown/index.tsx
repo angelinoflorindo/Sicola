@@ -54,7 +54,7 @@ export default function DropDown({ userPerfil, userNome }: { userPerfil: Role, u
 
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-left" id="container">
       <button
         onClick={() => setOpen(!open)}
         className="bg-gray-400 text-white px-4 py-2 rounded-lg   hover:bg-gray-300 transition"

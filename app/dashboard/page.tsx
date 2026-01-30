@@ -5,7 +5,7 @@ import styles from "@/modules/login.module.css"
 
 export default function Dashboard() {
   return (
-    <div className={styles.section} >
+    <div className="flex min-h-screen">
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Topbar />
