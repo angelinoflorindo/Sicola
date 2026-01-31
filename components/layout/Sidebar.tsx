@@ -7,7 +7,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className={styles.side}>
+    <aside className="hidden md:flex w-64 bg-blue-900 text-white flex-col p-4">
       <h1 className="text-2xl font-bold mb-6">SICOLA</h1>
 
       <nav className="flex-1">

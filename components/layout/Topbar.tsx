@@ -34,7 +34,7 @@ export default function Topbar() {
 
 
   return (
-    <header id="container" className="bg-white shadow px-4 py-3 flex justify-between items-center">
+    <header  className="bg-white shadow px-4 py-3 flex justify-between items-center">
       <Link href="/dashboard">
         <span className="font-semibold"> SICOLA - Simulação de Provas</span>
       </Link>
