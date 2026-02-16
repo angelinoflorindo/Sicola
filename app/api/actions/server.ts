@@ -92,7 +92,7 @@ export async function buscarProva(id: number) {
       },
     ],
   });
-   
+
   if (!prova) return null;
 
   const provaJSON = prova.toJSON() as any;
@@ -124,8 +124,7 @@ export async function buscarUsuarioPorEmail(email: string) {
 
 // Lógica de acesso a prova
 export async function validarAcesso(userId: number) {
-  return  {ok:true}
-
+  return { ok: true };
 
   /*
 
@@ -197,4 +196,33 @@ export async function buscarUserPorPagamento(pagamentoId: number) {
   });
 
   return result;
+}
+
+// buscar aulas consultivas
+
+import { NextResponse } from "next/server";
+
+export async function buscarAula(aulaID: any) {
+  const playlistId = aulaID;
+  const API_KEY = process.env.YOUTUBE_API_KEY;
+
+  const res = await fetch(
+    `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${playlistId}&key=${API_KEY}`,
+  );
+
+  const data = await res.json();
+
+  return NextResponse.json(data.items);
+}
+
+export async function buscarAulas(aulaID: string) {
+  const API_KEY = process.env.YOUTUBE_API_KEY;
+
+  const res = await fetch(
+    `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${aulaID}&key=${API_KEY}`
+  );
+
+  const data = await res.json();
+
+  return data.items; // ← apenas JSON puro
 }

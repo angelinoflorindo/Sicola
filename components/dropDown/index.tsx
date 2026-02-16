@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-type Role = 'ADMIN' | 'ESTUDANTE' | 'EXPLICADOR'
+type Role = "ADMIN" | "ESTUDANTE" | "EXPLICADOR";
 
 interface MenuItem {
   label: string;
@@ -10,8 +10,12 @@ interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  { label: "Meu Perfil", path: "/usuario", roles: ['ADMIN','ESTUDANTE',"EXPLICADOR"] },
- 
+  {
+    label: "Meu Perfil",
+    path: "/usuario",
+    roles: ["ADMIN", "ESTUDANTE", "EXPLICADOR"],
+  },
+
   /*
    {
     label: "Portal de  Pagamentos",
@@ -19,7 +23,7 @@ const menuItems: MenuItem[] = [
     roles: ["ESTUDANTE"],
   },
   */
-/*
+  /*
 
 {
     label: "Portal de Reclamações",
@@ -30,28 +34,49 @@ const menuItems: MenuItem[] = [
   {
     label: "Portal de  Sugestões",
     path: "/usuario/sugestoes",
-    roles: ["ESTUDANTE","EXPLICADOR"],
+    roles: ["ESTUDANTE", "EXPLICADOR"],
   },
+  /*
+  
   {
     label: "Marcar Explicação",
     path: "/develop",
+    roles: ["ESTUDANTE"],
+  },
+  
+  */
+  {
+    label: "Aulas consultivas",
+    path: "/usuario/aulas",
+    roles: ["ESTUDANTE"],
+  },
+  {
+    label: "Materias acadêmicos",
+    path: "/usuario/materias",
     roles: ["ESTUDANTE"],
   },
   { label: "Gerir Usuarios", path: "/gestao/usuario", roles: ["ADMIN"] },
   { label: "Gerir Pagamentos", path: "/gestao/pagamentos", roles: ["ADMIN"] },
   //{ label: "Gerir Reclamações", path: "/gestao/reclamacoes", roles: ["ADMIN"] },
   { label: "Gerir Sugestões", path: "/gestao/sugestoes", roles: ["ADMIN"] },
-  { label: "Terminar a Sessão", path: "/usuario/logout", roles: ['ESTUDANTE',"ADMIN","EXPLICADOR"] },
+  {
+    label: "Terminar a Sessão",
+    path: "/usuario/logout",
+    roles: ["ESTUDANTE", "ADMIN", "EXPLICADOR"],
+  },
+];
 
-]; 
-
-
-export default function DropDown({ userPerfil, userNome }: { userPerfil: Role, userNome:String }) {
+export default function DropDown({
+  userPerfil,
+  userNome,
+}: {
+  userPerfil: Role;
+  userNome: String;
+}) {
   const [open, setOpen] = useState(false);
   const filteredItems = menuItems.filter((item) =>
-    item.roles.includes(userPerfil)
+    item.roles.includes(userPerfil),
   );
-
 
   return (
     <div className="relative inline-block text-left" id="container">
