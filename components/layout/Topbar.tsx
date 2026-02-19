@@ -36,7 +36,7 @@ export default function Topbar() {
   return (
     <header  className="bg-white shadow px-4 py-3 flex justify-between items-center">
       <Link href="/dashboard">
-        <span className="font-semibold"> SICOLA - Simulação de Provas</span>
+        <span className="font-semibold"> SICOLA ONLINE</span>
       </Link>
 
       <DropDown userPerfil={perfil} userNome={nome}></DropDown>

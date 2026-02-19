@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "@/modules/login.module.css";
 import { signIn } from "next-auth/react";
 import Footer from "@/components/layout/Footer";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
@@ -33,7 +34,7 @@ export default function LoginPage() {
 
     if (res?.error) {
       console.log("Erro na autenticação:", res.error);
-      window.alert('Se esqueceu sua senha, contacta o Administrador')
+      window.alert("Se esqueceu sua senha, contacta o Administrador");
       router.push("/");
     } else {
       router.push("/dashboard");
@@ -41,13 +42,20 @@ export default function LoginPage() {
   }
   return (
     <div className={styles.container}>
-      <form onSubmit={onSubmit}  id={styles.form}>
-        <div className={styles.header}>
-          <h1 className={styles.h1}>
-            <b>Sicola</b>
+      <form onSubmit={onSubmit} id={styles.form}>
+        <div className="flex flex-col items-center mb-4">
+          <Image
+            src="/images/onesicola.png"
+            alt="Sicola - logotipo"
+            width={100} // define a largura base do Next.js
+            height={100} // define altura base do Next.js
+            className="mb-2 w-auto h-24 sm:h-32 object-contain" // mantém proporção, evita deformação
+          />
+          <h1 className="text-lg sm:text-2xl font-bold text-gray-800">
+            Sicola Online
           </h1>
-          <h4>Simulação de provas</h4>
         </div>
+
         <input
           type="email"
           name="email"
