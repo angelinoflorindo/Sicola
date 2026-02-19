@@ -39,13 +39,13 @@ export async function POST(req: NextRequest) {
   try {
     const data = await req.json();
     const agora = new Date();
-
+  /*
     if (!data.email?.includes("@isaf")) {
       return NextResponse.json(
         { message: "Email institucional inválido" },
         { status: 400 },
       );
-    }
+    }*/
     const hashedPassword = await hashPassword(data.password);
 
     initDB();
