@@ -9,8 +9,7 @@ export default function CursoPage() {
 
   const cursoSelecionado = cursos.find((c) => c.id === curso);
   const conteudo = cursoSelecionado?.videos ?? [];
-  if (!conteudo || conteudo.length < 0) {
-  }
+
   if (!cursoSelecionado) return <p>Curso não encontrado</p>;
 
   return (

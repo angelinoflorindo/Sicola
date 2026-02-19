@@ -33,6 +33,7 @@ export default function LoginPage() {
 
     if (res?.error) {
       console.log("Erro na autenticação:", res.error);
+      window.alert('Se esqueceu sua senha, contacta o Administrador')
       router.push("/");
     } else {
       router.push("/dashboard");

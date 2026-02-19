@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { cursos } from "@/lib/cursos";
+import LoadingPage from "@/components/LoadingPage";
 
 type Video = {
   id: string;
@@ -59,7 +60,7 @@ export default function ConteudoComplementar() {
   if (!cursoSelecionado) return <p>Curso não encontrado</p>;
   if (!listaVideos) return <p>Conteúdos não encontrados</p>;
 
-  if (loading) return <p className="p-6">Carregando conteúdos...</p>;
+  if (loading) return <LoadingPage/>
 
   return (
     <div className="p-6 max-w-6xl mx-auto">

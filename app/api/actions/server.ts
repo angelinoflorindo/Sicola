@@ -64,6 +64,13 @@ export async function buscarPagamentoId(id: number) {
   });
 }
 
+export async function buscarEbook(codigo: string) {
+  return await Ebook.findOne({
+    raw: false,
+    where: { codigo: codigo, estado: true },
+  });
+}
+
 export async function buscarDisciplina(codigo: string) {
   return await Disciplina.findOne({
     raw: false,
@@ -160,6 +167,11 @@ export async function getUserIdFromToken(req: any) {
   return token?.id;
 }
 
+export async function getUserFromToken(req: any) {
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  return token;
+}
+
 export async function validarEstado(value: any) {
   if (value === "true" || value === true) {
     return true;
@@ -201,6 +213,7 @@ export async function buscarUserPorPagamento(pagamentoId: number) {
 // buscar aulas consultivas
 
 import { NextResponse } from "next/server";
+import { Ebook } from "@/models/Ebook";
 
 export async function buscarAula(aulaID: any) {
   const playlistId = aulaID;
