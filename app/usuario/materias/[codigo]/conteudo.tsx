@@ -49,7 +49,7 @@ export default function Conteudo() {
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/ebooks/${codigo}`);
 
-      console.log("STATUS:", response.status);
+      
 
       if (!response.ok) {
         const text = await response.text();

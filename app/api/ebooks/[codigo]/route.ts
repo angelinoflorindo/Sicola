@@ -22,7 +22,7 @@ export async function GET(
   }
 
   const comprado = await Ebook.findOne({
-    where: { codigo: codigo, status: "PAGO" },
+    where: { codigo: codigo, status: "PAGO", user_id:id},
   });
 
   if (!comprado) {

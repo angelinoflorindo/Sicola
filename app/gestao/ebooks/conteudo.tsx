@@ -15,6 +15,16 @@ export default function Conteudo() {
 
   const handleAcao = async (acao: string, id: number) => {
     switch (acao) {
+      case "eliminar":
+        await fetch(
+          `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/ebooks/gerir/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
+        setLoading(true);
+        fetchData();
+        break;
       case "rejeitar":
         await fetch(
           `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/ebooks/gerir/${id}`,
@@ -121,6 +131,7 @@ export default function Conteudo() {
                       <option value="analisar"> - - - - </option>
                       <option value="aprovar"> Aprovar</option>
                       <option value="rejeitar">Rejeitar</option>
+                      <option value="eliminar">Eliminar</option>
                     </select>
                   </td>
                 </tr>
