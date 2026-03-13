@@ -21,6 +21,15 @@ export async function converterString(value: any) {
   return value; // já é número ou não é conversível
 }
 
+export async function converterBoolean(value: any) {
+    if(!value){
+      return false
+    }else if(typeof value === "string" && value === "false"){
+      return false
+    }else{
+      return true
+    }
+}
 export async function hashPassword(password: string) {
   const saltRounds = 12; // Definir número de rounds (quanto maior, mais seguro, mas mais lento)
   const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -179,6 +188,17 @@ export async function validarEstado(value: any) {
   return false; // já é número ou não é conversível
 }
 
+export async function logOutUser(attr: any) {
+  const resp = await User.update({ estado: false }, { where: { email: attr } });
+  return resp;
+}
+
+
+export async function logInUser(attr: any) {
+  const resp = await User.update({ estado: true }, { where: { email: attr } });
+  return resp;
+}
+
 // Operações relacionadas entre os models
 
 export async function buscarUser(userId: number) {
@@ -232,7 +252,7 @@ export async function buscarAulas(aulaID: string) {
   const API_KEY = process.env.YOUTUBE_API_KEY;
 
   const res = await fetch(
-    `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${aulaID}&key=${API_KEY}`
+    `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=${aulaID}&key=${API_KEY}`,
   );
 
   const data = await res.json();

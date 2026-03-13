@@ -3,6 +3,14 @@ import Link from "next/link";
 import Card from "@/components/ui/Card";
 
 export default function Conteudo() {
+  /*
+     <Link href={`/develop`}>
+          <Card
+            title="Métodos de Investigação"
+            description="Consultar Simulados"
+          />
+        </Link>
+  */
   return (
     <section>
       <h2 className="text-xl font-bold mb-4">1 º Ano</h2>
@@ -11,12 +19,7 @@ export default function Conteudo() {
           <Card title="Matemática I" description="Consultar simulados" />
         </Link>
 
-        <Link href={`/develop`}>
-          <Card
-            title="Métodos de Investigação"
-            description="Consultar Simulados"
-          />
-        </Link>
+     
       </div>
     </section>
   );

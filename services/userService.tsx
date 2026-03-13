@@ -10,6 +10,7 @@ export interface UserPerfonal {
   telemovel: any;
   perfil:any,
   estado:any,
+  situacao:any
   createdAt: any;
   updatedAt: any;
 }

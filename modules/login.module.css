@@ -12,6 +12,8 @@
 
 
 
+
+
 #form{
     background: white;
         display: flex;
@@ -69,8 +71,14 @@
 }
 
 .criarConta{
-    padding: 12px;
+    padding-top: 8px;
     color:  blue;
+    font-size: 18px;
+    cursor: pointer;
+}
+.recuperarConta{
+    padding-top: 4px;
+    color:  black;
     font-size: 18px;
     cursor: pointer;
 }

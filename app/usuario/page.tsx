@@ -20,6 +20,7 @@ const Usuario = () => {
     perfil:"",
     estado:"",
     createdAt:"",
+    situacao:"",
     updatedAt:""
   });
   const { data: session, status } = useSession();

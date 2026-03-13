@@ -6,8 +6,10 @@ import { signIn } from "next-auth/react";
 import Footer from "@/components/layout/Footer";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import LoadingPage from "@/components/LoadingPage";
 
 export default function LoginPage() {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -22,7 +24,7 @@ export default function LoginPage() {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-
+  setLoading(true)
     const email = formData.email.trim();
     const password = formData.password.trim();
 
@@ -33,12 +35,16 @@ export default function LoginPage() {
     });
 
     if (res?.error) {
-      console.log("Erro na autenticação:", res.error);
-      window.alert("Se esqueceu sua senha, contacta o Administrador");
       router.push("/");
     } else {
+      fetch(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/usuario?email=${email}`);
+      
+      setLoading(false);
       router.push("/dashboard");
     }
+  }
+  if (loading) {
+    return <LoadingPage />;
   }
   return (
     <div className={styles.container}>
@@ -78,6 +84,10 @@ export default function LoginPage() {
 
         <Link href="/registar" className={styles.center}>
           <span className={styles.criarConta}>Criar uma conta!</span>
+        </Link>
+
+        <Link href="/recover" className={styles.center}>
+          <span className={styles.recuperarConta}>Recuperar minha conta.</span>
         </Link>
         <Footer />
       </form>

@@ -29,3 +29,12 @@ body {
   background: white;
   color: black;
 }
+
+
+#dashboard-items{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 50%;
+}

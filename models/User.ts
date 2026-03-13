@@ -41,19 +41,25 @@ export class User extends Model {
   @Column(DataType.STRING)
   declare email: string;
 
-  @Column(DataType.ENUM("GBS", "IGF", "CF"))
-  declare curso: "GBS" | "IGF" | "CF";
+  @Column(DataType.ENUM("GBS", "IGF", "CF", "OUTRO"))
+  declare curso: "GBS" | "IGF" | "CF" | "OUTRO" ;
 
   @Default("ESTUDANTE")
   @Column({
-    type: DataType.ENUM("ADMIN", "ESTUDANTE", "EXPLICADOR"),
+    type: DataType.ENUM("ADMIN", "ESTUDANTE", "ORIENTADOR","VISITANTE"),
     allowNull: false,
   })
-  declare perfil: "ADMIN" | "ESTUDANTE" | "EXPLICADOR";
+  declare perfil: "ADMIN" | "ESTUDANTE" | "ORIENTADOR" | "VISITANTE";
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
   declare estado: boolean;
+
+  
+  @Default(true)
+  @Column({ type: DataType.BOOLEAN, defaultValue: true })
+  declare situacao: boolean;
+
 
   @CreatedAt
   @Column({ field: "created_at", type: DataType.DATE })

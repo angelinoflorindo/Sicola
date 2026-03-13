@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { UserPerfonal } from "@/services/userService";
 
 export default function Topbar() {
-  type Role = 'ADMIN' | 'ESTUDANTE' | 'EXPLICADOR'
+  type Role = 'ADMIN' | 'ESTUDANTE' | 'ORIENTADOR' | 'VISITANTE';
   const { data: session, status } = useSession();
   const [perfil, setPerfil] = useState<Role>('ESTUDANTE');
   const nome = session?.user.name;

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-type Role = "ADMIN" | "ESTUDANTE" | "EXPLICADOR";
+type Role = "ADMIN" | "ESTUDANTE" | "ORIENTADOR" | "VISITANTE";
 
 interface MenuItem {
   label: string;
@@ -11,9 +11,14 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   {
+    label: "Painel Principal",
+    path: "/dashboard",
+    roles: ["ADMIN", "ESTUDANTE", "ORIENTADOR", "VISITANTE"],
+  },
+  {
     label: "Meu Perfil",
     path: "/usuario",
-    roles: ["ADMIN", "ESTUDANTE", "EXPLICADOR"],
+    roles: ["ADMIN", "ESTUDANTE", "ORIENTADOR", "VISITANTE"],
   },
 
   /*
@@ -28,32 +33,34 @@ const menuItems: MenuItem[] = [
 {
     label: "Portal de Reclamações",
     path: "/usuario/reclamacoes",
-    roles: ["ESTUDANTE","EXPLICADOR"],
+    roles: ["ESTUDANTE","ORIENTADOR"],
   },
 */
-  {
-    label: "Portal de  Sugestões",
-    path: "/usuario/sugestoes",
-    roles: ["ESTUDANTE", "EXPLICADOR"],
-  },
-  /*
   
-  {
-    label: "Marcar Explicação",
-    path: "/develop",
-    roles: ["ESTUDANTE"],
-  },
-  
-  */
   {
     label: "Aulas consultivas",
     path: "/usuario/aulas",
-    roles: ["ESTUDANTE"],
+    roles: ["ESTUDANTE", "VISITANTE"],
   },
   {
     label: "Materias acadêmicos",
     path: "/usuario/materias",
-    roles: ["ESTUDANTE"],
+    roles: ["ESTUDANTE", "VISITANTE"],
+  },
+    {
+    label: "Marcar Orientação",
+    path: "/develop",
+    roles: ["ESTUDANTE", "VISITANTE"],
+  },
+  {
+    label: "Simulação de Provas",
+    path: "/dashboard/simulados",
+    roles: ["ESTUDANTE", "ORIENTADOR", "VISITANTE"],
+  },
+  {
+    label: "Portal de  Sugestões",
+    path: "/usuario/sugestoes",
+    roles: ["ESTUDANTE", "ORIENTADOR", "VISITANTE"],
   },
   { label: "Gerir Usuarios", path: "/gestao/usuario", roles: ["ADMIN"] },
   { label: "Gerir Pagamentos", path: "/gestao/pagamentos", roles: ["ADMIN"] },
@@ -63,7 +70,7 @@ const menuItems: MenuItem[] = [
   {
     label: "Terminar a Sessão",
     path: "/usuario/logout",
-    roles: ["ESTUDANTE", "ADMIN", "EXPLICADOR"],
+    roles: ["ESTUDANTE", "ADMIN", "ORIENTADOR", "VISITANTE"],
   },
 ];
 
