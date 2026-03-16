@@ -29,7 +29,7 @@ export default function DashBoardContent() {
             className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition"
           >
             <Image
-              src="/images/materiasAcademicos.png"
+              src="/images/materias.png" // equivaler os nomes com a imagem
               alt="imagens - Dashboard"
               width={50} // define a largura base do Next.js
               height={50} // define altura base do Next.js
