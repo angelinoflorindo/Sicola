@@ -108,7 +108,7 @@ export const cursos: Curso[] = [
 
   {
     id: "estatisticaI",
-    nome: "Estatística I",
+    nome: "Estatística",
     modulos: [
       {
         id: "geral",

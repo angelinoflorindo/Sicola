@@ -36,7 +36,7 @@ const menuItems: MenuItem[] = [
     roles: ["ESTUDANTE","ORIENTADOR"],
   },
 */
-  
+
   {
     label: "Aulas consultivas",
     path: "/usuario/aulas",
@@ -47,9 +47,9 @@ const menuItems: MenuItem[] = [
     path: "/usuario/materias",
     roles: ["ESTUDANTE", "VISITANTE"],
   },
-    {
+  {
     label: "Marcar Orientação",
-    path: "/develop",
+    path: "/usuario/orientacao",
     roles: ["ESTUDANTE", "VISITANTE"],
   },
   {

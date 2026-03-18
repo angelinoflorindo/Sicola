@@ -5,6 +5,7 @@ import { buscarPersonalUsuario, buscarUser } from "./app/api/actions/server";
 
 const rotasProtegidas = [
   "/dashboard",
+  "/dashboard/simulados",
   "/develop",
   "/resultados",
   "/resultados/anos/primeiro",
@@ -54,7 +55,10 @@ const rotasProtegidas = [
   "/usuario/pagamentos",
   "/usuario/pagamentos/renovar",
   "/usuario/reclamacoes",
-  "/usuario/sugestoes"
+  "/usuario/sugestoes",
+  "/usuario/aulas",
+  "/usuario/materias",
+  "/usuario/orientacao"
 ];
 
 const rotasPublicas = ["/", "/registar"];
