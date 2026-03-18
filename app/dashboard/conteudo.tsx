@@ -40,7 +40,7 @@ export default function DashBoardContent() {
           </div>
         </Link>
 
-        <Link href={`/usuario/orientacao`}>
+        <Link href={`/develop`}>
           <div
             id="dashboard-items"
             className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition"

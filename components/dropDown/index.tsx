@@ -49,7 +49,7 @@ const menuItems: MenuItem[] = [
   },
   {
     label: "Marcar Orientação",
-    path: "/usuario/orientacao",
+    path: "/develop",
     roles: ["ESTUDANTE", "VISITANTE"],
   },
   {
