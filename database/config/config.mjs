@@ -1,3 +1,5 @@
+import dotenv from 'dotev'
+
 
 export const options = {
   username: process.env.DB_USERNAME,
