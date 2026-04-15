@@ -41,17 +41,21 @@ export class User extends Model {
   @Column(DataType.STRING)
   declare email: string;
 
+  @Column(DataType.STRING)
+  declare filename: string;
+
   @Column(DataType.ENUM("GBS", "IGF", "CF", "OUTRO"))
   declare curso: "GBS" | "IGF" | "CF" | "OUTRO" ;
 
   @Default("ESTUDANTE")
   @Column({
-    type: DataType.ENUM("ADMIN", "ESTUDANTE", "ORIENTADOR","VISITANTE"),
+    type: DataType.ENUM("ADMIN", "ESTUDANTE", "ORIENTADOR","VISITANTE", "CANDIDATO"),
     allowNull: false,
   })
-  declare perfil: "ADMIN" | "ESTUDANTE" | "ORIENTADOR" | "VISITANTE";
+  declare perfil: "ADMIN" | "ESTUDANTE" | "ORIENTADOR" | "VISITANTE" | "CANDIDATO";
 
   @Default(true)
+  @Column({ type: DataType.BOOLEAN, defaultValue: true })
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
   declare estado: boolean;
 

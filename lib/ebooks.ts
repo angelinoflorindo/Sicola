@@ -28,7 +28,7 @@ export const ebooks: Ebooks[] = [
       "Rendas diferidas de acumulação",
       "Rendas ou séries imediatas antecipadas",
     ],
-    valor: "5000",
+    valor: "3000",
     imagem: "/images/guiaCalculoFinanceiro.png",
   },
 ];

@@ -13,6 +13,8 @@ import { setProvaAssociation } from "./prova.association";
 import {setUserAssociation} from "./user.association"
 import { Acesso } from "@/models/Acesso";
 import { Ebook } from "@/models/Ebook";
+import { Sugestao } from "@/models/Sugestao";
+import { UserDisciplina } from "@/models/UserDisciplina";
   
 
 
@@ -36,7 +38,9 @@ export const sequelize = new Sequelize({
     Prova,
     Suporte,
     Resposta,
-    Detalhes
+    Detalhes,
+    Sugestao,
+    UserDisciplina
   ]
 });
  

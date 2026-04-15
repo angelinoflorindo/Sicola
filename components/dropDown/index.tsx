@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-type Role = "ADMIN" | "ESTUDANTE" | "ORIENTADOR" | "VISITANTE";
+type Role = "ADMIN" | "ESTUDANTE" | "ORIENTADOR" | "VISITANTE" | "CANDIDATO";
 
 interface MenuItem {
   label: string;
@@ -13,12 +13,12 @@ const menuItems: MenuItem[] = [
   {
     label: "Painel Principal",
     path: "/dashboard",
-    roles: ["ADMIN", "ESTUDANTE", "ORIENTADOR", "VISITANTE"],
+    roles: ["ADMIN", "ESTUDANTE", "ORIENTADOR", "VISITANTE", "CANDIDATO"],
   },
   {
     label: "Meu Perfil",
     path: "/usuario",
-    roles: ["ADMIN", "ESTUDANTE", "ORIENTADOR", "VISITANTE"],
+    roles: ["ADMIN", "ESTUDANTE", "ORIENTADOR", "VISITANTE", "CANDIDATO"],
   },
 
   /*
@@ -29,48 +29,49 @@ const menuItems: MenuItem[] = [
   },
   */
   /*
-
-{
-    label: "Portal de Reclamações",
-    path: "/usuario/reclamacoes",
-    roles: ["ESTUDANTE","ORIENTADOR"],
-  },
 */
 
   {
     label: "Aulas consultivas",
     path: "/usuario/aulas",
-    roles: ["ESTUDANTE", "VISITANTE"],
+    roles: ["ESTUDANTE", "VISITANTE", "CANDIDATO"],
   },
+  {
+    label: "Painel do Orientador",
+    path: "/usuario/orientacao/painel",
+    roles: ["ORIENTADOR"],
+  },
+
   {
     label: "Materias acadêmicos",
     path: "/usuario/materias",
-    roles: ["ESTUDANTE", "VISITANTE"],
+    roles: ["ESTUDANTE", "VISITANTE", "CANDIDATO"],
   },
   {
     label: "Marcar Orientação",
-    path: "/develop",
-    roles: ["ESTUDANTE", "VISITANTE"],
+    path: "/usuario/orientacao",
+    roles: ["ESTUDANTE", "VISITANTE", "CANDIDATO"],
   },
   {
     label: "Simulação de Provas",
     path: "/dashboard/simulados",
-    roles: ["ESTUDANTE", "ORIENTADOR", "VISITANTE"],
+    roles: ["ESTUDANTE", "ORIENTADOR", "VISITANTE", "CANDIDATO"],
   },
   {
-    label: "Portal de  Sugestões",
+    label: "Sugestões & Reclamações",
     path: "/usuario/sugestoes",
-    roles: ["ESTUDANTE", "ORIENTADOR", "VISITANTE"],
+    roles: ["ESTUDANTE", "ORIENTADOR", "VISITANTE", "CANDIDATO"],
   },
-  { label: "Gerir Usuarios", path: "/gestao/usuario", roles: ["ADMIN"] },
   { label: "Gerir Pagamentos", path: "/gestao/pagamentos", roles: ["ADMIN"] },
   { label: "Gerir Ebooks", path: "/gestao/ebooks", roles: ["ADMIN"] },
-  //{ label: "Gerir Reclamações", path: "/gestao/reclamacoes", roles: ["ADMIN"] },
-  { label: "Gerir Sugestões", path: "/gestao/sugestoes", roles: ["ADMIN"] },
+  { label: "Gerir Disciplinas", path: "/gestao/disciplina", roles: ["ADMIN"] },
+  { label: "Gerir Sugestões", path: "/gestao/sugestao", roles: ["ADMIN"] },
+  { label: "Gerir Usuarios", path: "/gestao/usuario", roles: ["ADMIN"] },
+  { label: "Gerir Orientadores", path: "/gestao/orientador", roles: ["ADMIN"] },
   {
     label: "Terminar a Sessão",
     path: "/usuario/logout",
-    roles: ["ESTUDANTE", "ADMIN", "ORIENTADOR", "VISITANTE"],
+    roles: ["ESTUDANTE", "ADMIN", "ORIENTADOR", "VISITANTE", "CANDIDATO"],
   },
 ];
 

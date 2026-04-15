@@ -93,7 +93,7 @@ export default function Conteudo() {
                 <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                   <b>Gestor:</b> Angelino Francisco <br />
                   <b>IBAN:</b> 0040 0000 9926 0129 1013 0 <br />
-                  <b>Multicaixa Express:</b> +244 930 754 775
+                  <b>Express / BAI Directo:</b> +244 930 754 775
                 </p>
               </div>
 

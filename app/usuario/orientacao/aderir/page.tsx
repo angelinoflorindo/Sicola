@@ -2,7 +2,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import Topbar from "@/components/layout/Topbar";
 import Conteudo from "./conteudo"; 
 
-export default function Orientacao() {
+export default function aderir() {
   return (
     <div className="flex min-h-screen">
       <Sidebar />

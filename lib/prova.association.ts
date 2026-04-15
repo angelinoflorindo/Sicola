@@ -3,6 +3,7 @@ import { Disciplina } from "@/models/Disciplina";
 import { Prova } from "@/models/Prova";
 import { Resposta } from "@/models/Resposta";
 import { User } from "@/models/User";
+import { UserDisciplina } from "@/models/UserDisciplina";
 
 export function setProvaAssociation(): void {
   User.hasMany(Prova, { foreignKey: "user_id", as: "Provas" });
@@ -19,4 +20,6 @@ export function setProvaAssociation(): void {
     as: "Disciplina",
     foreignKey: "disciplina_id",
   });
+
+
 }

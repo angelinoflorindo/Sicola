@@ -1,37 +1,34 @@
-
-
 export interface UserPerfonal {
-  id:any,
+  id: any;
   email: any;
-  curso:any;
+  curso: any;
   password: any;
   primeiro_nome: any;
   segundo_nome: any;
   telemovel: any;
-  perfil:any,
-  estado:any,
-  situacao:any
+  perfil: any;
+  filename: any;
+  estado: any;
+  situacao: any;
   createdAt: any;
   updatedAt: any;
 }
-
 
 export interface AcessoProps {
-  id:any,
+  id: any;
   inicio: any;
-  fim:any;
+  fim: any;
   plano: any;
   user_id: any;
   estado: any;
   createdAt: any;
   updatedAt: any;
 }
-
 
 export interface PagamentoProps {
-  id:any,
+  id: any;
   valor: any;
-  status:any;
+  status: any;
   plano: any;
   user_id: any;
   estado: any;
@@ -39,22 +36,68 @@ export interface PagamentoProps {
   updatedAt: any;
 }
 
+export interface SugestaoInfo {
+  id: any;
+  descricao: any;
+  estado: any;
+  createdAt: any;
+  updatedAt: any;
+  Usuario: {
+    id: any;
+    primeiro_nome: any;
+    segundo_nome: any;
+    email: any;
+    telemovel: any;
+    perfil: any;
+  };
+}
 
 export interface PagamentoInfo {
-  id:any,
+  id: any;
   valor: any;
-  status:any;
+  status: any;
   plano: any;
   user_id: any;
   estado: any;
   createdAt: any;
   updatedAt: any;
-  Usuario:{
-    id:any,
-    primeiro_nome:any,
-    segundo_nome:any,
-    email:any,
-    telemovel:any,
-    }
+  Usuario: {
+    id: any;
+    primeiro_nome: any;
+    segundo_nome: any;
+    email: any;
+    telemovel: any;
+  };
 }
 
+export interface OrientadorInfo {
+  id: any;
+  email: any;
+  curso: any;
+  password: any;
+  primeiro_nome: any;
+  segundo_nome: any;
+  telemovel: any;
+  perfil: any;
+  filename: any;
+  estado: any;
+  situacao: any;
+  createdAt: any;
+  updatedAt: any;
+  UserDisciplina: Cadeiras[];
+}
+export interface Cadeiras {
+  id: any;
+  user_id: any;
+  disciplina_id: any;
+  estado: any;
+  createdAt: any;
+  updatedAt: any;
+  Disciplina: {
+    id: any;
+    nome: any;
+    codigo: any;
+    createdAt: any;
+    updatedAt: any;
+  };
+}

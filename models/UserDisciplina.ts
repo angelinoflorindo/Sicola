@@ -13,27 +13,36 @@ import {
   ForeignKey,
 } from "sequelize-typescript";
 import { User } from "./User";
+import { Disciplina } from "./Disciplina";
 
 @Table({
-  tableName: "disciplinas",
+  tableName: "user_disciplinas",
   createdAt: "created_at",
   updatedAt: "updated_at",
 })
-export class Disciplina extends Model {
+export class UserDisciplina extends Model {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER.UNSIGNED)
   declare id: number;
 
-  @Column(DataType.STRING)
-  declare nome: string
-
-  @Column(DataType.STRING)
-  declare codigo: string
-  
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
   declare estado: boolean;
+
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  declare user_id: number;
+
+  @ForeignKey(() => Disciplina)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  declare disciplina_id: number;
 
   @CreatedAt
   @Column({ field: "created_at", type: DataType.DATE })

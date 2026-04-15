@@ -21,6 +21,7 @@ const Usuario = () => {
     estado:"",
     createdAt:"",
     situacao:"",
+    filename:"",
     updatedAt:""
   });
   const { data: session, status } = useSession();

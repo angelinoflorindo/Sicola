@@ -1,19 +1,7 @@
-/*
-    username: process.env.DB_USERNAME || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'sicoladb',
-    host: process.env.DB_HOST || 'localhost',
-    port: Number(process.env.DB_PORT) || 3306,
 
-    servidor 
-
-    username: process.env.DB_USERNAME || 'usicola',
-    password: process.env.DB_PASSWORD || 'sic0La',
-    database: process.env.DB_NAME || 'sicoladb',
-*/
 export const options = {
-    username: process.env.DB_USERNAME || 'usicola',
-    password: process.env.DB_PASSWORD || 'sic0La',
+  username: process.env.DB_USERNAME || 'root',
+    password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || 'sicoladb',
     host: process.env.DB_HOST || 'localhost',
     port: Number(process.env.DB_PORT) || 3306,

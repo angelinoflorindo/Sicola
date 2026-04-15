@@ -33,3 +33,13 @@ export interface ResultadoProvaProps {
   detalhes: ItemDetalhes[];
   questoes: Questao[];
 }
+
+
+export interface DisciplinaProsps {
+  id: number;
+  nome:any;
+  codigo:any,
+  estado:any;
+  createdAt: any;
+  updatedAt: any;
+}
