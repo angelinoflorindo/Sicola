@@ -3,7 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
-/database/config/config.mjs
+
 .pnp.*
 .yarn/*
 !.yarn/patches
