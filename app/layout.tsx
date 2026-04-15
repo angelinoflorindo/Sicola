@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import SessionWrapper from "@/components/sessionWrapper/SessionWrapper";
 
 export const metadata: Metadata = {
-  title: "Sicola - Simulação de Provas",
+  title: "Sicola - Sistema de Orientação Académica",
   description: "Criado por Angelino Francisco",
 };
 
