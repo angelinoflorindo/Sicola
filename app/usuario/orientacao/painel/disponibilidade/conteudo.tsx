@@ -193,7 +193,7 @@ export default function Conteudo() {
 
         {/* FORMATO */}
         <div className="flex gap-2">
-          {["Online", "Presencial", "Ambas"].map((tipo) => (
+          {["Online", "Presencial"].map((tipo) => (
             <button
               key={tipo}
               onClick={() => setFormato(tipo)}

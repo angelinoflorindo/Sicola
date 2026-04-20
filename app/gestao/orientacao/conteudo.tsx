@@ -1,18 +1,8 @@
 "use client";
 import LoadingPage from "@/components/LoadingPage";
-import { PagamentoInfo, UserPerfonal } from "@/services/userService";
+import { infoOrientacao} from "@/services/userService";
 import { useState, useEffect } from "react";
 
-type infoOrientacao = {
-  id: any;
-  valor: any;
-  filename: string;
-  formato: string;
-  situacao: any;
-  Estudante: UserPerfonal;
-  createdAt: any;
-  updatedAt: any;
-};
 
 export default function Conteudo() {
   const [orientacoes, setOrientacoes] = useState<infoOrientacao[]>([]);

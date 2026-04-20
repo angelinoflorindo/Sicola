@@ -38,7 +38,7 @@ module.exports = {
       },
 
       formato: {
-        type: Sequelize.ENUM("Presencial", "Online", "Ambas"),
+        type: Sequelize.ENUM("Presencial", "Online"),
         allowNull: false,
       },
 

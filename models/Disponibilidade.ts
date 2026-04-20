@@ -43,10 +43,10 @@ export class Disponibilidade extends Model {
   declare data_sessao: Date;
 
   @Column({
-    type: DataType.ENUM("Presencial", "Online", "Ambas"),
+    type: DataType.ENUM("Presencial", "Online" ),
     allowNull: false,
   })
-  declare formato: "Presencial" | "Online" | "Ambas";
+  declare formato: "Presencial" | "Online" ;
 
   @CreatedAt
   @Column({ field: "created_at", type: DataType.DATE })

@@ -10,7 +10,6 @@ import { Orientacao } from "@/models/Orientacao";
 import { Sessao } from "@/models/Sessao";
 export const dynamic = "force-dynamic";
 
-
 // Candidaturas ao programa de orientacao
 export async function POST(req: NextRequest) {
   try {
@@ -90,18 +89,21 @@ export async function GET(req: Request) {
     const offset = (page - 1) * limit;
 
     const estadoParam = searchParams.get("estado") || false;
+
+    const situacao = searchParams.get("situacao");
     const orderBy = searchParams.get("order") || "created_at";
 
-    const where: any = { 
-    };
+    const where: any = {};
+
+    if (situacao) {
+      where.situacao = situacao;
+    }
 
     await initDB();
 
     const { rows, count } = await Orientacao.findAndCountAll({
       raw: false,
-      include:[
-        {model:User,as:'Estudante'}
-      ],
+      include: [{ model: User, as: "Estudante" }, {model:Sessao, as:"Sessoes"}],
       where,
       limit,
       offset,

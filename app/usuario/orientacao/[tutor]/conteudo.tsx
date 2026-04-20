@@ -22,7 +22,7 @@ function calcularPreco(item: string, sessoes: number) {
 export default function Conteudo() {
   const [sessoes, setSessao] = useState<any[]>([]);
   const [collection, setCollection] = useState<any[]>([]);
-  const [formato, setFormato] = useState('');
+  const [formato, setFormato] = useState("");
   const [disponibilidade, setDisponibilidade] = useState<any[]>([]);
   const [operacaoSucesso, setOperacaoSucesso] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -53,9 +53,9 @@ export default function Conteudo() {
     setFormato(form);
     if (sessoes.includes(dia)) {
       const result = sessoes.filter((d) => d !== dia);
-      const filtered = collection.filter((d)=> d != data)
+      const filtered = collection.filter((d) => d != data);
       setSessao(result);
-      setCollection(filtered)
+      setCollection(filtered);
     } else {
       setSessao([...sessoes, dia]);
       setCollection([...collection, data]);
@@ -67,7 +67,7 @@ export default function Conteudo() {
       `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientador/disponibilidade/${id}`,
     );
     const data = await res.json();
-    setLoading(false)
+    setLoading(false);
     setDisponibilidade(data);
   };
 
@@ -76,7 +76,7 @@ export default function Conteudo() {
       `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientador/${id}`,
     );
     const data = await resp.json();
-    setLoading(false)
+    setLoading(false);
     setOrientador(data);
   };
 
@@ -89,19 +89,19 @@ export default function Conteudo() {
 
       if (!total) {
         alert("Escolha sessões de orientação");
-        return
+        return;
       }
 
-      if(!formato){
+      if (!formato) {
         alert("Escolha modalidade das sessões");
-        return
+        return;
       }
       const formData = new FormData();
 
-      formData.append('sessoes', JSON.stringify(collection))
-      formData.append('valor', String(total))
-      formData.append('file', foto) 
-      formData.append('formato', formato)
+      formData.append("sessoes", JSON.stringify(collection));
+      formData.append("valor", String(total));
+      formData.append("file", foto);
+      formData.append("formato", formato);
 
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientacao`,
@@ -144,7 +144,7 @@ export default function Conteudo() {
     fetchDisponibilidade();
   }, []);
 
-  if(loading) return <LoadingPage/>
+  if (loading) return <LoadingPage />;
   return (
     <>
       {operacaoSucesso && <OperacaoSucesso />}
@@ -252,11 +252,7 @@ export default function Conteudo() {
 
                       {/* FORMATO */}
                       <td className="p-4 ">
-                        {d.formato === "Ambas" ? (
-                          <>Presencial/Online</>
-                        ) : (
-                          <>{d.formato}</>
-                        )}
+                      <>{d.formato}</>
                       </td>
 
                       {/* DURAÇÃO */}

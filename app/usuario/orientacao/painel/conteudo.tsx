@@ -1,12 +1,13 @@
 "use client";
 
 import LoadingPage from "@/components/LoadingPage";
+import { infoOrientacao } from "@/services/userService";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function Conteudo() {
   const [disponibilidade, setDisponibilidade] = useState<any[]>([]);
-  const [orientacoes, setOrientacoes] = useState<any[]>([]);
+  const [orientacoes, setOrientacoes] = useState<infoOrientacao[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -77,12 +78,13 @@ export default function Conteudo() {
     params.append("page", page.toString());
     params.append("limit", "5");
     params.append("estado", estado.toString());
+    params.append("situacao", "aprovado");
 
     if (status) params.append("status", status);
     if (order) params.append("order", order);
 
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientador?${params.toString()}`,
+      `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientacao?${params.toString()}`,
     );
 
     if (!res.ok) {
@@ -100,6 +102,7 @@ export default function Conteudo() {
 
   useEffect(() => {
     fetchDisponibilidade();
+     fetchOrientacoes();
   }, []);
 
   if (loading) return <LoadingPage />;
@@ -131,9 +134,8 @@ export default function Conteudo() {
               <tr>
                 <th className="p-4 text-left">Nome</th>
                 <th className="p-4 text-left">Formato</th>
-                <th className="p-4 text-left">Sessões</th>
-                <th className="p-4 text-left">Datas</th>
-                <th className="p-4 text-left">Semanas</th>
+                <th className="p-4 text-left">Total de Sessões</th>
+                <th className="p-4 text-left">Datas de Sessões</th>
                 <th className="p-4 text-left">Valor</th>
                 <th className="p-4 text-left">Estado</th>
                 <th className="p-4 text-left">Operação</th>
@@ -142,25 +144,26 @@ export default function Conteudo() {
 
             <tbody>
               {orientacoes.map((o) => {
-                const totalDatas = o.disponibilidades?.length || 0;
-                const semanas = Math.ceil(totalDatas / 2);
+                const totalSessoes = o.Sessoes.length;
 
                 return (
                   <tr key={o.id} className="border-t hover:bg-gray-50">
                     {/* NOME */}
-                    <td className="p-4 font-medium">{o.estudanteNome}</td>
+                    <td className="p-4 font-medium">
+                      {o.Estudante.primeiro_nome} {o.Estudante.segundo_nome}
+                    </td>
 
                     {/* FORMATO */}
                     <td className="p-4 capitalize">{o.formato}</td>
 
                     {/* SESSÕES */}
-                    <td className="p-4">{totalDatas} sessões</td>
+                    <td className="p-4">{totalSessoes}</td>
 
                     {/* DATAS (NOVO MODELO) */}
                     <td className="p-4">
                       <div className="flex flex-col gap-2 max-h-60 overflow-y-auto pr-2">
-                        {o.disponibilidades?.map((d: any, i: number) => {
-                          const data = new Date(d.data_sessao);
+                        {o.Sessoes?.map((d: any, i: number) => {
+                          const data = new Date(d.sessao);
 
                           const diaSemana = data.toLocaleDateString("pt-PT", {
                             weekday: "long",
@@ -191,34 +194,26 @@ export default function Conteudo() {
                                 </p>
                               </div>
 
-                              {/* BADGE */}
-                              <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                                sessão
-                              </span>
+                            
                             </div>
                           );
                         })}
                       </div>
                     </td>
 
-                    {/* SEMANAS */}
-                    <td className="p-4 font-medium">{semanas} semanas</td>
-
                     {/* VALOR */}
-                    <td className="p-4 font-medium">{o.valorTotal} kz</td>
+                    <td className="p-4 font-medium">{o.valor},00kz</td>
 
                     {/* ESTADO */}
                     <td className="p-4">
                       <span
-                        className={`px-3 py-1 rounded-full text-sm ${
-                          o.estado === "pendente"
-                            ? "bg-yellow-100 text-yellow-700"
-                            : o.estado === "aprovar"
-                              ? "bg-green-100 text-green-700"
-                              : "bg-red-100 text-red-700"
+                        className={`block text-center p-2  text-sm ${
+                          o.estado
+                            ? "bg-green-100  text-green-700"
+                            : "bg-red-100  text-red-700"
                         }`}
                       >
-                        {o.estado}
+                        {o.estado ? "Dando Orientação" : "Orientação Terminada"}
                       </span>
                     </td>
 
@@ -229,8 +224,9 @@ export default function Conteudo() {
                         className="border rounded px-2 py-1 text-sm"
                       >
                         <option>---</option>
-                        <option value="aprovar">Aprovar</option>
-                        <option value="rejeitar">Rejeitar</option>
+
+                        <option value="toggle">Restaurar orientação</option>
+                        <option value="toggle">Terminar orientação</option>
                       </select>
                     </td>
                   </tr>

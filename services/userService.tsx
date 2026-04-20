@@ -101,3 +101,18 @@ export interface Cadeiras {
     updatedAt: any;
   };
 }
+
+
+
+export interface infoOrientacao {
+  id: any;
+  valor: any;
+  filename: string;
+  formato: string;
+  situacao: any;
+  estado:any,
+  Estudante: UserPerfonal;
+  createdAt: any;
+  updatedAt: any;
+  Sessoes:any[]
+};

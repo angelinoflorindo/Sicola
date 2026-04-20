@@ -44,10 +44,10 @@ export class Orientacao extends Model {
 
   
   @Column({
-    type: DataType.ENUM("Presencial", "Online", "Ambas"),
+    type: DataType.ENUM("Presencial", "Online" ),
     allowNull: false,
   })
-  declare formato: "Presencial" | "Online" | "Ambas";
+  declare formato: "Presencial" | "Online" ;
 
 
   @Column(DataType.STRING)
