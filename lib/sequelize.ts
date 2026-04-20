@@ -15,6 +15,9 @@ import { Acesso } from "@/models/Acesso";
 import { Ebook } from "@/models/Ebook";
 import { Sugestao } from "@/models/Sugestao";
 import { UserDisciplina } from "@/models/UserDisciplina";
+import { Disponibilidade } from "@/models/Disponibilidade";
+import { Orientacao } from "@/models/Orientacao";
+import { Sessao } from "@/models/Sessao";
   
 
 
@@ -40,7 +43,10 @@ export const sequelize = new Sequelize({
     Resposta,
     Detalhes,
     Sugestao,
-    UserDisciplina
+    UserDisciplina,
+    Disponibilidade,
+    Orientacao,
+    Sessao
   ]
 });
  

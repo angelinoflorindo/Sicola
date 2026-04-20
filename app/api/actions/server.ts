@@ -22,13 +22,13 @@ export async function converterString(value: any) {
 }
 
 export async function converterBoolean(value: any) {
-    if(!value){
-      return false
-    }else if(typeof value === "string" && value === "false"){
-      return false
-    }else{
-      return true
-    }
+  if (!value) {
+    return false;
+  } else if (typeof value === "string" && value === "false") {
+    return false;
+  } else {
+    return true;
+  }
 }
 export async function hashPassword(password: string) {
   const saltRounds = 12; // Definir número de rounds (quanto maior, mais seguro, mas mais lento)
@@ -193,7 +193,6 @@ export async function logOutUser(attr: any) {
   return resp;
 }
 
-
 export async function logInUser(attr: any) {
   const resp = await User.update({ estado: true }, { where: { email: attr } });
   return resp;
@@ -259,3 +258,6 @@ export async function buscarAulas(aulaID: string) {
 
   return data.items; // ← apenas JSON puro
 }
+
+ 
+ 

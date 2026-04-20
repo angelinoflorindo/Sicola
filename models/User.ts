@@ -56,7 +56,6 @@ export class User extends Model {
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })
-  @Column({ type: DataType.BOOLEAN, defaultValue: true })
   declare estado: boolean;
 
   

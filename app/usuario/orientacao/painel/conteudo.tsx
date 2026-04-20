@@ -8,30 +8,45 @@ export default function Conteudo() {
   const [disponibilidade, setDisponibilidade] = useState<any[]>([]);
   const [orientacoes, setOrientacoes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [estado, setEstado] = useState(true);
+  const [status, setStatus] = useState("");
+  const [order, setOrder] = useState("");
 
   // ================================
-  // 📌 AÇÕES DISPONIBILIDADE
+  // 📌 DISPONIBILIDADE - AÇÕES
   // ================================
   const handleDisponibilidade = async (acao: string, id: number) => {
+    setLoading(true);
     if (acao === "delete") {
-      await fetch(`/api/disponibilidade/${id}`, { method: "DELETE" });
+      await fetch(
+        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientador/disponibilidade/${id}`,
+        { method: "DELETE" },
+      );
     }
 
     if (acao === "toggle") {
-      await fetch(`/api/disponibilidade/toggle/${id}`, {
-        method: "PATCH",
-      });
+      await fetch(
+        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientador/disponibilidade/${id}`,
+        {
+          method: "PATCH",
+        },
+      );
     }
 
     fetchDisponibilidade();
   };
 
   // ================================
-  // 📌 AÇÕES ORIENTAÇÃO
+  // 📌 ORIENTAÇÃO - AÇÕES
   // ================================
   const handleOrientacao = async (acao: string, id: number) => {
     await fetch(`/api/orientacao/${id}`, {
       method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ estado: acao }),
     });
 
@@ -39,31 +54,62 @@ export default function Conteudo() {
   };
 
   // ================================
-  // 📌 FETCH
+  // 📌 FETCH DISPONIBILIDADE
   // ================================
   const fetchDisponibilidade = async () => {
-    const res = await fetch("/api/disponibilidade");
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientador/disponibilidade`,
+    );
+
     const data = await res.json();
     setDisponibilidade(data);
+    setLoading(false);
   };
 
+  // ================================
+  // 📌 FETCH ORIENTAÇÕES
+  // ================================
+
   const fetchOrientacoes = async () => {
-    const res = await fetch("/api/orientacao");
-    const data = await res.json();
-    setOrientacoes(data);
     setLoading(false);
+    const params = new URLSearchParams();
+
+    params.append("page", page.toString());
+    params.append("limit", "5");
+    params.append("estado", estado.toString());
+
+    if (status) params.append("status", status);
+    if (order) params.append("order", order);
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientador?${params.toString()}`,
+    );
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Erro na API:", res.status, text);
+      return;
+    }
+
+    setLoading(false);
+    const data = await res.json();
+
+    setOrientacoes(data.data);
+    setTotalPages(data.totalPages);
   };
 
   useEffect(() => {
     fetchDisponibilidade();
-    fetchOrientacoes();
   }, []);
 
-  
+  if (loading) return <LoadingPage />;
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="max-w-6xl mx-auto space-y-6">
+        {/* ============================= */}
+        {/* HEADER */}
+        {/* ============================= */}
         <h1 className="text-3xl font-bold text-gray-800">
           Painel de Orientação
         </h1>
@@ -72,10 +118,11 @@ export default function Conteudo() {
         {/* 👨‍🎓 ORIENTAÇÕES */}
         {/* ============================= */}
         <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-          <div className="p-3 border-b">
+          <div className="p-4 border-b">
             <h2 className="text-xl font-bold">Lista de Estudantes</h2>
             <p className="text-sm text-gray-500">
-              Cada dia corresponde a 1 sessão. As sessões são distribuídas por semanas.
+              Cada dia corresponde a 1 sessão. As sessões são distribuídas por
+              semanas.
             </p>
           </div>
 
@@ -85,9 +132,8 @@ export default function Conteudo() {
                 <th className="p-4 text-left">Nome</th>
                 <th className="p-4 text-left">Formato</th>
                 <th className="p-4 text-left">Sessões</th>
-                <th className="p-4 text-left">Dias</th>
-                <th className="p-4 text-left">/ Semana</th>
-                <th className="p-4 text-left">Duração</th>
+                <th className="p-4 text-left">Datas</th>
+                <th className="p-4 text-left">Semanas</th>
                 <th className="p-4 text-left">Valor</th>
                 <th className="p-4 text-left">Estado</th>
                 <th className="p-4 text-left">Operação</th>
@@ -96,60 +142,90 @@ export default function Conteudo() {
 
             <tbody>
               {orientacoes.map((o) => {
-                const diasSemana = o.dias?.length || 0;
-                const semanas = Math.ceil(o.sessoes / (diasSemana || 1));
-                const erro = diasSemana > o.sessoes;
+                const totalDatas = o.disponibilidades?.length || 0;
+                const semanas = Math.ceil(totalDatas / 2);
 
                 return (
                   <tr key={o.id} className="border-t hover:bg-gray-50">
-                    <td className="p-4">{o.estudanteNome}</td>
+                    {/* NOME */}
+                    <td className="p-4 font-medium">{o.estudanteNome}</td>
 
+                    {/* FORMATO */}
                     <td className="p-4 capitalize">{o.formato}</td>
 
+                    {/* SESSÕES */}
+                    <td className="p-4">{totalDatas} sessões</td>
+
+                    {/* DATAS (NOVO MODELO) */}
                     <td className="p-4">
-                      {o.sessoes} sessões
+                      <div className="flex flex-col gap-2 max-h-60 overflow-y-auto pr-2">
+                        {o.disponibilidades?.map((d: any, i: number) => {
+                          const data = new Date(d.data_sessao);
+
+                          const diaSemana = data.toLocaleDateString("pt-PT", {
+                            weekday: "long",
+                          });
+
+                          const dataFormatada = data.toLocaleDateString(
+                            "pt-PT",
+                            {
+                              day: "2-digit",
+                              month: "long",
+                              year: "numeric",
+                            },
+                          );
+
+                          return (
+                            <div
+                              key={i}
+                              className="flex items-center justify-between bg-gray-50 border rounded-lg px-3 py-2 hover:shadow-sm transition"
+                            >
+                              {/* DATA */}
+                              <div>
+                                <p className="text-sm font-medium text-gray-800 capitalize">
+                                  {diaSemana}
+                                </p>
+
+                                <p className="text-xs text-gray-500">
+                                  {dataFormatada}
+                                </p>
+                              </div>
+
+                              {/* BADGE */}
+                              <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                                sessão
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </td>
 
-                    <td className="p-4">
-                      {o.dias?.join(", ")}
-                    </td>
+                    {/* SEMANAS */}
+                    <td className="p-4 font-medium">{semanas} semanas</td>
 
-                    <td className="p-4">
-                      {diasSemana}x / semana
-                    </td>
+                    {/* VALOR */}
+                    <td className="p-4 font-medium">{o.valorTotal} kz</td>
 
-                    <td className="p-4 font-medium">
-                      {semanas} semanas
-                      {erro && (
-                        <div className="text-red-500 text-xs">
-                          ⚠ sessões insuficientes
-                        </div>
-                      )}
-                    </td>
-
-                    <td className="p-4 font-medium">
-                      {o.valorTotal} kz
-                    </td>
-
+                    {/* ESTADO */}
                     <td className="p-4">
                       <span
                         className={`px-3 py-1 rounded-full text-sm ${
                           o.estado === "pendente"
                             ? "bg-yellow-100 text-yellow-700"
                             : o.estado === "aprovar"
-                            ? "bg-green-100 text-green-700"
-                            : "bg-red-100 text-red-700"
+                              ? "bg-green-100 text-green-700"
+                              : "bg-red-100 text-red-700"
                         }`}
                       >
                         {o.estado}
                       </span>
                     </td>
 
+                    {/* AÇÃO */}
                     <td className="p-4">
                       <select
-                        onChange={(e) =>
-                          handleOrientacao(e.target.value, o.id)
-                        }
+                        onChange={(e) => handleOrientacao(e.target.value, o.id)}
                         className="border rounded px-2 py-1 text-sm"
                       >
                         <option>---</option>
@@ -162,27 +238,47 @@ export default function Conteudo() {
               })}
             </tbody>
           </table>
+
+          <div className="p-4 flex justify-between items-center mt-4">
+            <button
+              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+              disabled={page === 1}
+              className="bg-gray-200 px-3 py-1 rounded disabled:opacity-50"
+            >
+              Anterior
+            </button>
+            <span>
+              Página {page} de {totalPages}
+            </span>
+            <button
+              onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={page === totalPages}
+              className="bg-gray-200 px-3 py-1 rounded disabled:opacity-50"
+            >
+              Próxima
+            </button>
+          </div>
         </div>
 
         {/* ============================= */}
-        {/* 📅 DISPONIBILIDADE */}
+        {/* 📅 DISPONIBILIDADE DO ORIENTADOR */}
         {/* ============================= */}
         <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-          <div className="flex items-center justify-between p-3 border-b">
-            <h2 className="text-xl font-bold">Disponibilidade</h2>
+          <div className="flex items-center justify-between p-4 border-b">
+            <h2 className="text-xl font-bold">Minha Disponibilidade</h2>
 
             <Link
-              href={`/gestao/disponibilidade`}
+              href="/usuario/orientacao/painel/disponibilidade"
               className="bg-blue-600 text-white py-2 px-4 rounded-xl hover:bg-blue-700"
             >
-              adicionar
+              Adicionar
             </Link>
           </div>
 
           <table className="w-full">
             <thead className="bg-gray-100 text-gray-600 text-sm">
               <tr>
-                <th className="p-4 text-left">Dia</th>
+                <th className="p-4 text-left">Data</th>
                 <th className="p-4 text-left">Formato</th>
                 <th className="p-4 text-left">Duração</th>
                 <th className="p-4 text-left">Estado</th>
@@ -191,41 +287,68 @@ export default function Conteudo() {
             </thead>
 
             <tbody>
-              {disponibilidade.map((d) => (
-                <tr key={d.id} className="border-t hover:bg-gray-50">
-                  <td className="p-4">{d.diaSemana}</td>
+              {disponibilidade.map((d) => {
+                const data = new Date(d.data_sessao);
 
-                  <td className="p-4 capitalize">{d.formato}</td>
+                const diaSemana = data.toLocaleDateString("pt-PT", {
+                  weekday: "long",
+                });
 
-                  <td className="p-4">
-                    {d.formato === "online"
-                      ? "1h30"
-                      : "2h30"}
-                  </td>
+                const dataFormatada = data.toLocaleDateString("pt-PT", {
+                  day: "2-digit",
+                  month: "long",
+                  year: "numeric",
+                });
 
-                  <td className="p-4">
-                    {d.estado ? "Activo" : "Inactivo"}
-                  </td>
+                return (
+                  <tr key={d.id} className="border-t hover:bg-gray-50">
+                    {/* DATA */}
+                    <td className="p-4">
+                      <div>
+                        <p className="font-medium capitalize">{diaSemana}</p>
+                        <p className="text-xs text-gray-500">{dataFormatada}</p>
+                      </div>
+                    </td>
 
-                  <td className="p-4">
-                    <select
-                      onChange={(e) =>
-                        handleDisponibilidade(
-                          e.target.value,
-                          d.id
-                        )
-                      }
-                      className="border rounded px-2 py-1 text-sm"
-                    >
-                      <option>---</option>
-                      <option value="toggle">
-                        Activar/Desactivar
-                      </option>
-                      <option value="delete">Eliminar</option>
-                    </select>
-                  </td>
-                </tr>
-              ))}
+                    {/* FORMATO */}
+                    <td className="p-4 capitalize">{d.formato}</td>
+
+                    {/* DURAÇÃO */}
+                    <td className="p-4">
+                      <span className="text-sm">
+                        {d.formato === "Online" ? "1h30" : "2h30"}
+                      </span>
+                    </td>
+
+                    {/* ESTADO */}
+                    <td className="p-4">
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm ${
+                          d.estado
+                            ? "bg-green-100 text-green-700"
+                            : "bg-gray-200 text-gray-600"
+                        }`}
+                      >
+                        {d.estado ? "Activo" : "Inactivo"}
+                      </span>
+                    </td>
+
+                    {/* OPERAÇÃO */}
+                    <td className="p-4">
+                      <select
+                        onChange={(e) =>
+                          handleDisponibilidade(e.target.value, d.id)
+                        }
+                        className="border rounded px-2 py-1 text-sm"
+                      >
+                        <option>---</option>
+                        <option value="toggle">Activar/Desactivar</option>
+                        <option value="delete">Eliminar</option>
+                      </select>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

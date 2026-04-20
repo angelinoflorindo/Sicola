@@ -64,6 +64,7 @@ const menuItems: MenuItem[] = [
   },
   { label: "Gerir Pagamentos", path: "/gestao/pagamentos", roles: ["ADMIN"] },
   { label: "Gerir Ebooks", path: "/gestao/ebooks", roles: ["ADMIN"] },
+  { label: "Gerir Orientações", path: "/gestao/orientacao", roles: ["ADMIN"] },
   { label: "Gerir Disciplinas", path: "/gestao/disciplina", roles: ["ADMIN"] },
   { label: "Gerir Sugestões", path: "/gestao/sugestao", roles: ["ADMIN"] },
   { label: "Gerir Usuarios", path: "/gestao/usuario", roles: ["ADMIN"] },

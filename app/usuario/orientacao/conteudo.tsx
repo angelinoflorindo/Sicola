@@ -15,7 +15,6 @@ export default function Conteudo() {
   const [order, setOrder] = useState("");
 
   const fetchData = async () => {
-    setLoading(false);
     const params = new URLSearchParams();
 
     params.append("page", page.toString());
@@ -35,7 +34,7 @@ export default function Conteudo() {
       return;
     }
 
-    setLoading(false);
+    setLoading(false); 
     const data = await res.json();
 
     setOrientadores(data.data);
@@ -46,11 +45,10 @@ export default function Conteudo() {
     fetchData();
   }, [page]);
 
+  if(loading) return <LoadingPage/>
   return (
     <div className="max-w-6xl mx-auto space-y-10">
       {/* ===== PERFIL / CARD PRINCIPAL ===== */}
-
-      {loading && <LoadingPage />}
       <section>
         <div className="px-4 py-8=4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* ❌ SEM ORIENTADORES */}

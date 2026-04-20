@@ -35,6 +35,7 @@ export default function LoginPage() {
     });
 
     if (res?.error) {
+      setLoading(false)
       router.push("/");
     } else {
       fetch(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/usuario?email=${email}`);
