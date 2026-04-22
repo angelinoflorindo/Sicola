@@ -4,6 +4,7 @@ import path from "path";
 import { converterString, getUserFromToken } from "@/app/api/actions/server";
 import { NextResponse } from "next/server";
 import { Ebook } from "@/models/Ebook";
+import { Material } from "@/models/Material";
 
 export async function GET(
   req: Request,
@@ -22,7 +23,7 @@ export async function GET(
   }
 
   const comprado = await Ebook.findOne({
-    where: { codigo: codigo, status: "PAGO", user_id:id},
+    where: { codigo: codigo, status: "PAGO", user_id: id },
   });
 
   if (!comprado) {
@@ -32,9 +33,9 @@ export async function GET(
       { status: 403 },
     );
   }
-
+  const ebook = await Material.findOne({ where: { codigo } });
   // 📂 Caminho do PDF original
-  const filePath = path.join(process.cwd(), `storage/ebooks/${codigo}.pdf`);
+  const filePath = path.join(process.cwd(), `storage/ebooks/${ebook?.filename}`);
 
   const existingPdfBytes = fs.readFileSync(filePath);
 
@@ -63,7 +64,7 @@ export async function GET(
   return new Response(Buffer.from(pdfBytes), {
     headers: {
       "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename="${codigo}.pdf"`,
+      "Content-Disposition": `attachment; filename="${ebook?.filename}"`,
     },
   });
 }

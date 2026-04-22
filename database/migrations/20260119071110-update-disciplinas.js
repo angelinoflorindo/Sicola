@@ -8,6 +8,7 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false,
       defaultValue: 'N/D',
+      
     });
   },
 

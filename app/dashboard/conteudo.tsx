@@ -36,9 +36,28 @@ export default function DashBoardContent() {
               className="mb-2 w-auto h-24 sm:h-32 object-contain" // mantém proporção, evita deformação
             />
 
-            <h3 className="font-semibold text-lg">Materias Acadêmicos</h3>
+            <h3 className="font-semibold text-lg">Materiais Acadêmicos</h3>
           </div>
         </Link>
+
+
+        <Link href={`/usuario/trabalhos`}>
+          <div
+            id="dashboard-items"
+            className="bg-white p-5 rounded-xl shadow hover:shadow-lg transition"
+          >
+            <Image
+              src="/images/trabalhoCientifico.png" // equivaler os nomes com a imagem
+              alt="imagens - Dashboard"
+              width={50} // define a largura base do Next.js
+              height={50} // define altura base do Next.js
+              className="mb-2 w-auto h-24 sm:h-32 object-contain" // mantém proporção, evita deformação
+            />
+
+            <h3 className="font-semibold text-lg">Trabalhos Científicos</h3>
+          </div>
+        </Link>
+
 
         <Link href={`/usuario/orientacao`}>
           <div

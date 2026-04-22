@@ -1,7 +1,7 @@
 export interface UserPerfonal {
   id: any;
   email: any;
-  curso: any;
+  universidade_id: any;
   password: any;
   primeiro_nome: any;
   segundo_nome: any;
@@ -85,6 +85,7 @@ export interface OrientadorInfo {
   createdAt: any;
   updatedAt: any;
   UserDisciplina: Cadeiras[];
+  Universidade:any
 }
 export interface Cadeiras {
   id: any;

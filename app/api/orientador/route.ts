@@ -6,6 +6,7 @@ import { converterString, getUserIdFromToken } from "../actions/server";
 import { Sugestao } from "@/models/Sugestao";
 import { UserDisciplina } from "@/models/UserDisciplina";
 import { Disciplina } from "@/models/Disciplina";
+import { Universidade } from "@/models/Universidade";
 export const dynamic = "force-dynamic";
 
 // Rota para candidaturas de orientadores
@@ -119,6 +120,10 @@ export async function GET(req: Request) {
             },
           ],
         },
+        {
+          model:Universidade,
+          as:"Universidade"
+        }
       ],
       where,
       limit,

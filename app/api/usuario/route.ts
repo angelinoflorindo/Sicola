@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
           segundo_nome: data.segundo_nome,
           email: data.email,
           password: hashedPassword,
-          curso: data.curso,
+          universidade_id: data.universidade_id,
           telemovel: data.telemovel,
         },
         { transaction: t },

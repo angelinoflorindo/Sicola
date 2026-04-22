@@ -1,23 +1,41 @@
 "use client";
 
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { ebooks } from "@/lib/ebooks";
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import LoadingPage from "@/components/LoadingPage";
 
 export default function Conteudo() {
   const { codigo } = useParams();
-  const ebook = ebooks.find((c) => c.codigo === codigo);
-
+  const [ebook, setEbook] = useState<any>(null);
   const [jaComprou, setCompra] = useState(false);
   const [verificando, setVerificando] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [baixando, setBaixando] = useState(false);
+  const router = useRouter();
+
+  const fetchEbook = async () => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientador/materiais/ver/${codigo}`,
+    );
+    if (res.ok) {
+      const data = await res.json();
+
+      setLoading(false);
+      setEbook(data);
+      return;
+    }
+
+    router.push("/usuario/materias");
+  };
 
   // 🔎 Verificar se o usuário já comprou
   const getEbook = async () => {
     try {
-      const res = await fetch(`/api/ebooks/pagar/${codigo}`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/ebooks/pagar/${codigo}`,
+      );
 
       if (!res.ok) {
         setCompra(false);
@@ -39,6 +57,7 @@ export default function Conteudo() {
   useEffect(() => {
     if (codigo) {
       getEbook();
+      fetchEbook();
     }
   }, [codigo]);
 
@@ -46,10 +65,11 @@ export default function Conteudo() {
   const handleDownload = async () => {
     try {
       setBaixando(true);
+      setLoading(true)
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/ebooks/${codigo}`);
-
-      
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/ebooks/${codigo}`,
+      );
 
       if (!response.ok) {
         const text = await response.text();
@@ -62,7 +82,7 @@ export default function Conteudo() {
 
       const a = document.createElement("a");
       a.href = url;
-      a.download = `${ebook?.titulo}.pdf`;
+      a.download = `${ebook?.codigo}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -72,15 +92,14 @@ export default function Conteudo() {
       alert("Erro ao baixar o guia.");
     } finally {
       setBaixando(false);
+      setLoading(false)
     }
   };
 
-  if (!ebook) {
-    return (
-      <div className="flex items-center justify-center h-[60vh] text-gray-500">
-        Ebook não encontrado.
-      </div>
-    );
+ 
+
+  if (loading) {
+    return <LoadingPage />;
   }
 
   return (
@@ -89,8 +108,8 @@ export default function Conteudo() {
         {/* CAPA */}
         <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
           <Image
-            src={ebook.imagem}
-            alt={ebook.titulo}
+            src={`/capas/${ebook.imagem}`}
+            alt="capa do material"
             fill
             className="object-cover"
             priority
@@ -124,12 +143,12 @@ export default function Conteudo() {
               Principais Conteúdos
             </h2>
 
-            {ebook.subItens && (
+            {ebook.SubItens && (
               <ul className="space-y-3">
-                {ebook.subItens.map((s: string, i: number) => (
+                {ebook.SubItens.map((s: any, i: number) => (
                   <li key={i} className="flex items-start gap-3 text-gray-600">
                     <span className="text-blue-600 mt-1 text-lg">•</span>
-                    <span>{s}</span>
+                    <span>{s.item}</span>
                   </li>
                 ))}
               </ul>

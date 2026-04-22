@@ -39,7 +39,7 @@ const menuItems: MenuItem[] = [
   {
     label: "Painel do Orientador",
     path: "/usuario/orientacao/painel",
-    roles: ["ORIENTADOR"],
+    roles: ["ORIENTADOR", "ADMIN"],
   },
 
   {
@@ -50,6 +50,11 @@ const menuItems: MenuItem[] = [
   {
     label: "Marcar Orientação",
     path: "/usuario/orientacao",
+    roles: ["ESTUDANTE", "VISITANTE", "CANDIDATO"],
+  },
+  {
+    label: "Trabalhos acadêmicos",
+    path: "/usuario/trabalhos",
     roles: ["ESTUDANTE", "VISITANTE", "CANDIDATO"],
   },
   {
@@ -66,6 +71,7 @@ const menuItems: MenuItem[] = [
   { label: "Gerir Ebooks", path: "/gestao/ebooks", roles: ["ADMIN"] },
   { label: "Gerir Orientações", path: "/gestao/orientacao", roles: ["ADMIN"] },
   { label: "Gerir Disciplinas", path: "/gestao/disciplina", roles: ["ADMIN"] },
+  { label: "Gerir Universidades", path: "/gestao/universidade", roles: ["ADMIN"] },
   { label: "Gerir Sugestões", path: "/gestao/sugestao", roles: ["ADMIN"] },
   { label: "Gerir Usuarios", path: "/gestao/usuario", roles: ["ADMIN"] },
   { label: "Gerir Orientadores", path: "/gestao/orientador", roles: ["ADMIN"] },

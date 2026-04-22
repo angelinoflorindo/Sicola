@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { initDB } from "@/lib/db";
-import { Pagamento } from "@/models/Pagamento";
+import { initDB } from "@/lib/db"; 
 import { Ebook } from "@/models/Ebook";
 import { converterString, getUserFromToken } from "@/app/api/actions/server";
 

@@ -49,6 +49,9 @@ export class Ebook extends Model {
   })
   declare status: "PENDENTE" | "PAGO" | "EXPIRADO"
 
+  
+  @Column(DataType.STRING)
+  declare filename: string;
 
   @Default(true)
   @Column({ type: DataType.BOOLEAN, defaultValue: true })

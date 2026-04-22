@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { initDB } from "@/lib/db";
 import { sequelize } from "@/lib/sequelize";
-import { User } from "@/models/User";
-import { Sugestao } from "@/models/Sugestao";
-import { UserDisciplina } from "@/models/UserDisciplina";
-import { Disciplina } from "@/models/Disciplina";
+import { User } from "@/models/User"; 
 import { converterString, getUserIdFromToken } from "@/app/api/actions/server";
 import { Orientacao } from "@/models/Orientacao";
 import { Sessao } from "@/models/Sessao";

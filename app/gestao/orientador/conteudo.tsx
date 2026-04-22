@@ -85,8 +85,7 @@ export default function Conteudo() {
           <table className="w-full">
             <thead className="bg-gray-100 text-gray-600 text-sm">
               <tr>
-                <th className="p-4 text-left">Nome Completo</th>
-                <th className="p-4 text-left">Curso</th>
+                <th className="p-4 text-left">Nome Completo</th> 
                 <th className="p-4 text-left">telemovel</th>
                 <th className="p-4 text-left">Email</th>
                 <th className="p-4 text-left">Situação</th>
@@ -101,8 +100,7 @@ export default function Conteudo() {
                 >
                   <td className="p-4 font-medium">
                     {dep.primeiro_nome} {dep.segundo_nome}
-                  </td>
-                  <td className="p-4 font-medium">{dep.curso}</td>
+                  </td> 
                   <td className="p-4 font-medium">{dep.telemovel}</td>
                   <td className="p-4 font-medium">{dep.email}</td>
 

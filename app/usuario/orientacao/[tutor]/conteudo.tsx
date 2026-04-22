@@ -41,6 +41,7 @@ export default function Conteudo() {
     filename: "",
     updatedAt: "",
     UserDisciplina: [],
+    Universidade:''
   });
   const [total, setTotal] = useState(0);
   const [valorBase, setBase] = useState(0);
@@ -171,7 +172,7 @@ export default function Conteudo() {
                   {orientador.primeiro_nome} {orientador.segundo_nome}
                 </h3>
                 <p className="text-xs text-gray-500 mb-2">
-                  {"ISAF"} - {orientador.curso}
+                  {"Universidade"} 
                 </p>
                 <p className="text-xs bg-gray-100 text-green-500 p-2 rounded">
                   {"Whatssap"} - {orientador.telemovel}

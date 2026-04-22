@@ -1,24 +1,21 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { initDB } from "@/lib/db";
-import {
-  converterString,
-  getUserIdFromToken,
-  registarPagamento,
-} from "@/app/api/actions/server";
-import { Pagamento } from "@/models/Pagamento";
-import { User } from "@/models/User";
-import { ebooks } from "@/lib/ebooks";
+import { converterString, getUserIdFromToken } from "@/app/api/actions/server";
+import { User } from "@/models/User"; 
 import { Ebook } from "@/models/Ebook";
-
+import { Material } from "@/models/Material";
 
 // Registar pagamento
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
-    const id = await getUserIdFromToken(req);
-    const userId = await converterString(id);
-    const data = await req.json();
-    const ebook = ebooks.find((e)=> e.codigo === data.codigo)
+    await initDB();
+const userId = await getUserIdFromToken(req);
+    const formData = await req.formData();
+    const codigo = JSON.parse(formData.get("codigo") as string);
 
+
+    const ebook = await Material.findOne({where:{codigo}})
+    const file = formData.get("file") as File | null;
 
     if (!userId || !ebook) {
       return NextResponse.json(
@@ -27,19 +24,32 @@ export async function POST(req: Request) {
       );
     }
 
-    await initDB();
-    const response = await Ebook.create({
+    let filename = null;
+
+    if (file) {
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+
+      const fs = require("fs");
+      const path = require("path");
+
+      filename = `${Date.now()}-${file.name}`;
+      const uploadDir = path.join(process.cwd(), "storage/recibos");
+
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+
+      fs.writeFileSync(path.join(uploadDir, filename), buffer);
+    }
+    const resp = await Ebook.create({
       user_id: userId,
-      codigo:ebook.codigo,
+      codigo: ebook.codigo,
       valor: ebook.valor,
+      filename: filename,
     });
 
-    if (!response) {
-      return NextResponse.json({ message: "Acesso expirado" }, { status: 403 });
-    }
-
-    // continua a lógica da prova
-    return NextResponse.json({ ok: true });
+    return NextResponse.json(resp, { status: 201 });
   } catch (error) {
     return NextResponse.json({ message: "Erro interno" }, { status: 500 });
   }

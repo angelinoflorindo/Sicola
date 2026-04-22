@@ -45,7 +45,7 @@ export default function Conteudo() {
         return;
       }
 
-      const resp = await fetch("/api/disciplina", {
+      const resp = await fetch(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/disciplina/`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

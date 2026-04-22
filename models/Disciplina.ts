@@ -25,6 +25,7 @@ export class Disciplina extends Model {
   @Column(DataType.INTEGER.UNSIGNED)
   declare id: number;
 
+  @Unique
   @Column(DataType.STRING)
   declare nome: string
 

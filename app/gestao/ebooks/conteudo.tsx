@@ -14,40 +14,48 @@ export default function Conteudo() {
   const [loading, setLoading] = useState(true);
 
   const handleAcao = async (acao: string, id: number) => {
-    switch (acao) {
-      case "eliminar":
-        await fetch(
-          `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/ebooks/gerir/${id}`,
-          {
-            method: "DELETE",
-          }
-        );
-        setLoading(true);
-        fetchData();
-        break;
-      case "rejeitar":
-        await fetch(
-          `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/ebooks/gerir/${id}`,
-          {
-            method: "PUT",
-          }
-        );
-        setLoading(true);
-        fetchData();
-        break;
-      case "aprovar":
-        await fetch(
-          `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/ebooks/gerir/${id}`
-        );
-        setLoading(true);
-        fetchData();
+    setLoading(true);
+    if (acao === "eliminar") {
+      await fetch(
+        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/ebooks/gerir/${id}`,
+        {
+          method: "DELETE",
+        },
+      );
 
-      default:
-        break;
+      fetchData();
+      setPage(1);
+      return;
+    } else if (acao === "toggle") {
+      await fetch(
+        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/ebooks/gerir/${id}`,
+        { method: "PATCH" },
+      );
+
+      fetchData();
+      setPage(1);
+      return;
+    } else if (acao === "baixar") {
+      const resp = await fetch(
+        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/ebooks/gerir/${id}`,
+      );
+
+      const blob = await resp.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `recibo_${id}`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      window.URL.revokeObjectURL(url);
+
+      fetchData();
+      setPage(1);
+      return;
     }
-
-    // Atualiza lista após ação
-    setPage(1);
   };
 
   const fetchData = async () => {
@@ -63,7 +71,7 @@ export default function Conteudo() {
     const res = await fetch(
       `${
         process.env.NEXT_PUBLIC_CLIENT_URL
-      }/api/ebooks/pagar?${params.toString()}`
+      }/api/ebooks/pagar?${params.toString()}`,
     );
 
     if (!res.ok) {
@@ -89,9 +97,7 @@ export default function Conteudo() {
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="max-w-5xl mx-auto space-y-6">
-        <h1 className="text-3xl font-bold text-gray-800">
-          Gestão de Ebooks
-        </h1>
+        <h1 className="text-3xl font-bold text-gray-800">Gestão de Ebooks</h1>
 
         <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
           <table className="w-full">
@@ -102,6 +108,7 @@ export default function Conteudo() {
                 <th className="p-4 text-left">telemovel</th>
                 <th className="p-4 text-left">Valor</th>
                 <th className="p-4 text-left">Situação</th>
+                <th className="p-4 text-left">Baixar Recibo</th>
                 <th className="p-4 text-left">Operação</th>
               </tr>
             </thead>
@@ -122,15 +129,22 @@ export default function Conteudo() {
                       {dep.status}
                     </span>
                   </td>
-                  
+                  <td
+                    onClick={() => handleAcao("baixar", dep.id)}
+                    className=" cursor text-sm"
+                  >
+                    <span className="bg-green-600 p-2 rounded  text-white cursor  ">
+                      Baixar{" "}
+                    </span>
+                  </td>
+
                   <td className="py-2 px-4 border-b">
                     <select
                       onChange={(e) => handleAcao(e.target.value, dep.id)}
                       className="border rounded px-2 py-1 bg-white text-sm"
                     >
                       <option value="analisar"> - - - - </option>
-                      <option value="aprovar"> Aprovar</option>
-                      <option value="rejeitar">Rejeitar</option>
+                      <option value="toggle"> Aprovar / Rejeitar </option>
                       <option value="eliminar">Eliminar</option>
                     </select>
                   </td>

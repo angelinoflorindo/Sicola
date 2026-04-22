@@ -86,8 +86,8 @@ export default function Conteudo() {
                 <h3 className="font-semibold text-lg text-gray-800">
                   {item.primeiro_nome} {item.segundo_nome}
                 </h3>
-                <p className="text-xs text-gray-500 mb-2">
-                  {"ISAF"} - {item.curso}
+                <p className="text-xs text-gray-800 mb-2">
+                   {"Universidade"} -  {item.Universidade.codigo}
                 </p>
 
                 <p className=" text-gray-500 mb-2">

@@ -1,7 +1,34 @@
+"use client";
 import LoadingPage from "@/components/LoadingPage";
 import { UserPerfonal } from "@/services/userService";
+import { useEffect, useState } from "react";
 
 export default function Conteudo({ users }: { users: UserPerfonal }) {
+  const [faculdade, setFaculdade] = useState("");
+  const fetchData = async () => {
+    const resp = await fetch(
+      `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/universidade`,
+    );
+
+    if (!resp.ok) {
+      throw new Error("Erro de busca");
+    }
+
+    const data = await resp.json();
+    data.map((item: any) => {
+      if (item.id === Number(users.universidade_id)) {
+        setFaculdade(item.nome);
+        return;
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (users.universidade_id) {
+      fetchData();
+    }
+  }, [users.universidade_id]);
+
   if (!users.primeiro_nome || !users.email) {
     return <LoadingPage />;
   }
@@ -24,7 +51,7 @@ export default function Conteudo({ users }: { users: UserPerfonal }) {
           </span>
 
           <span className="py-1">
-            Curso: <b>{users?.curso}</b>
+            Universidade: <b>{faculdade}</b>
           </span>
         </div>
       </div>

@@ -10,7 +10,9 @@ import {
   CreatedAt,
   UpdatedAt,
   Default,
+  ForeignKey,
 } from "sequelize-typescript";
+import { Universidade } from "./Universidade";
 
 @Table({
   tableName: "users",
@@ -43,9 +45,13 @@ export class User extends Model {
 
   @Column(DataType.STRING)
   declare filename: string;
-
-  @Column(DataType.ENUM("GBS", "IGF", "CF", "OUTRO"))
-  declare curso: "GBS" | "IGF" | "CF" | "OUTRO" ;
+ 
+   @ForeignKey(() => Universidade)
+   @Column({
+     type: DataType.INTEGER,
+     allowNull: false,
+   })
+   declare universidade_id: number;
 
   @Default("ESTUDANTE")
   @Column({

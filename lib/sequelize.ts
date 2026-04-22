@@ -18,6 +18,10 @@ import { UserDisciplina } from "@/models/UserDisciplina";
 import { Disponibilidade } from "@/models/Disponibilidade";
 import { Orientacao } from "@/models/Orientacao";
 import { Sessao } from "@/models/Sessao";
+import { Material } from "@/models/Material";
+import { SubItem } from "@/models/SubItem";
+import { Universidade } from "@/models/Universidade";
+import { Trabalho } from "@/models/Trabalho";
   
 
 
@@ -46,7 +50,11 @@ export const sequelize = new Sequelize({
     UserDisciplina,
     Disponibilidade,
     Orientacao,
-    Sessao
+    Sessao,
+    Material,
+    SubItem,
+    Universidade,
+    Trabalho
   ]
 });
  

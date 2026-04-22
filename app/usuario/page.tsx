@@ -12,7 +12,7 @@ const Usuario = () => {
   const [userData, setUser] = useState<UserPerfonal>({
     id: "",
     email: "",
-    curso: "",
+    universidade_id: "",
     password: "",
     primeiro_nome: "",
     segundo_nome: "",

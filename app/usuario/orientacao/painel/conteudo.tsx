@@ -43,13 +43,16 @@ export default function Conteudo() {
   // 📌 ORIENTAÇÃO - AÇÕES
   // ================================
   const handleOrientacao = async (acao: string, id: number) => {
-    await fetch(`/api/orientacao/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
+    await fetch(
+      `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientador/estudante`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ estado: acao, inputId: id }),
       },
-      body: JSON.stringify({ estado: acao }),
-    });
+    );
 
     fetchOrientacoes();
   };
@@ -102,20 +105,37 @@ export default function Conteudo() {
 
   useEffect(() => {
     fetchDisponibilidade();
-     fetchOrientacoes();
+    fetchOrientacoes();
   }, []);
 
   if (loading) return <LoadingPage />;
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="max-w-6xl mx-auto space-y-6 ">
         {/* ============================= */}
         {/* HEADER */}
         {/* ============================= */}
-        <h1 className="text-3xl font-bold text-gray-800">
-          Painel de Orientação
-        </h1>
+
+        <div className="flex items-center justify-between p-4 border-b">
+          <h1 className="text-3xl font-bold text-gray-800">
+            Painel de Orientação
+          </h1>
+          <div>
+            <Link
+              href="/usuario/orientacao/painel/materiais"
+              className="bg-gray-500 text-white p-4 mx-2   rounded-xl hover:bg-gray-800"
+            >
+              Gerir Materiais
+            </Link>
+            <Link
+              href="/usuario/orientacao/painel/trabalhos"
+              className="bg-gray-500   text-white  p-4  mx-2 rounded-xl hover:bg-gray-800"
+            >
+              Gerir Trabalhos
+            </Link>
+          </div>
+        </div>
 
         {/* ============================= */}
         {/* 👨‍🎓 ORIENTAÇÕES */}
@@ -193,8 +213,6 @@ export default function Conteudo() {
                                   {dataFormatada}
                                 </p>
                               </div>
-
-                            
                             </div>
                           );
                         })}
@@ -225,8 +243,9 @@ export default function Conteudo() {
                       >
                         <option>---</option>
 
-                        <option value="toggle">Restaurar orientação</option>
-                        <option value="toggle">Terminar orientação</option>
+                        <option value="restaurar">Restaurar orientação</option>
+                        <option value="terminar">Terminar orientação</option>
+                        {/*<option value="eliminar">Apagar orientação</option> */}
                       </select>
                     </td>
                   </tr>
@@ -347,6 +366,14 @@ export default function Conteudo() {
               })}
             </tbody>
           </table>
+        </div>
+
+        <div className="border-t">
+          <p className="text-sm text-gray-500 wrap border-b">
+            No âmbito da prestação e contas, serão retidos 30% dos serviços
+            realizados, exceptuando os materias de orientação feitos até a
+            sua completude, em conformidade com os parâmetros.
+          </p>
         </div>
       </div>
     </div>

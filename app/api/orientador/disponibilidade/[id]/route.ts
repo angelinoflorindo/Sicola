@@ -15,7 +15,7 @@ export async function GET(
   try {
     await initDB();
 
-    const resp = await Disponibilidade.findAll({ where: { user_id: id } });
+    const resp = await Disponibilidade.findAll({ where: { user_id: id, estado:true } });
 
     return NextResponse.json(resp, { status: 200 });
   } catch (error) {

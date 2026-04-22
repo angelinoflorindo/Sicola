@@ -3,7 +3,7 @@ import { initDB } from "@/lib/db";
 import { Ebook } from "@/models/Ebook";
 import { Disciplina } from "@/models/Disciplina";
 
-
+/*
 
 // Editar disciplina
 export async function PUT(
@@ -28,6 +28,7 @@ export async function PUT(
 }
 
 
+*/
 
 // Eliminar disciplinas
 export async function DELETE(

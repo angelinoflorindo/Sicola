@@ -1,12 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/modules/login.module.css";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import LoadingPage from "@/components/LoadingPage";
 
 const Registar = () => {
-  const [curso, setCurso] = useState("");
+  const [faculdade, setFaculdade] = useState<any[]>([]);
+  const [unid, setUnid] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -19,7 +20,7 @@ const Registar = () => {
   });
 
   const mudarCurso = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCurso(e.target.value);
+    setUnid(e.target.value);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,19 +33,20 @@ const Registar = () => {
     setLoading(true);
 
     try {
+ 
       const usuario = {
         primeiro_nome: formData.primeiro_nome,
         segundo_nome: formData.segundo_nome,
         telemovel: formData.telemovel,
         email: formData.email,
         password: formData.password,
-        curso,
+        universidade_id:unid,
       };
 
       if (
         !usuario.primeiro_nome ||
         !usuario.segundo_nome ||
-        !usuario.curso ||
+        !usuario.universidade_id ||
         !usuario.password ||
         !usuario.telemovel ||
         !usuario.email
@@ -84,79 +86,88 @@ const Registar = () => {
     }
   }
 
+  const fetchUniversidade = async () => {
+    const resp = await fetch(
+      `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/universidade`,
+    );
+    if (!resp.ok) throw new Error("Erro de busca");
+    const data = await resp.json();
+    setFaculdade(data);
+  };
+
+  useEffect(()=>{
+    fetchUniversidade()
+  }, [])
+
   if (loading) {
     return <LoadingPage />;
   }
 
   return (
     <div className={styles.container}>
-      <form onSubmit={onSubmit}  id={styles.form}>
-            <div className={styles.header}>
-              <h1 className={styles.h1}>
-                <b>Registar </b>
-              </h1>
-            </div>
-            <input
-              name="primeiro_nome"
-              placeholder="Primeiro Nome"
-              className={styles.input}
-              onChange={handleChange}
-            />
-            <input
-              name="segundo_nome"
-              placeholder="Segundo Nome"
-              className={styles.input}
-              onChange={handleChange}
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Palavra passe"
-              className={styles.input}
-              onChange={handleChange}
-            />
-            <input
-              name="telemovel"
-              placeholder="Telemovel"
-              className={styles.input}
-              onChange={handleChange}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email:numeroEstudante@isaf.co.ao"
-              className={styles.input}
-              onChange={handleChange}
-            />
+      <form onSubmit={onSubmit} id={styles.form}>
+        <div className={styles.header}>
+          <h1 className={styles.h1}>
+            <b>Registar </b>
+          </h1>
+        </div>
+        <input
+          name="primeiro_nome"
+          placeholder="Primeiro Nome"
+          className={styles.input}
+          onChange={handleChange}
+        />
+        <input
+          name="segundo_nome"
+          placeholder="Segundo Nome"
+          className={styles.input}
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Palavra passe"
+          className={styles.input}
+          onChange={handleChange}
+        />
+        <input
+          name="telemovel"
+          placeholder="Telemovel"
+          className={styles.input}
+          onChange={handleChange}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email:numeroEstudante@isaf.co.ao"
+          className={styles.input}
+          onChange={handleChange}
+        />
 
-            <select
-              value={curso}
-              onChange={mudarCurso}
-              className={styles.input}
-            >
-              <option value="">Escolher o curso</option>
-              <option value="IGF">IGF</option>
-              <option value="CF">CF</option>
-              <option value="GBS">GBS</option>
-            </select>
-            <div className={styles.space}>
-              <button
-                type="button"
-                onClick={() => {
-                  router.push("/");
-                }}
-                className="px-4 py-2 bg-blue-900 text-white rounded  cursor-pointer w-[100px]"
-              >
-                Login
-              </button>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-blue-900 text-white rounded  cursor-pointer w-[100px]"
-              >
-                Registar
-              </button>
-            </div>
-          </form>
+        <select onChange={mudarCurso} className={styles.input}>
+          <option > --- --- </option>
+          {faculdade.map((inst) => (
+            <option key={inst.id} value={`${inst.id}`} >{inst.codigo}</option>
+          ))}
+        </select>
+        <div className={styles.space}>
+          <button
+            type="button"
+            onClick={() => {
+              router.push("/");
+            }}
+            className="px-4 py-2 bg-blue-900 text-white rounded  cursor-pointer w-[100px]"
+          >
+            Login
+          </button>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-blue-900 text-white rounded  cursor-pointer w-[100px]"
+          >
+            Registar
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
