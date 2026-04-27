@@ -6,6 +6,13 @@ const nextConfig: NextConfig = {
     domains: ["i.ytimg.com"],
   },
 
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "5mb", // ou mais, conforme necessário
+    },
+  },
+
+ 
 };
 
 export default nextConfig;

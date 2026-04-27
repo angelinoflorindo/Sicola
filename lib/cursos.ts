@@ -71,8 +71,8 @@ export const cursos: Curso[] = [
         nome: "Balanço inicial e Final",
         videoId: "JR_CEn73KKE",
       },
-      
-       {
+
+      {
         id: "quotas-constantes",
         nome: "Amortização: Quotas Constantes",
         videoId: "mg09MXSpIRA",
@@ -114,6 +114,126 @@ export const cursos: Curso[] = [
         id: "geral",
         nome: "Conteudo Geral",
         playlistId: "PLX-4skTGVrWUNh2VGFIyoWVGEVRQq3gkB&index=1",
+      },
+    ],
+  },
+  {
+    id: "Analitica",
+    nome: "Contabilidade Analítica",
+    modulos: [
+      {
+        id: "reparticao",
+        nome: "Repartição de Encargos Indirectos",
+        playlistId: "PLMEU9-QjzhJjcHXKeao3HhVOcMxDyxMMt",
+      },
+      {
+        id: "exercicios",
+        nome: "Exercícios Resolvidos",
+        playlistId: "PLMEU9-QjzhJiKzarpLNqfFLsmQYhsHuPK",
+      },
+      {
+        id: "concurso",
+        nome: "Resolução de Provas de Concurso",
+        playlistId: "PLMEU9-QjzhJgAsI74bXHPSMeTNWb5iTyO",
+      },
+      {
+        id: "custo",
+        nome: "Custo Industrial",
+        playlistId: "PLMEU9-QjzhJgjB6NuWuC6f04X9oztLerR",
+      },
+    ],
+  },
+  {
+    id: "fiscalidade",
+    nome: "Fiscalidade",
+    modulos: [
+      {
+        id: "tudofiscalidade",
+        nome: "Conceitos de Fiscalidade",
+        playlistId: "PLMEU9-QjzhJhvvmmE_naKkhlkGdDZkmmd",
+      },
+    ],
+  },
+
+  {
+    id: "fisica",
+    nome: "Física",
+    modulos: [
+      {
+        id: "cinematica1",
+        nome: "Parte 1: Cinemática",
+        playlistId: "PLzjR7HXQnrccLJC47rXCJVJMHSBYjDTyy",
+      },
+      {
+        id: "cinematica2",
+        nome: "Parte 2: Cinemática",
+        playlistId: "PLzjR7HXQnrceNJ2pUl9afkCMkTubbvCbz",
+      },
+
+      {
+        id: "tudocinematica",
+        nome: "Tudo sobre Cinemática",
+        playlistId: "PLzjR7HXQnrcf1rHb6E33Rbo5xP7ZbMM6s",
+      },
+      {
+        id: "electrodinamica",
+        nome: "Electrodinamica",
+        playlistId: "PLzjR7HXQnrcfSiQpi_1nGHZLKS6AKtv9O",
+      },
+
+      {
+        id: "tudElectrodinamica",
+        nome: "Tudo sobre Electrodinamica",
+        playlistId: "PLzjR7HXQnrccZoUGxqJuN2SFd83PH0yRz",
+      },
+      {
+        id: "optica",
+        nome: "Fundamentos de Óptica",
+        playlistId: "PLzjR7HXQnrcdqSPfvOvU2Z2IGXfKRP0u3",
+      },
+      {
+        id: "opticageometrica",
+        nome: "Óptica Geométrica",
+        playlistId: "PLzjR7HXQnrcejt6bCK57Wxnwa6K9rqt3X",
+      },
+      {
+        id: "termologia",
+        nome: "Termologia",
+        playlistId: "PLzjR7HXQnrccNvQPKqmf5DIgHIB2gEtv8",
+      },
+
+      {
+        id: "cursoDinamica",
+        nome: "Curso de Dinâmica",
+        playlistId: "PLzjR7HXQnrcd5texPyBTomAFef7oN2Bd0",
+      },
+      {
+        id: "dinamica",
+        nome: "Conceitos de Dinâmica",
+        playlistId: "PLzjR7HXQnrcdJSrrM2DbJ-LHuFwRR31Uc",
+      },
+      {
+        id: "eletromagnetismo",
+        nome: "Fundamentos de Eletromagnetismo",
+        playlistId: "PLzjR7HXQnrcd0_HOcaVJ5BNRdoIBy9A36",
+      },
+    ],
+  },
+
+  {
+    id: "portugues",
+    nome: "Comunicação: Língua Portuguesa",
+    modulos: [
+      {
+        id: "cursoPortugues",
+        nome: "Curso de Língua Portuguesa",
+        playlistId: "PLToTKj2C0mWCvfKFw2ppQkd3qv6PfShu9",
+      },
+
+      {
+        id: "gramatica",
+        nome: "Gramática de Língua Portuguesa",
+        playlistId: "PLToTKj2C0mWDJowVTjT0FWL14dhXOVP9p",
       },
     ],
   },

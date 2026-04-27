@@ -53,12 +53,12 @@ export default function Conteudo() {
     grau === "Medio"
       ? 25000
       : grau === "Licenciatura"
-        ? 50000
-        : grau === "Especialidade"
-          ? 100000
-          : grau === "Catedratico"
-            ? 150000
-            : 0;
+      ? 50000
+      : grau === "Especialidade"
+      ? 100000
+      : grau === "Catedratico"
+      ? 150000
+      : 0;
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -110,39 +110,40 @@ export default function Conteudo() {
   if (loading) {
     return <LoadingPage />;
   }
+
   return (
     <>
       {operacaoSucesso && <OperacaoSucesso />}
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="max-w-[80%]  w-full bg-white rounded-2xl shadow p-6 space-y-6">
-          <h1 className="text-3xl font-bold text-gray-800 border-b">
+
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-3 sm:p-4">
+        <div className="w-full max-w-5xl lg:max-w-6xl bg-white rounded-2xl shadow p-4 sm:p-6 space-y-6">
+
+          {/* HEADER */}
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 border-b pb-2">
             TCC | Trabalhos Científicos
           </h1>
 
-          <div className=" grid grid-cols-1 items-center justify-center ">
-            {/* Add código */}
+          <div className="grid grid-cols-1 gap-4 sm:gap-6">
 
-            <div className="grid grid-cols-1 m-4">
+            <div className="grid grid-cols-1 m-2 sm:m-4">
               <h2 className="font-semibold"> Tema do Trabalho </h2>
               <small> Informe abaixo o tema principal </small>
 
               <input
                 type="text"
-                onChange={(e) => {
-                  setTema(e.target.value);
-                }}
-                className=" text-black p-2   border  "
+                onChange={(e) => setTema(e.target.value)}
+                className="text-black p-2 border rounded-lg"
                 placeholder="tema de pesquisa"
               />
             </div>
 
-            <div className="grid grid-cols-1 m-4">
+            <div className="grid grid-cols-1 m-2 sm:m-4">
               <h2 className="font-semibold">Grau Académico</h2>
               <small>Escolhe o grau académico respeitante ao trabalho</small>
 
               <select
                 onChange={(e) => setGrau(e.target.value)}
-                className="border  rounded p-4   bg-white font-semibold"
+                className="border rounded-lg p-3 bg-white font-semibold"
               >
                 <option value="analisar"> - - - - </option>
                 <option value="Medio">Ensino Médio</option>
@@ -152,37 +153,35 @@ export default function Conteudo() {
               </select>
             </div>
 
-            <div className="grid grid-cols-1 m-4 ">
+            <div className="grid grid-cols-1 m-2 sm:m-4">
               <h2 className="font-semibold"> Área de graduação </h2>
               <small> Informe a sua área/curso </small>
+
               <input
                 type="text"
-                onChange={(e) => {
-                  setArea(e.target.value);
-                }}
-                className=" text-black p-2   border capitalize "
+                onChange={(e) => setArea(e.target.value)}
+                className="text-black p-2 border rounded-lg capitalize"
                 placeholder="Escreve ..."
               />
             </div>
 
-            <div className="grid grid-cols-1 m-4">
+            <div className="grid grid-cols-1 m-2 sm:m-4">
               <h2 className="font-semibold"> Informações adicionais</h2>
               <small> Descreva abaixo todas as informações necessárias </small>
 
               <textarea
-                className="text-black p-2 capitalize  border "
+                className="text-black p-2 border rounded-lg capitalize min-h-[120px]"
                 placeholder="Informe aqui o nome do seu Docente, nome da sua Instituição/universidade, unidade curricular(disciplina); intervenientes do trabalho, prazo do trabalho... "
-                onChange={(e) => {
-                  setDescricao(e.target.value);
-                }}
+                onChange={(e) => setDescricao(e.target.value)}
               ></textarea>
             </div>
 
-            <div className="  bg-white rounded-2xl shadow-sm p-6">
+            {/* VALOR */}
+            <div className="bg-white rounded-2xl shadow-sm p-4 sm:p-6">
               <p className="text-sm text-gray-500">Valor de Pagamento</p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div className="text-3xl sm:text-4xl font-bold text-blue-600 mt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                <div className="text-2xl sm:text-4xl font-bold text-blue-600 mt-2">
                   {valorTotal},00kz
                 </div>
 
@@ -194,92 +193,86 @@ export default function Conteudo() {
               </div>
             </div>
 
-            <div className="m-4">
+            {/* FILE */}
+            <div className="m-2 sm:m-4">
               <h3 className="font-semibold text-gray-800 mb-2 text-sm sm:text-base">
                 Anexar Comprovativo
               </h3>
 
-              <div>
-                <input
-                  type="file"
-                  name="fotoPerfil"
-                  onChange={(e) => setFile(e.target.files?.[0] || null)}
-                  className="w-full border border-gray-300 rounded-lg p-2 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-600 file:text-white hover:file:bg-blue-700"
-                />
-              </div>
+              <input
+                type="file"
+                onChange={(e) => setFile(e.target.files?.[0] || null)}
+                className="w-full border border-gray-300 rounded-lg p-2 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-600 file:text-white hover:file:bg-blue-700"
+              />
             </div>
 
-            <div className="grid grid-cols-1 m-4">
+            {/* BOTÃO */}
+            <div className="grid grid-cols-1 m-2 sm:m-4">
               <button
-                onClick={() => handleSubmit()}
-                className=" w-[50%] bg-blue-600 text-white p-2 rounded hover:bg-blue-700 disabled:opacity-50 transition"
+                onClick={handleSubmit}
+                className="w-full sm:w-1/2 mx-auto bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition"
               >
                 confirmar
               </button>
             </div>
           </div>
 
+          {/* TABELA */}
           <div className="border-b">
-            <h2 className="text-xl font-bold">TCC | Trabalhos realizados</h2>
+            <h2 className="text-lg sm:text-xl font-bold">
+              TCC | Trabalhos realizados
+            </h2>
           </div>
-          <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
-            <table className="w-full">
+
+          <div className="bg-white rounded-2xl shadow-sm overflow-x-auto">
+            <table className="min-w-[600px] w-full">
               <thead className="bg-gray-100 text-gray-600 text-sm">
                 <tr>
-                  <th className="p-4 text-left">Data </th>
-                  <th className="p-4 text-left">Grau Acadêmico</th>
-                  <th className="p-4 text-left">Área / curso</th>
-                  <th className="p-4 text-left">Universidade</th>
-                  <th className="p-4 text-left">Estado</th>
+                  <th className="p-3 sm:p-4 text-left">Grau Acadêmico</th>
+                  <th className="p-3 sm:p-4 text-left">Área / curso</th>
+                  <th className="p-3 sm:p-4 text-left">Universidade</th>
                 </tr>
               </thead>
+
               <tbody>
-                {ebooks.map((dep, index) => (
-                  <tr
-                    key={dep.id}
-                    className="border-t hover:bg-gray-50 transition"
-                  >
-                    <td className="p-4">{dep.createdAt.split("T")[0]}</td>
-                    <td className="p-4 font-medium">{dep.grau}</td>
-                    <td className="p-4 font-medium">{dep.area}</td>
-                    <td className="p-4 font-medium">
+                {ebooks.map((dep) => (
+                  <tr key={dep.id} className="border-t hover:bg-gray-50">
+                    <td className="p-3 sm:p-4">{dep.grau}</td>
+                    <td className="p-3 sm:p-4">{dep.area}</td>
+                    <td className="p-3 sm:p-4">
                       {dep.Usuario.perfil === "ADMIN"
                         ? `Universidade José Eduardo dos Santos`
                         : dep.Usuario.Universidade.nome}
-                    </td>
-                    <td className="p-4">
-                      <span
-                        className={`px-3 py-1 text-black text-sm ${dep.estado ? "bg-green-200 " : "bg-red-200"} `}
-                      >
-                        {dep.estado ? "Concluído" : "Pendente"}
-                      </span>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
 
-            <div className="flex justify-between items-center mt-4">
-              <button
-                onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-                disabled={page === 1}
-                className="bg-gray-200 px-3 py-1 rounded disabled:opacity-50"
-              >
-                Anterior
-              </button>
-              <span>
-                Página {page} de {totalPages}
-              </span>
-              <button
-                onClick={() =>
-                  setPage((prev) => Math.min(prev + 1, totalPages))
-                }
-                disabled={page === totalPages}
-                className="bg-gray-200 px-3 py-1 rounded disabled:opacity-50"
-              >
-                Próxima
-              </button>
-            </div>
+          {/* PAGINAÇÃO */}
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
+            <button
+              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+              disabled={page === 1}
+              className="w-full sm:w-auto bg-gray-200 px-4 py-2 rounded disabled:opacity-50"
+            >
+              Anterior
+            </button>
+
+            <span className="text-sm sm:text-base">
+              Página {page} de {totalPages}
+            </span>
+
+            <button
+              onClick={() =>
+                setPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={page === totalPages}
+              className="w-full sm:w-auto bg-gray-200 px-4 py-2 rounded disabled:opacity-50"
+            >
+              Próxima
+            </button>
           </div>
         </div>
       </div>
