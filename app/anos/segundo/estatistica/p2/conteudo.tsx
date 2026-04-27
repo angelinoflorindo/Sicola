@@ -51,8 +51,10 @@ export default function Conteudo() {
       });
 
       if (!resp.ok) throw new Error("Erro na submissão");
-      const data = await resp.json().then((data)=> {return data} )
-      const prova = data.prova
+      const data = await resp.json().then((data) => {
+        return data;
+      });
+      const prova = data.prova;
       // sucesso
       setLoading(false);
       setOperacaoSucesso(true);
@@ -69,7 +71,7 @@ export default function Conteudo() {
   }
 
   if (loading) {
-    <LoadingPage />;
+    return <LoadingPage />;
   }
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
