@@ -60,9 +60,8 @@ export async function POST(req: NextRequest) {
 // Editar Universidade
 export async function PUT(req: NextRequest) {
   try {
-    const data = await req.json();
-
     initDB();
+    const data = await req.json();
 
     const resp = await Universidade.update(
       {

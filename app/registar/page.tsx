@@ -7,7 +7,7 @@ import LoadingPage from "@/components/LoadingPage";
 
 const Registar = () => {
   const [faculdade, setFaculdade] = useState<any[]>([]);
-  const [unid, setUnid] = useState('');
+  const [unid, setUnid] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -33,14 +33,13 @@ const Registar = () => {
     setLoading(true);
 
     try {
- 
       const usuario = {
         primeiro_nome: formData.primeiro_nome,
         segundo_nome: formData.segundo_nome,
         telemovel: formData.telemovel,
         email: formData.email,
         password: formData.password,
-        universidade_id:unid,
+        universidade_id: unid,
       };
 
       if (
@@ -90,14 +89,25 @@ const Registar = () => {
     const resp = await fetch(
       `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/universidade`,
     );
-    if (!resp.ok) throw new Error("Erro de busca");
+
+    if (!resp.ok) {
+      throw new Error("Erro de busca");
+    }
+
     const data = await resp.json();
     setFaculdade(data);
   };
+  useEffect(() => {
+    async function load() {
+      try {
+        await fetchUniversidade();
+      } catch (e) {
+        console.error("Erro ao carregar universidades:", e);
+      }
+    }
 
-  useEffect(()=>{
-    fetchUniversidade()
-  }, [])
+    load();
+  }, []);
 
   if (loading) {
     return <LoadingPage />;
@@ -145,9 +155,11 @@ const Registar = () => {
         />
 
         <select onChange={mudarCurso} className={styles.input}>
-          <option > --- --- </option>
+          <option  >Escolhe sua universidade</option>
           {faculdade.map((inst) => (
-            <option key={inst.id} value={`${inst.id}`} >{inst.codigo}</option>
+            <option key={inst.id} value={`${inst.id}`}>
+              {inst.codigo} -- {inst.nome}
+            </option>
           ))}
         </select>
         <div className={styles.space}>
