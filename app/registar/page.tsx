@@ -149,7 +149,7 @@ const Registar = () => {
         <input
           type="email"
           name="email"
-          placeholder="Email:numeroEstudante@isaf.co.ao"
+          placeholder="insira o email"
           className={styles.input}
           onChange={handleChange}
         />
