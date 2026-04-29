@@ -13,11 +13,11 @@ export default function Conteudo() {
 
   const [codigo, setCodigo] = useState("");
   const [descricao, setDescricao] = useState<string[]>([]);
-  const [totalPages, setTotalPages] = useState(1); 
+  const [totalPages, setTotalPages] = useState(1);
   const [status, setStatus] = useState("");
   const [order, setOrder] = useState("");
   const [file, setMaterial] = useState<File | null>(null);
-  
+
   const [imagem, setCapa] = useState<File | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -71,7 +71,7 @@ export default function Conteudo() {
     const params = new URLSearchParams();
 
     params.append("page", page.toString());
-    params.append("limit", "5"); 
+    params.append("limit", "5");
 
     if (status) params.append("status", status);
     if (order) params.append("order", order);
@@ -89,7 +89,7 @@ export default function Conteudo() {
     }
 
     setLoading(false);
-    setDescricao([])
+    setDescricao([]);
     const data = await res.json();
 
     setEbooks(data.data);
@@ -97,7 +97,7 @@ export default function Conteudo() {
   };
 
   const handleSubmit = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       if (!file || !imagem) {
         alert("Upload do material ou capa");
@@ -126,13 +126,14 @@ export default function Conteudo() {
         },
       );
 
-      if (!res.ok) throw new Error("Erro ao submeter");
-     
+      if (!res.ok) {
+        router.push(`/usuario/orientacao/painel`);
+      }
+
       fetchData();
     } catch (error) {
-      console.error(error);
-      alert("Ocorreu um erro");
-      router.push(`/usuario/orientacao/painel/materiais`);
+      setLoading(false);
+      router.push(`/usuario/orientacao/painel`);
     }
   };
 
@@ -159,7 +160,6 @@ export default function Conteudo() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-2 sm:p-4">
       <div className="w-full max-w-6xl bg-white rounded-2xl shadow p-4 sm:p-6 space-y-6">
-
         <h1 className="text-xl sm:text-3xl font-bold text-gray-800">
           Materiais Acadêmicos
         </h1>
@@ -178,7 +178,6 @@ export default function Conteudo() {
         </div>
 
         <div className="grid grid-cols-1">
-
           <div className="grid grid-cols-1 m-2 sm:m-4">
             <h2 className="font-semibold"> Código do Material </h2>
             <small> Combinação: único, sem espaços, nem acentos </small>
@@ -289,7 +288,9 @@ export default function Conteudo() {
                   <td className="p-2 sm:p-4">{dep.titulo}</td>
                   <td className="p-2 sm:p-4">{dep.valor},00Kz</td>
                   <td className="p-2 sm:p-4">
-                    <span className={`${dep.estado ? 'bg-green-600' : 'bg-red-600'} text-white text-sm px-2 py-1`}>
+                    <span
+                      className={`${dep.estado ? "bg-green-600" : "bg-red-600"} text-white text-sm px-2 py-1`}
+                    >
                       {dep.estado ? "Activo" : "Inactivo"}
                     </span>
                   </td>

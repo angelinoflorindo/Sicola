@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { initDB } from "@/lib/db";
 import { sequelize } from "@/lib/sequelize";
-import { User } from "@/models/User";
-import { converterString, getUserIdFromToken } from "@/app/api/actions/server";
-import { Sugestao } from "@/models/Sugestao";
-import { UserDisciplina } from "@/models/UserDisciplina";
-import { Disciplina } from "@/models/Disciplina";
+import { getUserIdFromToken } from "@/app/api/actions/server";
 import { Material } from "@/models/Material";
 import { SubItem } from "@/models/SubItem";
 export const dynamic = "force-dynamic";
@@ -13,9 +9,9 @@ export const dynamic = "force-dynamic";
 // Upload de Materiais academicos
 export async function POST(req: NextRequest) {
   try {
-    const userId = await getUserIdFromToken(req);
-
     initDB();
+
+    const userId = await getUserIdFromToken(req);
 
     // ✅ RECEBER FORMDATA
     const formData = await req.formData();
@@ -117,10 +113,10 @@ export async function GET(req: Request) {
 
     const where: any = {};
 
-    if(estadoParam){
-      where.estado = true
+    if (estadoParam) {
+      where.estado = true;
     }
-    
+
     await initDB();
 
     const { rows, count } = await Material.findAndCountAll({
@@ -128,7 +124,7 @@ export async function GET(req: Request) {
       include: [
         {
           model: SubItem,
-          as: "SubItens"
+          as: "SubItens",
         },
       ],
       where,

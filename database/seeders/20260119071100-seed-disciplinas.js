@@ -28,7 +28,7 @@ module.exports = {
           updated_at: new Date(),
         },
       ],
-      { updateOnDuplicate: ["id", "nome"] },
+      { updateOnDuplicate: ["id", "nome", "codigo"] },
     );
   },
 
