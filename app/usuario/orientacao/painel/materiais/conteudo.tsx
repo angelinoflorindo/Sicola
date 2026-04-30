@@ -127,13 +127,16 @@ export default function Conteudo() {
       );
 
       if (!res.ok) {
-        router.push(`/usuario/orientacao/painel`);
+  
+        console.log('ok', res.text)
+        //router.push(`/usuario/orientacao/painel`);
       }
 
       fetchData();
     } catch (error) {
-      setLoading(false);
-      router.push(`/usuario/orientacao/painel`);
+      //setLoading(false);
+      console.log('erros', error)
+      //router.push(`/usuario/orientacao/painel`);
     }
   };
 
