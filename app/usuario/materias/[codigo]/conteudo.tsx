@@ -108,7 +108,7 @@ export default function Conteudo() {
         {/* CAPA */}
         <div className="relative w-full aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
           <Image
-            src={`/capas/${ebook.imagem}`}
+            src={`/api/orientador/estudante/${ebook.imagem}`}
             alt="capa do material"
             fill
             className="object-cover"

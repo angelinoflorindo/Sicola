@@ -87,7 +87,7 @@ export default function Conteudo() {
             {/* Capa */}
             <div className="relative w-full h-56 overflow-hidden">
               <Image
-                src={`/capas/${ebook.imagem}`}
+                src={`/api/orientador/estudante/${ebook.imagem}`}
                 alt='capa do material'
                 fill
                 className="object-cover group-hover:scale-105 transition duration-500"

@@ -110,7 +110,7 @@ export default function Conteudo({ users }: { users: UserPerfonal }) {
     data.map((item: any) => {
       if (item.id === Number(users.universidade_id)) {
         setFaculdade(item.nome);
-
+        setUnid(item.id)
         return;
       }
     });

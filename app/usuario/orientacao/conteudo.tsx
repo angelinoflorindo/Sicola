@@ -75,7 +75,7 @@ export default function Conteudo() {
                   src={
                     item.filename === "N/D"
                       ? "/candidatos/candidate.png"
-                      : `/candidatos/${item.filename}`
+                      : `/api/usuario/personal/${item.filename}`
                   }
                   alt="perfil indisponível"
                   width={120}

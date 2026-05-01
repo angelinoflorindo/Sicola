@@ -25,24 +25,28 @@ export default function Conteudo() {
   const handleAcao = async (acao: string, id: number) => {
     setLoading(true);
     if (acao === "eliminar") {
-      await fetch(
+      const remove = await fetch(
         `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientador/materiais/${id}`,
         {
           method: "DELETE",
         },
       );
 
-      fetchData();
-      setPage(1);
+      if (remove.ok) {
+        fetchData();
+        setPage(1);
+      }
+
       return;
     } else if (acao === "toggle") {
-      await fetch(
+      const toggle = await fetch(
         `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/orientador/materiais/${id}`,
         { method: "PATCH" },
       );
-
-      fetchData();
-      setPage(1);
+      if (toggle.ok) {
+        fetchData();
+        setPage(1);
+      }
       return;
     } else if (acao === "baixar") {
       const resp = await fetch(
@@ -126,17 +130,15 @@ export default function Conteudo() {
         },
       );
 
-      if (!res.ok) {
-  
-        console.log('ok', res.text)
-        //router.push(`/usuario/orientacao/painel`);
+      if (res.ok) {
+        setLoading(false);
+        fetchData();
+        return
       }
-
-      fetchData();
     } catch (error) {
-      //setLoading(false);
-      console.log('erros', error)
-      //router.push(`/usuario/orientacao/painel`);
+      setLoading(false);
+      console.log("erros", error);
+      router.push(`/usuario/orientacao/painel`);
     }
   };
 

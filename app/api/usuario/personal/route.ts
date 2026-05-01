@@ -8,8 +8,9 @@ import {
   hashPassword,
 } from "@/app/api/actions/server";
 import { initDB } from "@/lib/db";
-import { sequelize } from "@/lib/sequelize";
 import { User } from "@/models/User";
+
+
 
 export async function GET(req: NextRequest) {
   try {
@@ -58,9 +59,7 @@ export async function POST(req: NextRequest) {
     // ✅ TRATAR IMAGEM
     let filename = null;
 
-    console.log(file);
-
-    if (file === null || !file || file === 'null') {
+    if (file === null || !file || file === "null") {
       const input = {
         primeiro_nome: formData.get("primeiro_nome"),
         segundo_nome: formData.get("segundo_nome"),
@@ -84,7 +83,7 @@ export async function POST(req: NextRequest) {
       const fs = require("fs");
       const path = require("path");
 
-      const uploadDir = path.join(process.cwd(), "public/candidatos");
+      const uploadDir = path.join(process.cwd(), "storage/candidatos");
 
       if (!fs.existsSync(uploadDir)) {
         fs.mkdirSync(uploadDir, { recursive: true });
@@ -116,3 +115,4 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: "Erro interno" }, { status: 500 });
   }
 }
+
